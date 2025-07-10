@@ -5,6 +5,8 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
+$RNFirebaseAnalyticsWithoutAdIdSupport = true
+
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
@@ -15,7 +17,7 @@ if linkage != nil
 end
 
 target 'GithubUsers' do
-    use_frameworks! :linkage => :static
+  use_frameworks! :linkage => :static
 
   project 'GithubUsers',
   'Debug' => :debug,
