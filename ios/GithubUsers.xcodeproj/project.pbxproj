@@ -13,6 +13,8 @@
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		CEF9B33B2DF9602CD6BFC610 /* Pods_GithubUsers_GithubUsers_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6C217DDBF6515B014EC32A /* Pods_GithubUsers_GithubUsers_Dev.framework */; };
+		F40337B52E206C3A00FA0E90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F40337B42E206C3A00FA0E90 /* GoogleService-Info.plist */; };
+		F40337B62E206C3A00FA0E90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F40337B42E206C3A00FA0E90 /* GoogleService-Info.plist */; };
 		F49EBA8E2E20561100F5D9B8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
 		F49EBA922E20561100F5D9B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		F49EBA932E20561100F5D9B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -37,6 +39,7 @@
 		E327EF39560A041E69DE1653 /* Pods-GithubUsers-GithubUsers Dev.release development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubUsers-GithubUsers Dev.release development.xcconfig"; path = "Target Support Files/Pods-GithubUsers-GithubUsers Dev/Pods-GithubUsers-GithubUsers Dev.release development.xcconfig"; sourceTree = "<group>"; };
 		EB127553442A8D1EAB224D1C /* Pods-GithubUsers.debug development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubUsers.debug development.xcconfig"; path = "Target Support Files/Pods-GithubUsers/Pods-GithubUsers.debug development.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F40337B42E206C3A00FA0E90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F49EBA9B2E20561100F5D9B8 /* GithubUsers Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GithubUsers Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49EBA9C2E20561200F5D9B8 /* GithubUsers Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GithubUsers Dev-Info.plist"; path = "/Users/joseluismosconi/Dev/jl/GithubUsers/ios/GithubUsers Dev-Info.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -99,6 +102,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				F49EBA9C2E20561200F5D9B8 /* GithubUsers Dev-Info.plist */,
+				F40337B42E206C3A00FA0E90 /* GoogleService-Info.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -214,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				F40337B52E206C3A00FA0E90 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				02BFAAFEC661AA5300C7BCA9 /* PrivacyInfo.xcprivacy in Resources */,
 			);
@@ -224,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49EBA922E20561100F5D9B8 /* LaunchScreen.storyboard in Resources */,
+				F40337B62E206C3A00FA0E90 /* GoogleService-Info.plist in Resources */,
 				F49EBA932E20561100F5D9B8 /* Images.xcassets in Resources */,
 				F49EBA942E20561100F5D9B8 /* PrivacyInfo.xcprivacy in Resources */,
 			);

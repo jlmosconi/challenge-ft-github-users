@@ -24,13 +24,13 @@ if [ $2 = "ios" ]
 then
     if [[ $1 == *"dev"* ]]; then
         echo "Setting iOS Development"
-        cp -f ../app/config/environment/development/GoogleService-Info.plist ./Blank/GoogleService-Info.plist && echo "cp command success" || echo "cp command failed"
+        cp -f ../app/config/environment/development/GoogleService-Info.plist ./GithubUsers/GoogleService-Info.plist && echo "cp command success" || echo "cp command failed"
     elif [[ $1 != *"prod"* ]]; then
         echo "Setting iOS Production"
-        cp -f ../app/config/environment/production/GoogleService-Info.plist ./Blank/GoogleService-Info.plist && echo "cp command success" || echo "cp command failed"
+        cp -f ../app/config/environment/production/GoogleService-Info.plist ./GithubUsers/GoogleService-Info.plist && echo "cp command success" || echo "cp command failed"
     else
         echo "Setting iOS Development by default"
-        cp -f ../app/config/environment/development/GoogleService-Info.plist ./Blank/GoogleService-Info.plist && echo "cp command success" || echo "cp command failed"
+        cp -f ../app/config/environment/development/GoogleService-Info.plist ./GithubUsers/GoogleService-Info.plist && echo "cp command success" || echo "cp command failed"
     fi
 fi
 
