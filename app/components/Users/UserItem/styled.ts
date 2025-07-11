@@ -26,7 +26,3 @@ export const ColumnRight = styled.View`
   justify-content: center;
   align-items: center;
 `;
-
-export const ColumnRightContainer = styled.View`
-  align-items: flex-end;
-`;
