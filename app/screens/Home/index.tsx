@@ -25,12 +25,18 @@ const HomeScreen: FC = () => {
     getUserList();
   }, [getUserList]);
 
+  const handleOnFavoritePress = useCallback(() => {
+    console.log('Favorite button pressed');
+  }, []);
+
   return (
     <SafeArea>
       <InfiniteScrollList
         data={mockUserList}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => <UserItem login={item.login} avatar_url={item.avatar_url} />}
+        renderItem={({item}) => (
+          <UserItem login={item.login} avatar_url={item.avatar_url} handleOnFavorite={handleOnFavoritePress} />
+        )}
         fetchNextData={() => {
           console.log('fetchNextData called');
         }}

@@ -3,16 +3,15 @@ import type {IUserBase} from '@services/usersService/types';
 import {TypographyText} from '@components/Text/TypographyText';
 import {Block, ColumnCenter, ColumnLeft, ColumnRight} from './styled';
 import UserAvatar from '../UserAvatar';
-import SpecificSizeIcon from '@components/Icon/SpecificSize';
-import {IconName} from '@components/Icon/icons';
-import {useTheme} from 'styled-components/native';
+import FavoriteButton from '@components/Favorite/FavoriteButton';
 
 interface UserItem extends Pick<IUserBase, 'login' | 'avatar_url'> {
   avatarSize?: number;
+  showFavoriteButton?: boolean;
+  handleOnFavorite?: () => void;
 }
 
-const UserItem: FC<UserItem> = ({login, avatar_url, avatarSize = 4}) => {
-  const theme = useTheme();
+const UserItem: FC<UserItem> = ({login, avatar_url, avatarSize = 4, showFavoriteButton = true, handleOnFavorite}) => {
   return (
     <Block>
       <ColumnLeft>
@@ -21,9 +20,7 @@ const UserItem: FC<UserItem> = ({login, avatar_url, avatarSize = 4}) => {
       <ColumnCenter>
         <TypographyText>{login}</TypographyText>
       </ColumnCenter>
-      <ColumnRight>
-        <SpecificSizeIcon size={24} name={IconName.StarEmpty} color={theme.colors.grey.dark} />
-      </ColumnRight>
+      <ColumnRight>{showFavoriteButton && <FavoriteButton isFavorite={true} onPress={handleOnFavorite} />}</ColumnRight>
     </Block>
   );
 };
