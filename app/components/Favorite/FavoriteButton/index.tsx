@@ -7,14 +7,16 @@ import {IconButton} from './styled';
 
 interface FavoriteButtonProps {
   isFavorite?: boolean;
+  pressDelay?: number; // delay in milliseconds to prevent rapid toggling
   onPress?: () => void;
 }
 
-const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, onPress}) => {
+const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, pressDelay = 350, onPress}) => {
   const theme = useTheme();
 
   const scale = useSharedValue(1);
   const prevIsFavorite = useRef(isFavorite);
+  const lastPress = useRef<number>(0);
 
   useEffect(() => {
     if (!prevIsFavorite.current && isFavorite) {
@@ -33,8 +35,15 @@ const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, onPress}) => {
   const iconName = isFavorite ? IconName.StarFilled : IconName.StarEmpty;
   const iconColor = isFavorite ? theme.colors.primary : theme.colors.grey.dark;
 
+  const handlePress = () => {
+    const now = Date.now();
+    if (now - lastPress.current < pressDelay) return; // prevent rapid toggling
+    lastPress.current = now;
+    onPress?.();
+  };
+
   return (
-    <IconButton onPress={onPress} testID="favoriteButton">
+    <IconButton onPress={handlePress} testID="favoriteButton">
       <Animated.View style={animatedStyle}>
         <SpecificSizeIcon size={24} name={iconName} color={iconColor} />
       </Animated.View>
