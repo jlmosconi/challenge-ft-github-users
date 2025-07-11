@@ -1,15 +1,15 @@
-import {ImageResizeMode} from 'react-native'
+import type {ImageResizeMode} from 'react-native';
 
 export interface LazyImageProps {
-  source: {uri: string}
-  containerStyle?: ContainerStyle
-  fallback?: React.ReactNode
-  resizeMode?: ImageResizeMode
+  source: {uri: string};
+  containerStyle?: ContainerStyle;
+  fallback?: React.ReactNode;
+  resizeMode?: ImageResizeMode;
 }
 
 export interface ContainerStyle {
-  width?: number
-  height?: number
-  borderRadius?: number
-  backgroundColor?: string
+  width?: number;
+  height?: number;
+  borderRadius?: number;
+  backgroundColor?: string;
 }

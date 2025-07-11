@@ -1,4 +1,5 @@
-import {ActivityIndicator, Animated} from 'react-native';
+import Animated from 'react-native-reanimated';
+import {ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import type {ContainerStyle} from './types';
 

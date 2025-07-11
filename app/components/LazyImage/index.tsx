@@ -1,10 +1,10 @@
-import {type FC, Fragment, useEffect, useRef, useState} from 'react';
-import {Animated} from 'react-native';
+import {type FC, Fragment, useEffect, useState} from 'react';
+import {useSharedValue, useAnimatedStyle, withTiming} from 'react-native-reanimated';
 import type {LazyImageProps} from './types';
 import {AnimatedImage, Loader, Wrapper} from './styled';
 
 const LazyImage: FC<LazyImageProps> = ({source, containerStyle, resizeMode, fallback}) => {
-  const opacity = useRef(new Animated.Value(0)).current;
+  const opacity = useSharedValue(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -12,25 +12,24 @@ const LazyImage: FC<LazyImageProps> = ({source, containerStyle, resizeMode, fall
     if (source?.uri) {
       setError(false);
       setLoading(false);
-      opacity.setValue(0);
+      opacity.value = 0;
     }
   }, [source?.uri, opacity]);
 
   const fadeIn = () => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      useNativeDriver: true,
-    }).start();
+    opacity.value = withTiming(1, {duration: 300});
   };
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+  }));
 
   const onLoadStart = () => {
     setLoading(true);
   };
 
   const onImageLoad = () => {
-    if (loading) {
-      fadeIn();
-    }
+    fadeIn();
     setLoading(false);
   };
 
@@ -39,19 +38,17 @@ const LazyImage: FC<LazyImageProps> = ({source, containerStyle, resizeMode, fall
     setError(true);
   };
 
-  console.log('loading', loading, 'error', error, 'source', source);
-
   return (
-    <Wrapper {...containerStyle}>
+    <Wrapper style={containerStyle}>
       {loading && <Loader />}
 
       {!error && source.uri && (
         <AnimatedImage
           source={source}
-          style={{opacity}}
+          style={animatedStyle}
           resizeMode={resizeMode}
           onLoadStart={onLoadStart}
-          onLoad={onImageLoad}
+          onLoadEnd={onImageLoad}
           onError={onError}
         />
       )}
