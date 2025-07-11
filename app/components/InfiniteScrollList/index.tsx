@@ -59,12 +59,6 @@ const InfiniteScrollList = <T,>({
       }}
       ItemSeparatorComponent={ItemSeparatorComponent}
       contentContainerStyle={{
-        // paddingVertical: theme.size(theme.spacing(1.5)),
-        // ...(padding
-        //   ? {
-        //       paddingHorizontal: theme.size(theme.spacing(2)),
-        //     }
-        //   : {}),
         ...(typeof contentContainerStyle === 'object' ? contentContainerStyle : {}),
       }}
     />

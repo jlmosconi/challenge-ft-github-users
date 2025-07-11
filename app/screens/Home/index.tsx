@@ -1,16 +1,18 @@
-import {useCallback, useEffect, type FC} from 'react';
+import React, {useCallback, useEffect, type FC} from 'react';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import SafeArea from '@components/SafeArea';
 import {fetchUsers, isFetching, selectUsersList} from '@store/slices/users';
 import {mockUserList} from './data';
 import InfiniteScrollList from '@components/InfiniteScrollList';
-import UserItem from '@components/Users/UserItem';
+import UserItem from '@components/Users/Item';
 import {selectFavoritesMap, toggleFavorite} from '@store/slices/favorites';
+import ListFooter from '@components/Users/ListFooter';
+import ListEmpty from '@components/Users/ListEmpty';
 
 const HomeScreen: FC = () => {
   const list = useAppSelector(selectUsersList);
-  const favorites = useAppSelector(selectFavoritesMap);
   const loading = useAppSelector(isFetching);
+  const favorites = useAppSelector(selectFavoritesMap);
   const dispatch = useAppDispatch();
 
   // const getUserList = () => {
@@ -52,10 +54,16 @@ const HomeScreen: FC = () => {
         }}
         refreshData={getUserList}
         isLoading={loading}
-        // ListEmptyComponent={<ListEmpty loading={!!loading} text={t('home.empty')} />}
-        // ListFooterComponent={
-        //   <ListFooter loading={loading} emptyList={!data?.length} elementsToDisplay={!data?.length ? 5 : 1} />
-        // }
+        ListEmptyComponent={
+          <ListEmpty
+            loading={!!loading}
+            text={
+              'No se encontraron usuarios'
+              // t('home.empty')
+            }
+          />
+        }
+        ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!mockUserList?.length ? 5 : 1} />}
       />
     </SafeArea>
   );
