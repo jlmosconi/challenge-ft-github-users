@@ -5,9 +5,10 @@ import type {IUserListResponse, IUserResponse} from './types';
 
 const baseUrl = `${CONFIG.API.BASE_URL}/users`;
 
-const getUserList = (since = 0, limit = 10) =>
+const getUserList = (since: number, limit: number) =>
   api.get<IUserListResponse[], ErrorResponse>(`${baseUrl}`, {
-    params: {per_page: limit, since},
+    per_page: limit,
+    since,
   });
 
 const getUserByName = (username: string) => api.get<IUserResponse, ErrorResponse>(`${baseUrl}/${username}`);

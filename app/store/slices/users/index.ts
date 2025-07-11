@@ -35,7 +35,7 @@ export default UsersSlice.reducer;
  */
 
 export const fetchUsers =
-  ({since = 0, limit = 10}) =>
+  ({since = 0, limit = 10} = {}) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const alreadyLoading = isFetching(getState());
     if (alreadyLoading) return;
