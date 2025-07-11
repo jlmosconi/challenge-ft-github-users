@@ -1,5 +1,5 @@
 import LazyImage from '@components/LazyImage';
-import SpacingBox from '@components/SpacingBox';
+import DefaultProfile from '@assets/images/default-profile.svg';
 import styled from 'styled-components/native';
 
 export const AvatarWrapper = styled.View<{size: number; backgroundColor?: string}>`
@@ -21,7 +21,7 @@ export const StyledImage = styled(LazyImage).attrs<{backgroundColor?: string}>((
   height: 100%;
 `;
 
-export const ProfileDefault = styled(SpacingBox)`
+export const ProfileDefault = styled(DefaultProfile)`
   width: 100%;
   height: 100%;
 `;
