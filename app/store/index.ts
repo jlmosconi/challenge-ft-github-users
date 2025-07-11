@@ -2,9 +2,9 @@ import {combineReducers, configureStore, type ThunkDispatch, type UnknownAction}
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist';
 
-import loaderReducer from '@store/slices/loader';
 import themeReducer from '@store/slices/theme';
 import usersReducer from '@store/slices/users';
+import favoritesReducer from '@store/slices/favorites';
 
 const themeConfig = {
   key: 'theme',
@@ -17,11 +17,16 @@ const usersConfig = {
   blacklist: ['isFetching'], // Avoid persisting the fetching state
 };
 
+const favoritesConfig = {
+  key: 'favorites',
+  storage: AsyncStorage,
+};
+
 // Combine all reducers into a single root reducer
 const combinedReducers = combineReducers({
-  loader: loaderReducer,
   theme: persistReducer(themeConfig, themeReducer),
   users: persistReducer(usersConfig, usersReducer),
+  favorites: persistReducer(favoritesConfig, favoritesReducer),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

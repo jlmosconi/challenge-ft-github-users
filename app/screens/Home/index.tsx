@@ -5,9 +5,11 @@ import {fetchUsers, isFetching, selectUsersList} from '@store/slices/users';
 import {mockUserList} from './data';
 import InfiniteScrollList from '@components/InfiniteScrollList';
 import UserItem from '@components/Users/UserItem';
+import {selectFavoritesMap, toggleFavorite} from '@store/slices/favorites';
 
 const HomeScreen: FC = () => {
   const list = useAppSelector(selectUsersList);
+  const favorites = useAppSelector(selectFavoritesMap);
   const loading = useAppSelector(isFetching);
   const dispatch = useAppDispatch();
 
@@ -25,9 +27,12 @@ const HomeScreen: FC = () => {
     getUserList();
   }, [getUserList]);
 
-  const handleOnFavoritePress = useCallback(() => {
-    console.log('Favorite button pressed');
-  }, []);
+  const handleOnFavoritePress = useCallback(
+    (id: number) => {
+      dispatch(toggleFavorite(id));
+    },
+    [dispatch],
+  );
 
   return (
     <SafeArea>
@@ -35,7 +40,12 @@ const HomeScreen: FC = () => {
         data={mockUserList}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
-          <UserItem login={item.login} avatar_url={item.avatar_url} handleOnFavorite={handleOnFavoritePress} />
+          <UserItem
+            login={item.login}
+            avatar_url={item.avatar_url}
+            handleOnFavorite={() => handleOnFavoritePress(item.id)}
+            isFavorite={favorites.has(item.id)}
+          />
         )}
         fetchNextData={() => {
           console.log('fetchNextData called');
