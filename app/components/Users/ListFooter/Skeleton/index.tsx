@@ -39,7 +39,7 @@ const Skeleton: FC<{theme: DefaultTheme}> = ({theme}) => (
 const SkeletonList: FC<{elementsToDisplay?: number}> = ({elementsToDisplay = 1}) => {
   const theme = useTheme();
   return (
-    <Container>
+    <Container mt={elementsToDisplay === 1 ? 1 : 0}>
       {[...Array(elementsToDisplay)].map((_, index) => (
         <Skeleton key={index} theme={theme} />
       ))}
