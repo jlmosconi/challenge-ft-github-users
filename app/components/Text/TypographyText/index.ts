@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components/native';
-import {TextProps} from 'react-native';
+import {type TextProps} from 'react-native';
 
 export enum Weight {
   REGULAR = 'regular',
@@ -23,7 +23,7 @@ export type TypographyType = (props: {weight: Weight}) => ReturnType<typeof css>
 
 export interface ITypographyText extends TextProps {
   weight?: Weight;
-  type: TypographyType;
+  type?: TypographyType;
 }
 
 const Typography = ({weight, size, height}: ITypography) => css`
@@ -45,5 +45,5 @@ export const Overline = createTypography(12, 14);
 export const Caption = createTypography(14, 16);
 
 export const TypographyText = styled.Text<ITypographyText>`
-  ${({weight, type}) => type({weight: weight || Weight.REGULAR})};
+  ${({weight = Weight.REGULAR, type = Body2}) => type({weight})};
 `;

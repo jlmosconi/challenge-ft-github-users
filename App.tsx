@@ -1,26 +1,32 @@
-import {StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
+import {StatusBar, StyleSheet, useColorScheme, View} from 'react-native';
 import {SafeAreaProvider, initialWindowMetrics} from 'react-native-safe-area-context';
 import {ToastProvider} from 'react-native-toast-notifications';
 import CONFIG from '@config/environment/current';
+import {TypographyText} from '@components/Text/TypographyText';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from '@store/index';
+import {ThemeProvider} from '@config/theme/ThemeContext';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <ToastProvider duration={2500} placement="bottom">
-        <View style={styles.container}>
-          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-          <Text
-            style={{
-              fontSize: 20,
-              textAlign: 'center',
-              marginTop: 150,
-            }}>
-            {CONFIG.MODE} - {CONFIG.API.BASE_URL}
-          </Text>
-        </View>
-      </ToastProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider>
+            <ToastProvider duration={2500} placement="bottom">
+              <View style={styles.container}>
+                <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+                <TypographyText>
+                  {CONFIG.MODE} - {CONFIG.API.BASE_URL}
+                </TypographyText>
+              </View>
+            </ToastProvider>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
     </SafeAreaProvider>
   );
 }
