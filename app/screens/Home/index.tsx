@@ -9,6 +9,8 @@ import UserItem from '@components/Users/Item';
 import {selectFavoritesMap, toggleFavorite} from '@store/slices/favorites';
 import ListFooter from '@components/Users/ListFooter';
 import ListEmpty from '@components/Users/ListEmpty';
+import SpacingBox from '@components/SpacingBox';
+import SearchBar from '@components/SearchBar';
 
 const HomeScreen: FC = () => {
   const list = useAppSelector(selectUsersList);
@@ -39,6 +41,17 @@ const HomeScreen: FC = () => {
 
   return (
     <SafeArea>
+      <SpacingBox mt={2} mb={3}>
+        <SearchBar
+          value={''}
+          onChangeText={text => () => {
+            console.log('Search text changed:', text);
+            // Handle search text change
+          }}
+          placeholder={t('home.search_placeholder')}
+          testID="usersSearchBar"
+        />
+      </SpacingBox>
       <InfiniteScrollList
         data={mockUserList}
         keyExtractor={item => item.id.toString()}
