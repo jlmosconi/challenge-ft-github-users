@@ -67,7 +67,7 @@ const darkTheme: DefaultTheme = {
   typography,
 };
 
-export const defaultThemePreference = ThemePreference.Light;
-export const defaultThemeMode = ThemeMode.Light;
+export const defaultThemePreference = ThemePreference.Dark;
+export const defaultThemeMode = ThemeMode.Dark;
 
-export {lightTheme as theme, darkTheme};
+export {lightTheme, darkTheme};
