@@ -1,15 +1,8 @@
 import {StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
 import CONFIG from '@config/environment/current';
-import {useEffect} from 'react';
-import crashlytics from '@react-native-firebase/crashlytics';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
-
-  useEffect(() => {
-    crashlytics().log('App mounted.');
-    crashlytics().recordError(new Error('Test error for Crashlytics'));
-  }, []);
 
   return (
     <View style={styles.container}>
