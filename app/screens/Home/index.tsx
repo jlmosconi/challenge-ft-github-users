@@ -1,6 +1,7 @@
-import React, {useCallback, useEffect, type FC} from 'react';
+import {useCallback, useEffect, type FC} from 'react';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import SafeArea from '@components/SafeArea';
+import {t} from '@config/i18n';
 import {fetchUsers, isFetching, selectUsersList} from '@store/slices/users';
 import {mockUserList} from './data';
 import InfiniteScrollList from '@components/InfiniteScrollList';
@@ -54,15 +55,7 @@ const HomeScreen: FC = () => {
         }}
         refreshData={getUserList}
         isLoading={loading}
-        ListEmptyComponent={
-          <ListEmpty
-            loading={!!loading}
-            text={
-              'No se encontraron usuarios'
-              // t('home.empty')
-            }
-          />
-        }
+        ListEmptyComponent={<ListEmpty loading={!!loading} text={t('home.empty')} />}
         ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!mockUserList?.length ? 5 : 1} />}
       />
     </SafeArea>
