@@ -1,0 +1,8 @@
+{
+  "home": {
+    "title": "Usuarios de GitHub",
+    "search": "Buscar",
+    "search_placeholder": "Buscar por nombre de usuario",
+    "empty": "No se encontraron usuarios"
+  }
+}
