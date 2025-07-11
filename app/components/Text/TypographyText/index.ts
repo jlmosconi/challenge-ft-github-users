@@ -8,9 +8,9 @@ export enum Weight {
 }
 
 export const WeightMap = {
-  [Weight.REGULAR]: 'Satoshi-Medium',
-  [Weight.SEMI_BOLD]: 'Satoshi-Bold',
-  [Weight.BOLD]: 'Satoshi-Black',
+  [Weight.REGULAR]: 'Mulish-Regular',
+  [Weight.SEMI_BOLD]: 'Mulish-SemiBold',
+  [Weight.BOLD]: 'Mulish-Bold',
 };
 
 interface ITypography {
