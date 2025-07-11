@@ -45,5 +45,5 @@ export const Overline = createTypography(12, 14);
 export const Caption = createTypography(14, 16);
 
 export const TypographyText = styled.Text<ITypographyText>`
-  ${({weight = Weight.REGULAR, type = Body2}) => type({weight})};
+  ${({weight = Weight.REGULAR, type = Caption}) => type({weight})};
 `;
