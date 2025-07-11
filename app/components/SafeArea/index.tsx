@@ -36,7 +36,7 @@ const SafeArea: FC<PropsWithChildren<SafeAreaProps>> = ({
   const edges = useEdges(disableVertical, disableHorizontal, disableBottom, disableTop);
 
   return (
-    <Wrapper color={color || theme.colors.grey.light} edges={edges}>
+    <Wrapper color={color || theme.colors.background} edges={edges}>
       <Container padding={padding}>{children}</Container>
     </Wrapper>
   );
