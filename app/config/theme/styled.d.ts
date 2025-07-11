@@ -6,9 +6,15 @@ declare module 'styled-components/native' {
   export interface DefaultTheme {
     mode: ThemeMode;
     colors: {
-      neutral: {
-        black: string;
-        white: string;
+      background: string;
+      surface: string;
+      primary: string;
+      textPrimary: string;
+      textSecondary: string;
+      grey: {
+        light: string;
+        medium: string;
+        dark: string;
       };
     };
     size: (s: number) => number;

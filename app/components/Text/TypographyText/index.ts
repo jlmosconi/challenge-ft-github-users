@@ -30,7 +30,7 @@ const Typography = ({weight, size, height}: ITypography) => css`
   font-family: ${WeightMap[weight]};
   font-size: ${({theme}) => `${theme.size(size)}px`};
   line-height: ${({theme}) => `${theme.size(height || size)}px`};
-  color: ${({theme}) => theme.colors.neutral.black};
+  color: ${({theme}) => theme.colors.textPrimary};
 `;
 
 export const createTypography = (size: number, height: number, defaultWeight: Weight = Weight.REGULAR) => {

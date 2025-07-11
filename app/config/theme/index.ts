@@ -32,9 +32,15 @@ const typography = {
 const lightTheme: DefaultTheme = {
   mode: ThemeMode.Light,
   colors: {
-    neutral: {
-      black: '#1E252E',
-      white: '#FFFFFF',
+    background: '#ffffff',
+    surface: '#f5f5f5',
+    primary: '#ffcc53',
+    textPrimary: '#0f0d13',
+    textSecondary: '#4f4f4f',
+    grey: {
+      light: '#e0e0e0',
+      medium: '#bdbdbd',
+      dark: '#4f4f4f',
     },
   },
   size,
@@ -45,9 +51,15 @@ const lightTheme: DefaultTheme = {
 const darkTheme: DefaultTheme = {
   mode: ThemeMode.Dark,
   colors: {
-    neutral: {
-      black: '#CCCCCC',
-      white: '#1c1c1e',
+    background: '#0f0d13',
+    surface: '#1c1c1e',
+    primary: '#ffcc53',
+    textPrimary: '#ffffff',
+    textSecondary: '#929292',
+    grey: {
+      light: '#161616',
+      medium: '#464548',
+      dark: '#929292',
     },
   },
   size,
