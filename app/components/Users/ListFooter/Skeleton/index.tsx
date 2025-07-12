@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import {type FC} from 'react';
 import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
 import {type DefaultTheme, useTheme} from 'styled-components/native';
