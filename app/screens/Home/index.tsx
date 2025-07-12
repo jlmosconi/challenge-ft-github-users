@@ -7,6 +7,7 @@ import {
   fetchSearchUsers,
   fetchUsers,
   reloadUsers,
+  selectHasError,
   selectIsFetching,
   selectIsSearching,
   selectUsersList,
@@ -26,6 +27,7 @@ const HomeScreen: FC = () => {
   const loading = useAppSelector(selectIsFetching);
   const favorites = useAppSelector(selectFavorites);
   const isSearching = useAppSelector(selectIsSearching);
+  const hasError = useAppSelector(selectHasError);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -78,6 +80,7 @@ const HomeScreen: FC = () => {
           isSearching={isSearching && loading}
         />
       </SpacingBox>
+
       <ScrollList
         data={userList}
         keyExtractor={item => item.id.toString()}

@@ -27,8 +27,7 @@ const UserRenderItem: FC<RenderItemProps> = ({user, isFavorite, onFavoritePress,
   return (
     <Animated.View
       layout={LinearTransition.springify().damping(40).mass(0.1).stiffness(150)}
-      entering={FadeIn.duration(300).delay(200)}
-      exiting={FadeOut.duration(150)}>
+      entering={FadeIn.duration(300).delay(200)}>
       {itemContent}
     </Animated.View>
   );

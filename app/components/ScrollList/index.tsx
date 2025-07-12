@@ -2,12 +2,10 @@ import {JSX, useCallback, useEffect, useRef, useState} from 'react';
 import {FlatList} from 'react-native';
 import type {ScrollListProp} from './types';
 import {Separator} from './styled';
-import {lightTheme} from '@config/theme';
 
 const SCROLL_EVENT_THROTTLE = 32;
 const SCROLL_END_THRESHOLD = 0.25;
 const DEFAULT_NUM_RENDER = 10;
-const ITEM_HEIGHT = lightTheme.size(56);
 
 const ScrollList = <T,>({
   fetchNextData,
@@ -59,12 +57,6 @@ const ScrollList = <T,>({
         callOnScrollEnd.current = false;
       }}
       ItemSeparatorComponent={ItemSeparatorComponent}
-      getItemLayout={(_, index) => ({
-        // Provides a fixed height for each item
-        length: ITEM_HEIGHT,
-        offset: ITEM_HEIGHT * index,
-        index,
-      })}
     />
   );
 };
