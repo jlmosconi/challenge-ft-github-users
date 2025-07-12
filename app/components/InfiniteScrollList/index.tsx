@@ -3,7 +3,7 @@ import {FlatList} from 'react-native';
 import type {InfiniteScrollListProp} from './types';
 import {Separator} from './styled';
 
-const SCROLL_EVENT_THROTTLE = 64;
+const SCROLL_EVENT_THROTTLE = 32;
 const SCROLL_END_THRESHOLD = 0.25;
 const DEFAULT_NUM_RENDER = 10;
 
