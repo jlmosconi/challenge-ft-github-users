@@ -49,7 +49,6 @@ const ScrollList = <T,>({
       scrollEventThrottle={SCROLL_EVENT_THROTTLE}
       onEndReachedThreshold={SCROLL_END_THRESHOLD}
       refreshing={refreshing}
-      removeClippedSubviews // Improves performance by not rendering items that are off-screen
       onRefresh={handleRefresh}
       onEndReached={() => {
         if (!callOnScrollEnd.current && !isLoading && !refreshing) return;
