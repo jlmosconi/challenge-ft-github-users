@@ -17,6 +17,7 @@ import FilterModal from '@components/Users/FilterModal';
 const FavoritesScreen: FC = () => {
   const favorites = useAppSelector(selectFavorites);
   const filter = useAppSelector(selectFavoritesFilter);
+
   const dispatch = useAppDispatch();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -46,14 +47,8 @@ const FavoritesScreen: FC = () => {
   );
 
   const renderItem = useCallback(
-    ({item, index}: {item: FavoriteUser; index: number}) => (
-      <RenderItem
-        user={item}
-        isFavorite={!!favorites[item.id]}
-        onFavoritePress={handleOnFavoritePress}
-        index={index}
-        animate
-      />
+    ({item}: {item: FavoriteUser}) => (
+      <RenderItem user={item} isFavorite={!!favorites[item.id]} onFavoritePress={handleOnFavoritePress} animate />
     ),
     [handleOnFavoritePress, favorites],
   );

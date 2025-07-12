@@ -9,6 +9,7 @@ const initialState: UsersState = {
   list: [],
   isFetching: false,
   isSearching: false,
+  hasError: false,
 };
 
 const UsersSlice = createSlice({
@@ -22,9 +23,11 @@ const UsersSlice = createSlice({
     getUsersSuccess: (state, {payload}: PayloadAction<IUserListResponse[]>) => {
       state.list = payload || [];
       state.isFetching = false;
+      state.hasError = false;
     },
     getUsersFailed: state => {
       state.isFetching = false;
+      state.hasError = true;
     },
     searchUserStart: state => {
       state.isFetching = true;
@@ -33,9 +36,11 @@ const UsersSlice = createSlice({
     searchUserSuccess: (state, {payload}: PayloadAction<IUserListResponse[]>) => {
       state.list = payload || [];
       state.isFetching = false;
+      state.hasError = false;
     },
     searchUserFailed: state => {
       state.isFetching = false;
+      state.hasError = true;
     },
     clearUserList: state => {
       state.list = [];
@@ -69,6 +74,8 @@ export const fetchUsers =
     dispatch(getUsersStart());
     const response = await usersService.getUserList(since, limit);
 
+    console.log('fetchUsers', response);
+
     if (response.ok) {
       const list = selectUsersList(getState());
       const data = [...list, ...(response.data || [])];
@@ -81,7 +88,8 @@ export const fetchUsers =
 
 export const fetchNextUsers = () => async (dispatch: AppDispatch, getState: () => RootState) => {
   const searching = selectIsSearching(getState());
-  if (searching) return;
+  const hasError = selectHasError(getState());
+  if (searching || hasError) return;
 
   const list = selectUsersList(getState()) || [];
   const lastUserId = list[list.length - 1]?.id || 0;
@@ -116,3 +124,4 @@ export const fetchSearchUsers =
 export const selectUsersList = (state: RootState) => state.users.list;
 export const selectIsFetching = (state: RootState) => state.users.isFetching;
 export const selectIsSearching = (state: RootState) => state.users.isSearching;
+export const selectHasError = (state: RootState) => state.users.hasError;

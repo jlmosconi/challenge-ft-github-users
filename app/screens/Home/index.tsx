@@ -8,6 +8,7 @@ import {
   fetchUsers,
   reloadUsers,
   selectIsFetching,
+  selectIsSearching,
   selectUsersList,
 } from '@store/slices/users';
 import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
@@ -24,6 +25,7 @@ const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
   const loading = useAppSelector(selectIsFetching);
   const favorites = useAppSelector(selectFavorites);
+  const isSearching = useAppSelector(selectIsSearching);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const HomeScreen: FC = () => {
         </TypographyText>
       </SpacingBox>
       <SpacingBox mb={3}>
-        <SearchBox onSearch={handleOnSearch} placeholder={t('home.search_placeholder')} />
+        <SearchBox onSearch={handleOnSearch} placeholder={t('home.search_placeholder')} isSearching={isSearching} />
       </SpacingBox>
       <ScrollList
         data={userList}

@@ -1,4 +1,4 @@
-import {type FC} from 'react';
+import {memo, type FC} from 'react';
 import Animated, {FadeOut, FadeIn, LinearTransition} from 'react-native-reanimated';
 import UserItem from '@components/Users/Item';
 import {FavoriteUser} from '@store/slices/favorites/types';
@@ -8,10 +8,9 @@ interface RenderItemProps {
   onFavoritePress: (user: FavoriteUser) => void;
   isFavorite?: boolean;
   animate?: boolean;
-  index?: number;
 }
 
-const UserRenderItem: FC<RenderItemProps> = ({user, isFavorite, onFavoritePress, animate = false, index = 0}) => {
+const UserRenderItem: FC<RenderItemProps> = ({user, isFavorite, onFavoritePress, animate = false}) => {
   const itemContent = (
     <UserItem
       login={user.login}
@@ -28,11 +27,10 @@ const UserRenderItem: FC<RenderItemProps> = ({user, isFavorite, onFavoritePress,
   return (
     <Animated.View
       layout={LinearTransition.springify().damping(40).mass(0.1).stiffness(150)}
-      entering={FadeIn.duration(150 * (index + 1)).delay(200)}
+      entering={FadeIn.duration(300).delay(200)}
       exiting={FadeOut.duration(150)}>
       {itemContent}
     </Animated.View>
   );
 };
-
-export default UserRenderItem;
+export default memo(UserRenderItem);

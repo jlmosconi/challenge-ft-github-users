@@ -6,5 +6,6 @@ export interface SearchBarProps {
   value: string;
   maxLength?: number;
   placeholder?: string;
+  isSearching?: boolean;
   testID?: string;
 }

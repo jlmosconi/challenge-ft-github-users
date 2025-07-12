@@ -12,9 +12,8 @@ const LazyImage: FC<LazyImageProps> = ({source, containerStyle, resizeMode, fall
     if (source?.uri) {
       setError(false);
       setLoading(false);
-      opacity.value = 0;
     }
-  }, [source?.uri, opacity]);
+  }, [source?.uri]);
 
   const fadeIn = () => {
     opacity.value = withTiming(1, {duration: 300});
