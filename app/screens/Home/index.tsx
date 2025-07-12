@@ -20,18 +20,14 @@ import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
 
 const HomeScreen: FC = () => {
-  const list = useAppSelector(selectUsersList);
+  const userList = useAppSelector(selectUsersList);
   const loading = useAppSelector(selectIsFetching);
   const favorites = useAppSelector(selectFavoritesMap);
   const dispatch = useAppDispatch();
 
-  const getUserList = useCallback(() => {
+  useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
-
-  useEffect(() => {
-    getUserList();
-  }, [getUserList]);
 
   const handleOnFavoritePress = useCallback(
     (id: number) => {
@@ -69,7 +65,7 @@ const HomeScreen: FC = () => {
         <SearchBox onSearch={handleOnSearch} placeholder={t('home.search_placeholder')} />
       </SpacingBox>
       <InfiniteScrollList
-        data={list}
+        data={userList}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <UserItem
@@ -83,7 +79,7 @@ const HomeScreen: FC = () => {
         refreshData={handleOnRefresh}
         isLoading={loading}
         ListEmptyComponent={<ListEmpty loading={!!loading} text={t('home.empty')} />}
-        ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!list?.length ? 5 : 1} />}
+        ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!userList?.length ? 5 : 1} />}
       />
     </SafeArea>
   );

@@ -94,7 +94,7 @@ export const reloadUsers = () => async (dispatch: AppDispatch) => {
 };
 
 export const fetchSearchUsers =
-  ({query = '', limit = 10} = {}) =>
+  ({query = '', limit = 15} = {}) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
     const alreadyLoading = selectIsFetching(getState());
     if (alreadyLoading) return;
