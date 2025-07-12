@@ -4,6 +4,7 @@ import type {FavoritesState, FavoriteUser} from './types';
 
 const initialState: FavoritesState = {
   list: {},
+  filter: 'id', // Default sort option
 };
 
 const FavoritesSlice = createSlice({
@@ -17,10 +18,13 @@ const FavoritesSlice = createSlice({
         state.list[payload.id] = payload;
       }
     },
+    setFilter: (state, {payload}: PayloadAction<FavoritesState['filter']>) => {
+      state.filter = payload;
+    },
   },
 });
 
-export const {toggleFavorite} = FavoritesSlice.actions;
+export const {toggleFavorite, setFilter} = FavoritesSlice.actions;
 
 export default FavoritesSlice.reducer;
 
@@ -28,3 +32,4 @@ export default FavoritesSlice.reducer;
  * Selectors
  */
 export const selectFavorites = (state: RootState) => state.favorites.list;
+export const selectFavoritesFilter = (state: RootState) => state.favorites.filter;
