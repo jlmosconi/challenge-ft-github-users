@@ -9,11 +9,11 @@ export const Container = styled(SpacingBox)`
 
 export const Text = styled.Text`
   ${({theme}) => theme.typography.body1({weight: Weight.REGULAR})};
-  color: ${({theme}) => theme.colors.grey.medium};
+  color: ${({theme}) => theme.colors.grey.dark};
   text-align: center;
 `;
 
 export const EmptyIcon = styled(SpecificSizeIcon)`
   color: ${({theme}) => theme.colors.grey.dark};
-  opacity: 0.7;
+  opacity: 0.9;
 `;

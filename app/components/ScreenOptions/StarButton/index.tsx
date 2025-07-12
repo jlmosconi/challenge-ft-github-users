@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {type FC} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {useTheme} from 'styled-components/native';
 import {IconName} from '@components/Icon/icons';

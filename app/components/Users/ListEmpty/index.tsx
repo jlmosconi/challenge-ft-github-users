@@ -1,24 +1,17 @@
-import {FC} from 'react';
-import SpacingBox from '@components/SpacingBox';
-import {Container, EmptyIcon, Text} from './styled';
+import {type FC} from 'react';
+import type {ListEmptyProps} from '@components/ListEmpty/types';
 import {IconName} from '@components/Icon/icons';
+import ListEmpty from '@components/ListEmpty';
 
-interface ListEmptyProps {
+interface UserListEmptyProps extends Partial<ListEmptyProps> {
   loading: boolean;
-  text: string;
-  spacing?: number;
 }
 
-const ListEmpty: FC<ListEmptyProps> = ({loading, text, spacing = 10}) => {
+const UserListEmpty: FC<UserListEmptyProps> = ({iconName = IconName.Users, loading, text, ...rest}) => {
   if (loading) return null;
 
   return (
-    <Container mt={spacing}>
-      <SpacingBox testID="nUsersImage" mb={1}>
-        <EmptyIcon size={100} name={IconName.Users} />
-      </SpacingBox>
-      <Text testID="noUsersTitle">{text}</Text>
-    </Container>
+    <ListEmpty iconName={iconName} text={text || ''} iconTestID="noUsersImage" textTestID="noUsersTitle" {...rest} />
   );
 };
-export default ListEmpty;
+export default UserListEmpty;

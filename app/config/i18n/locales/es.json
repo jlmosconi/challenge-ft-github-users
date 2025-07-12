@@ -5,6 +5,7 @@
     "empty": "No se encontraron usuarios"
   },
   "favorites": {
-    "title": "Favoritos"
+    "title": "Favoritos",
+    "empty": "No tienes usuarios favoritos"
   }
 }

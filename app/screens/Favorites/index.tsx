@@ -5,6 +5,9 @@ import {useAppDispatch, useAppSelector} from '@store/hooks';
 import InfiniteScrollList from '@components/InfiniteScrollList';
 import UserItem from '@components/Users/Item';
 import {FavoriteUser} from '@store/slices/favorites/types';
+import ListEmpty from '@components/ListEmpty';
+import {IconName} from '@components/Icon/icons';
+import {t} from '@config/i18n';
 
 const FavoritesScreen: FC = () => {
   const favorites = useAppSelector(selectFavorites);
@@ -20,6 +23,19 @@ const FavoritesScreen: FC = () => {
     },
     [dispatch],
   );
+
+  if (!favoritesList.length) {
+    return (
+      <SafeArea>
+        <ListEmpty
+          iconName={IconName.StarFilled}
+          text={t('favorites.empty')}
+          iconTestID="noFavoritesImage"
+          textTestID="noFavoritesTitle"
+        />
+      </SafeArea>
+    );
+  }
 
   return (
     <SafeArea>
