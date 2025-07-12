@@ -3,5 +3,8 @@
     "title": "Usuarios de GitHub",
     "search_placeholder": "Buscar por nombre",
     "empty": "No se encontraron usuarios"
+  },
+  "favorites": {
+    "title": "Favoritos"
   }
 }

@@ -60,7 +60,7 @@ const HomeScreen: FC = () => {
 
   return (
     <SafeArea>
-      <SpacingBox mt={2} mb={1}>
+      <SpacingBox mb={1}>
         <TypographyText type={Body2} weight={Weight.BOLD}>
           {t('home.title')}
         </TypographyText>
