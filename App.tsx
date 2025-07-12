@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import {SafeAreaProvider, initialWindowMetrics} from 'react-native-safe-area-context';
 import {ToastProvider} from 'react-native-toast-notifications';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
@@ -15,7 +16,9 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
           <ThemeProvider>
             <ToastProvider duration={2500} placement="bottom">
-              <ApplicationNavigator />
+              <BottomSheetModalProvider>
+                <ApplicationNavigator />
+              </BottomSheetModalProvider>
             </ToastProvider>
           </ThemeProvider>
         </PersistGate>
