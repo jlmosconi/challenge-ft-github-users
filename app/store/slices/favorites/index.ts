@@ -1,4 +1,4 @@
-import {type PayloadAction, createSelector, createSlice} from '@reduxjs/toolkit';
+import {type PayloadAction, createSlice} from '@reduxjs/toolkit';
 import type {RootState} from 'store';
 import type {FavoriteId, FavoritesState} from './types';
 
@@ -27,7 +27,4 @@ export default FavoritesSlice.reducer;
 /**
  * Selectors
  */
-export const selectFavoritesMap = createSelector(
-  (state: RootState) => state.favorites.list,
-  list => new Map(Object.entries(list).map(([key, value]) => [Number(key), value as true])),
-);
+export const selectFavorites = (state: RootState) => state.favorites.list;

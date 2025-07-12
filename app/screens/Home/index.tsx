@@ -12,7 +12,7 @@ import {
 } from '@store/slices/users';
 import InfiniteScrollList from '@components/InfiniteScrollList';
 import UserItem from '@components/Users/Item';
-import {selectFavoritesMap, toggleFavorite} from '@store/slices/favorites';
+import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
 import ListFooter from '@components/Users/ListFooter';
 import ListEmpty from '@components/Users/ListEmpty';
 import SpacingBox from '@components/SpacingBox';
@@ -22,7 +22,7 @@ import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
   const loading = useAppSelector(selectIsFetching);
-  const favorites = useAppSelector(selectFavoritesMap);
+  const favorites = useAppSelector(selectFavorites);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const HomeScreen: FC = () => {
             login={item.login}
             avatar_url={item.avatar_url}
             handleOnFavorite={() => handleOnFavoritePress(item.id)}
-            isFavorite={favorites.has(item.id)}
+            isFavorite={favorites[item.id] || false}
           />
         )}
         fetchNextData={handleFetchNextUsers}
