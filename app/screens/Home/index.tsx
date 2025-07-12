@@ -10,15 +10,15 @@ import {
   selectIsFetching,
   selectUsersList,
 } from '@store/slices/users';
-import InfiniteScrollList from '@components/InfiniteScrollList';
-import UserItem from '@components/Users/Item';
 import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
+import type {FavoriteUser} from '@store/slices/favorites/types';
+import ScrollList from '@components/ScrollList';
+import UserItem from '@components/Users/Item';
 import ListFooter from '@components/Users/ListFooter';
 import ListEmpty from '@components/Users/ListEmpty';
 import SpacingBox from '@components/SpacingBox';
 import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
-import {FavoriteUser} from '@store/slices/favorites/types';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
@@ -65,7 +65,7 @@ const HomeScreen: FC = () => {
       <SpacingBox mb={3}>
         <SearchBox onSearch={handleOnSearch} placeholder={t('home.search_placeholder')} />
       </SpacingBox>
-      <InfiniteScrollList
+      <ScrollList
         data={userList}
         keyExtractor={item => item.id.toString()}
         renderItem={({item: {id, login, avatar_url}}) => (

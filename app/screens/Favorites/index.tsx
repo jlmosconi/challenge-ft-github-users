@@ -2,7 +2,7 @@ import {useCallback, useMemo, type FC} from 'react';
 import SafeArea from '@components/SafeArea';
 import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
-import InfiniteScrollList from '@components/InfiniteScrollList';
+import ScrollList from '@components/ScrollList';
 import UserItem from '@components/Users/Item';
 import {FavoriteUser} from '@store/slices/favorites/types';
 import ListEmpty from '@components/ListEmpty';
@@ -26,20 +26,18 @@ const FavoritesScreen: FC = () => {
 
   if (!favoritesList.length) {
     return (
-      <SafeArea>
-        <ListEmpty
-          iconName={IconName.StarFilled}
-          text={t('favorites.empty')}
-          iconTestID="noFavoritesImage"
-          textTestID="noFavoritesTitle"
-        />
-      </SafeArea>
+      <ListEmpty
+        iconName={IconName.StarFilled}
+        text={t('favorites.empty')}
+        iconTestID="noFavoritesImage"
+        textTestID="noFavoritesTitle"
+      />
     );
   }
 
   return (
     <SafeArea>
-      <InfiniteScrollList
+      <ScrollList
         data={favoritesList}
         keyExtractor={item => item.id.toString()}
         renderItem={({item: {id, login, avatar_url}}) => (

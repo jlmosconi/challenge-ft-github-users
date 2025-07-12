@@ -1,22 +1,22 @@
 import {JSX, useCallback, useEffect, useRef, useState} from 'react';
 import {FlatList} from 'react-native';
-import type {InfiniteScrollListProp} from './types';
+import type {ScrollListProp} from './types';
 import {Separator} from './styled';
 
 const SCROLL_EVENT_THROTTLE = 32;
 const SCROLL_END_THRESHOLD = 0.25;
 const DEFAULT_NUM_RENDER = 10;
 
-const InfiniteScrollList = <T,>({
+const ScrollList = <T,>({
   fetchNextData,
   refreshData,
   ItemSeparatorComponent = Separator,
-  testID = 'infiniteScrollList',
+  testID = 'ScrollList',
   contentContainerStyle,
   initialNumToRender = DEFAULT_NUM_RENDER,
   isLoading,
   ...props
-}: InfiniteScrollListProp<T>): JSX.Element => {
+}: ScrollListProp<T>): JSX.Element => {
   const [refreshing, setRefreshing] = useState(false);
   const callOnScrollEnd = useRef(false);
 
@@ -64,4 +64,4 @@ const InfiniteScrollList = <T,>({
     />
   );
 };
-export default InfiniteScrollList;
+export default ScrollList;
