@@ -58,8 +58,6 @@ const HomeScreen: FC = () => {
     dispatch(fetchNextUsers());
   }, [dispatch]);
 
-  const users = list;
-
   return (
     <SafeArea>
       <SpacingBox mt={2} mb={1}>
@@ -71,7 +69,7 @@ const HomeScreen: FC = () => {
         <SearchBox onSearch={handleOnSearch} placeholder={t('home.search_placeholder')} />
       </SpacingBox>
       <InfiniteScrollList
-        data={users}
+        data={list}
         keyExtractor={item => item.id.toString()}
         renderItem={({item}) => (
           <UserItem
@@ -85,7 +83,7 @@ const HomeScreen: FC = () => {
         refreshData={handleOnRefresh}
         isLoading={loading}
         ListEmptyComponent={<ListEmpty loading={!!loading} text={t('home.empty')} />}
-        ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!users?.length ? 5 : 1} />}
+        ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!list?.length ? 5 : 1} />}
       />
     </SafeArea>
   );
