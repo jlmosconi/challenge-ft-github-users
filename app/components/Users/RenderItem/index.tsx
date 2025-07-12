@@ -5,8 +5,8 @@ import {FavoriteUser} from '@store/slices/favorites/types';
 
 interface RenderItemProps {
   user: FavoriteUser;
-  isFavorite: boolean;
   onFavoritePress: (user: FavoriteUser) => void;
+  isFavorite?: boolean;
   animate?: boolean;
   index?: number;
 }
