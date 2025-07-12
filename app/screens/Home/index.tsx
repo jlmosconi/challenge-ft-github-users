@@ -72,7 +72,11 @@ const HomeScreen: FC = () => {
         </TypographyText>
       </SpacingBox>
       <SpacingBox mb={3}>
-        <SearchBox onSearch={handleOnSearch} placeholder={t('home.search_placeholder')} isSearching={isSearching} />
+        <SearchBox
+          onSearch={handleOnSearch}
+          placeholder={t('home.search_placeholder')}
+          isSearching={isSearching && loading}
+        />
       </SpacingBox>
       <ScrollList
         data={userList}

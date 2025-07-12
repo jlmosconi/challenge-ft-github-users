@@ -4,6 +4,7 @@ import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconWrapper, StyledTextInput, Wrapper} from './styled';
 import type {SearchBarProps} from './types';
 import {useTheme} from 'styled-components/native';
+import {ActivityIndicator} from 'react-native';
 
 const SearchBar: FC<SearchBarProps> = ({
   placeholderTextColor,
@@ -11,6 +12,7 @@ const SearchBar: FC<SearchBarProps> = ({
   value,
   maxLength = 20,
   placeholder,
+  isSearching,
   testID,
 }) => {
   const theme = useTheme();
@@ -32,6 +34,7 @@ const SearchBar: FC<SearchBarProps> = ({
         textContentType="none"
         spellCheck={false}
       />
+      {isSearching && <ActivityIndicator size="small" color={theme.colors.grey.dark} />}
     </Wrapper>
   );
 };

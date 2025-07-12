@@ -4,10 +4,11 @@ import {useDebounce} from '@hooks/useDebounce';
 
 interface SearchBoxProps {
   placeholder?: string;
+  isSearching?: boolean;
   onSearch: (name: string) => void;
 }
 
-const SearchBox: FC<SearchBoxProps> = ({placeholder, onSearch}) => {
+const SearchBox: FC<SearchBoxProps> = ({placeholder, isSearching, onSearch}) => {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search, 300);
@@ -16,7 +17,7 @@ const SearchBox: FC<SearchBoxProps> = ({placeholder, onSearch}) => {
     onSearch(debouncedSearch);
   }, [debouncedSearch, onSearch]);
 
-  return <SearchBar placeholder={placeholder} value={search} onChangeText={setSearch} />;
+  return <SearchBar placeholder={placeholder} value={search} onChangeText={setSearch} isSearching={isSearching} />;
 };
 
 export default SearchBox;
