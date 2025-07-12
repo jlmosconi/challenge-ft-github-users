@@ -1,16 +1,15 @@
-import {useCallback, useEffect, type FC} from 'react';
+import {useCallback, useEffect, useState, type FC} from 'react';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import SafeArea from '@components/SafeArea';
 import {t} from '@config/i18n';
 import {
-  clearUserList,
   fetchNextUsers,
   fetchSearchUsers,
   fetchUsers,
+  reloadUsers,
   selectIsFetching,
   selectUsersList,
 } from '@store/slices/users';
-import {mockUserList} from './data';
 import InfiniteScrollList from '@components/InfiniteScrollList';
 import UserItem from '@components/Users/Item';
 import {selectFavoritesMap, toggleFavorite} from '@store/slices/favorites';
@@ -21,6 +20,7 @@ import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
 
 const HomeScreen: FC = () => {
+  const [refreshing, setRefreshing] = useState(false);
   const list = useAppSelector(selectUsersList);
   const loading = useAppSelector(selectIsFetching);
   const favorites = useAppSelector(selectFavoritesMap);
@@ -44,19 +44,17 @@ const HomeScreen: FC = () => {
   const handleOnSearch = useCallback(
     (name: string) => {
       if (!name.trim()) {
-        dispatch(clearUserList());
-        getUserList();
-        return;
+        return dispatch(reloadUsers());
       }
       dispatch(fetchSearchUsers({query: name}));
     },
-    [dispatch, getUserList],
+    [dispatch],
   );
 
   const handleOnRefresh = useCallback(() => {
-    dispatch(clearUserList());
-    getUserList();
-  }, [getUserList, dispatch]);
+    setRefreshing(true);
+    dispatch(reloadUsers());
+  }, [dispatch]);
 
   const handleFetchNextUsers = useCallback(() => {
     dispatch(fetchNextUsers());
@@ -88,6 +86,7 @@ const HomeScreen: FC = () => {
         fetchNextData={handleFetchNextUsers}
         refreshData={handleOnRefresh}
         isLoading={loading}
+        refreshing={refreshing}
         ListEmptyComponent={<ListEmpty loading={!!loading} text={t('home.empty')} />}
         ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!users?.length ? 5 : 1} />}
       />

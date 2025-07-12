@@ -88,6 +88,11 @@ export const fetchNextUsers = () => async (dispatch: AppDispatch, getState: () =
   return dispatch(fetchUsers({since: lastUserId}));
 };
 
+export const reloadUsers = () => async (dispatch: AppDispatch) => {
+  dispatch(clearUserList());
+  return dispatch(fetchUsers());
+};
+
 export const fetchSearchUsers =
   ({query = '', limit = 10} = {}) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
