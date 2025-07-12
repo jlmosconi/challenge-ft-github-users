@@ -33,7 +33,6 @@ const Skeleton: FC<{theme: DefaultTheme}> = ({theme}) => (
       </ContentLoader>
     </SpacingBox>
   </Block>
-  // </Item>
 );
 
 const SkeletonList: FC<{elementsToDisplay?: number}> = ({elementsToDisplay = 1}) => {
