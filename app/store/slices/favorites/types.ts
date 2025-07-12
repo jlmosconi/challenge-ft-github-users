@@ -1,7 +1,6 @@
 import type {IUserBase} from '@services/usersService/types';
-
-export type FavoriteId = IUserBase['id'];
+export type FavoriteUser = Pick<IUserBase, 'id' | 'login' | 'avatar_url'>;
 
 export interface FavoritesState {
-  list: Record<FavoriteId, true>;
+  list: Record<FavoriteUser['id'], FavoriteUser>;
 }

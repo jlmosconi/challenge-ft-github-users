@@ -18,6 +18,7 @@ import ListEmpty from '@components/Users/ListEmpty';
 import SpacingBox from '@components/SpacingBox';
 import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
+import {FavoriteUser} from '@store/slices/favorites/types';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
@@ -30,8 +31,8 @@ const HomeScreen: FC = () => {
   }, [dispatch]);
 
   const handleOnFavoritePress = useCallback(
-    (id: number) => {
-      dispatch(toggleFavorite(id));
+    (user: FavoriteUser) => {
+      dispatch(toggleFavorite(user));
     },
     [dispatch],
   );
@@ -67,12 +68,18 @@ const HomeScreen: FC = () => {
       <InfiniteScrollList
         data={userList}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item}) => (
+        renderItem={({item: {id, login, avatar_url}}) => (
           <UserItem
-            login={item.login}
-            avatar_url={item.avatar_url}
-            handleOnFavorite={() => handleOnFavoritePress(item.id)}
-            isFavorite={favorites[item.id] || false}
+            login={login}
+            avatar_url={avatar_url}
+            handleOnFavorite={() =>
+              handleOnFavoritePress({
+                id,
+                login,
+                avatar_url,
+              })
+            }
+            isFavorite={!!favorites[id]}
           />
         )}
         fetchNextData={handleFetchNextUsers}
