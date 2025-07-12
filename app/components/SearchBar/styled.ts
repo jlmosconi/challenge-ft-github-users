@@ -19,7 +19,7 @@ export const StyledTextInput = styled.TextInput`
   padding-horizontal: ${({theme}) => `${theme.size(4)}px`};
   margin-right: ${({theme}) => `${theme.size(16)}px`};
   font-size: ${({theme}) => `${theme.size(16)}px`};
-  ${({theme}) => theme.typography.body2({weight: Weight.REGULAR})};
+  ${({theme}) => theme.typography.body1({weight: Weight.REGULAR})};
 `;
 
 export const IconWrapper = styled.View`

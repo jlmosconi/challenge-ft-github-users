@@ -1,10 +1,9 @@
-/* eslint-disable react-native/no-inline-styles */
 import {type FC} from 'react';
 import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
 import {type DefaultTheme, useTheme} from 'styled-components/native';
 import SpacingBox from '@components/SpacingBox';
 import {Block} from '@components/Users/Item/styled';
-import {Container} from './styled';
+import {CenterContent, Container} from './styled';
 
 const AVATAR_SIZE = 4;
 
@@ -23,7 +22,7 @@ const Skeleton: FC<{theme: DefaultTheme}> = ({theme}) => (
         />
       </ContentLoader>
     </SpacingBox>
-    <SpacingBox style={{flex: 1, justifyContent: 'center'}}>
+    <CenterContent>
       <ContentLoader
         width={theme.size(theme.spacing(15))}
         height={theme.size(theme.spacing(2))}
@@ -31,9 +30,8 @@ const Skeleton: FC<{theme: DefaultTheme}> = ({theme}) => (
         foregroundColor={theme.colors.grey.medium}>
         <Rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
       </ContentLoader>
-    </SpacingBox>
+    </CenterContent>
   </Block>
-  // </Item>
 );
 
 const SkeletonList: FC<{elementsToDisplay?: number}> = ({elementsToDisplay = 1}) => {

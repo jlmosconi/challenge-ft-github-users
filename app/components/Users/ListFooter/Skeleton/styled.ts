@@ -6,3 +6,8 @@ export const Container = styled(SpacingBox)`
   border-radius: ${({theme}) => `${theme.size(12)}px`};
   gap: ${({theme}) => theme.size(theme.spacing(1))};
 `;
+
+export const CenterContent = styled.View`
+  flex: 1;
+  justify-content: center;
+`;
