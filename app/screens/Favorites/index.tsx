@@ -8,6 +8,7 @@ import {FavoriteUser} from '@store/slices/favorites/types';
 import ListEmpty from '@components/ListEmpty';
 import {IconName} from '@components/Icon/icons';
 import {t} from '@config/i18n';
+import Animated, {FadeOut, FadeIn, LinearTransition} from 'react-native-reanimated';
 
 const FavoritesScreen: FC = () => {
   const favorites = useAppSelector(selectFavorites);
@@ -41,18 +42,23 @@ const FavoritesScreen: FC = () => {
         data={favoritesList}
         keyExtractor={item => item.id.toString()}
         renderItem={({item: {id, login, avatar_url}}) => (
-          <UserItem
-            login={login}
-            avatar_url={avatar_url}
-            handleOnFavorite={() =>
-              handleOnFavoritePress({
-                id,
-                login,
-                avatar_url,
-              })
-            }
-            isFavorite={!!favorites[id]}
-          />
+          <Animated.View
+            layout={LinearTransition.springify()}
+            entering={FadeIn.duration(300)}
+            exiting={FadeOut.duration(300)}>
+            <UserItem
+              login={login}
+              avatar_url={avatar_url}
+              handleOnFavorite={() =>
+                handleOnFavoritePress({
+                  id,
+                  login,
+                  avatar_url,
+                })
+              }
+              isFavorite={!!favorites[id]}
+            />
+          </Animated.View>
         )}
       />
     </SafeArea>
