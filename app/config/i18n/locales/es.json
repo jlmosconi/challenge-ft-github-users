@@ -6,6 +6,14 @@
   },
   "favorites": {
     "title": "Favoritos",
-    "empty": "No tienes usuarios favoritos"
+    "empty": "No tienes usuarios favoritos",
+    "filter": {
+      "title": "Ordenar por...",
+      "options": {
+        "id": "ordenar por ID",
+        "name-asc": "ordenar por nombre (A-Z)",
+        "name-desc": "ordenar por nombre (Z-A)"
+      }
+    }
   }
 }

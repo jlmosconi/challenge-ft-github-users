@@ -1,10 +1,10 @@
 import {type FC} from 'react';
-
-import {FilterContainer} from './styled';
+import {useTheme} from 'styled-components/native';
+import {t} from '@config/i18n';
 import {Overline, TypographyText, Weight} from '@components/Text/TypographyText';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconName} from '@components/Icon/icons';
-import {useTheme} from 'styled-components/native';
+import {FilterContainer} from './styled';
 
 interface ListFilterProps {
   onFilterPress?: () => void;
@@ -15,7 +15,7 @@ const ListFilter: FC<ListFilterProps> = ({onFilterPress}) => {
   return (
     <FilterContainer onPress={onFilterPress}>
       <TypographyText type={Overline} weight={Weight.SEMI_BOLD}>
-        Ordenar por...
+        {t('favorites.filter.title')}
       </TypographyText>
       <SpecificSizeIcon name={IconName.ArrowRight} size={16} color={theme.colors.textPrimary} />
     </FilterContainer>
