@@ -1,9 +1,10 @@
 import {useCallback, useMemo, useRef, type FC} from 'react';
-import {t} from '@config/i18n';
 import type {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {selectFavorites, selectFavoritesFilter, setFilter, toggleFavorite} from '@store/slices/favorites';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {FavoriteUser, type SortOption} from '@store/slices/favorites/types';
+import {sortUsers} from '@utils/users/sortUsers';
+import {t} from '@config/i18n';
 import ScrollList from '@components/ScrollList';
 import SafeArea from '@components/SafeArea';
 import ListEmpty from '@components/ListEmpty';
@@ -12,7 +13,6 @@ import RenderItem from '@components/Users/RenderItem';
 import ListFilter from '@components/ListFilter';
 import SpacingBox from '@components/SpacingBox';
 import FilterModal from '@components/Users/FilterModal';
-import {sortUsers} from '@utils/users/sortUsers';
 
 const FavoritesScreen: FC = () => {
   const favorites = useAppSelector(selectFavorites);
@@ -61,9 +61,12 @@ const FavoritesScreen: FC = () => {
   return (
     <>
       <SafeArea>
-        <SpacingBox mv={1}>
-          <ListFilter onFilterPress={handlePresentModalPress} />
-        </SpacingBox>
+        {!!favoritesList.length && (
+          <SpacingBox mv={1}>
+            <ListFilter onFilterPress={handlePresentModalPress} />
+          </SpacingBox>
+        )}
+
         <ScrollList
           data={favoritesList}
           keyExtractor={item => item.id.toString()}
