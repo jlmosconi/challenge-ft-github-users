@@ -30,8 +30,8 @@ const FavoritesScreen: FC = () => {
         user={item}
         isFavorite={!!favorites[item.id]}
         onFavoritePress={handleOnFavoritePress}
-        animate={true}
         index={index}
+        animate
       />
     ),
     [handleOnFavoritePress, favorites],
