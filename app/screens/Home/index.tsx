@@ -13,12 +13,12 @@ import {
 import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
 import type {FavoriteUser} from '@store/slices/favorites/types';
 import ScrollList from '@components/ScrollList';
-import UserItem from '@components/Users/Item';
 import ListFooter from '@components/Users/ListFooter';
 import ListEmpty from '@components/Users/ListEmpty';
 import SpacingBox from '@components/SpacingBox';
 import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
+import UserRenderItem from '@components/Users/RenderItem';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
@@ -55,6 +55,13 @@ const HomeScreen: FC = () => {
     dispatch(fetchNextUsers());
   }, [dispatch]);
 
+  const renderItem = useCallback(
+    ({item}: {item: FavoriteUser}) => (
+      <UserRenderItem user={item} isFavorite={!!favorites[item.id]} onFavoritePress={handleOnFavoritePress} />
+    ),
+    [handleOnFavoritePress, favorites],
+  );
+
   return (
     <SafeArea>
       <SpacingBox mb={1}>
@@ -68,20 +75,7 @@ const HomeScreen: FC = () => {
       <ScrollList
         data={userList}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item: {id, login, avatar_url}}) => (
-          <UserItem
-            login={login}
-            avatar_url={avatar_url}
-            handleOnFavorite={() =>
-              handleOnFavoritePress({
-                id,
-                login,
-                avatar_url,
-              })
-            }
-            isFavorite={!!favorites[id]}
-          />
-        )}
+        renderItem={renderItem}
         fetchNextData={handleFetchNextUsers}
         refreshData={handleOnRefresh}
         isLoading={loading}

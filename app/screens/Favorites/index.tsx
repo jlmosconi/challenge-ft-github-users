@@ -1,14 +1,13 @@
 import {useCallback, useMemo, type FC} from 'react';
-import SafeArea from '@components/SafeArea';
+import {t} from '@config/i18n';
 import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
-import ScrollList from '@components/ScrollList';
-import UserItem from '@components/Users/Item';
 import {FavoriteUser} from '@store/slices/favorites/types';
+import ScrollList from '@components/ScrollList';
+import SafeArea from '@components/SafeArea';
 import ListEmpty from '@components/ListEmpty';
 import {IconName} from '@components/Icon/icons';
-import {t} from '@config/i18n';
-import Animated, {FadeOut, FadeIn, LinearTransition} from 'react-native-reanimated';
+import RenderItem from '@components/Users/RenderItem';
 
 const FavoritesScreen: FC = () => {
   const favorites = useAppSelector(selectFavorites);
@@ -25,41 +24,33 @@ const FavoritesScreen: FC = () => {
     [dispatch],
   );
 
-  if (!favoritesList.length) {
-    return (
-      <ListEmpty
-        iconName={IconName.StarFilled}
-        text={t('favorites.empty')}
-        iconTestID="noFavoritesImage"
-        textTestID="noFavoritesTitle"
+  const renderItem = useCallback(
+    ({item, index}: {item: FavoriteUser; index: number}) => (
+      <RenderItem
+        user={item}
+        isFavorite={!!favorites[item.id]}
+        onFavoritePress={handleOnFavoritePress}
+        animate={true}
+        index={index}
       />
-    );
-  }
+    ),
+    [handleOnFavoritePress, favorites],
+  );
 
   return (
     <SafeArea>
       <ScrollList
         data={favoritesList}
         keyExtractor={item => item.id.toString()}
-        renderItem={({item: {id, login, avatar_url}}) => (
-          <Animated.View
-            layout={LinearTransition.springify()}
-            entering={FadeIn.duration(300)}
-            exiting={FadeOut.duration(300)}>
-            <UserItem
-              login={login}
-              avatar_url={avatar_url}
-              handleOnFavorite={() =>
-                handleOnFavoritePress({
-                  id,
-                  login,
-                  avatar_url,
-                })
-              }
-              isFavorite={!!favorites[id]}
-            />
-          </Animated.View>
-        )}
+        renderItem={renderItem}
+        ListEmptyComponent={
+          <ListEmpty
+            iconName={IconName.StarFilled}
+            text={t('favorites.empty')}
+            iconTestID="noFavoritesImage"
+            textTestID="noFavoritesTitle"
+          />
+        }
       />
     </SafeArea>
   );
