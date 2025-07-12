@@ -1,13 +1,13 @@
-import React, {forwardRef} from 'react';
+import {forwardRef} from 'react';
+import {t} from '@config/i18n';
+import {useTheme} from 'styled-components/native';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import type {SortOption} from '@store/slices/favorites/types';
 import BottomModal from '@components/BottomModal';
 import {TypographyText} from '@components/Text/TypographyText';
-import type {SortOption} from '@store/slices/favorites/types';
-import {Container, FilterContainer} from './styled';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconName} from '@components/Icon/icons';
-import {useTheme} from 'styled-components/native';
-import {t} from '@config/i18n';
+import {Container, FilterContainer} from './styled';
 
 interface BottomModalProps {
   filter: SortOption;
