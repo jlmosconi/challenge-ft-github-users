@@ -1,4 +1,4 @@
-import {Animated} from 'react-native';
+import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 import type {ToggleWrapperProps} from './types';
 
@@ -21,7 +21,7 @@ export const Indicator = styled(Animated.View)`
   width: 18px;
   height: 18px;
   border-radius: 18px;
-  background-color: ${({theme}) => theme.colors.textPrimary};
+  background-color: ${({theme}) => theme.colors.grey.light};
   position: absolute;
   left: 3px;
   top: 3px;

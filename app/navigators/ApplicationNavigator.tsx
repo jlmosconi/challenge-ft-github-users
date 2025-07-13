@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
-import {useMemo, type FC} from 'react';
+import {type FC} from 'react';
 import {t} from '@config/i18n';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';

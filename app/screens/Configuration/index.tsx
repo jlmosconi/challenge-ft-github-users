@@ -1,3 +1,4 @@
+import Toggle from '@components/Toggle';
 import {ThemeMode, ThemePreference} from '@config/theme';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {selectThemeMode, setThemePreference} from '@store/slices/theme';
@@ -23,6 +24,7 @@ const ConfigurationScreen: FC = () => {
     <View>
       <Pressable onPress={onChangeAppearance}>
         <Text style={{color: currentMode === ThemeMode.Dark ? 'white' : 'black'}}>ConfigurationScreen</Text>
+        <Toggle testID="theme-toggle" checked={currentMode === ThemeMode.Dark} />
       </Pressable>
     </View>
   );

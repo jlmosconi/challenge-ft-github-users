@@ -1,20 +1,28 @@
-import {type FC, useCallback, useEffect, useRef} from 'react';
-import {Animated} from 'react-native';
-import {IndicatorWrapper, Label, Wrapper, Indicator} from './styled';
+import {type FC, useCallback, useEffect} from 'react';
+import Animated, {useSharedValue, useAnimatedStyle, withSpring} from 'react-native-reanimated';
 import type {ToggleProps} from './types';
+import {IndicatorWrapper, Label, Wrapper, Indicator} from './styled';
+
+const TOGGLE_TRANSLATION_X = 16;
 
 const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, label, testID}) => {
-  const translation = useRef(new Animated.Value(checked ? 16 : 0)).current;
+  const translation = useSharedValue(checked ? TOGGLE_TRANSLATION_X : 0);
 
   useEffect(() => {
-    Animated.spring(translation, {
-      toValue: checked ? 16 : 0,
-      useNativeDriver: true,
-    }).start();
+    translation.value = withSpring(checked ? TOGGLE_TRANSLATION_X : 0, {
+      damping: 15,
+      stiffness: 150,
+    });
   }, [checked, translation]);
 
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{translateX: translation.value}],
+  }));
+
   const onPressWrapper = useCallback(() => {
-    !disabled && onPress?.();
+    if (!disabled) {
+      onPress?.();
+    }
   }, [disabled, onPress]);
 
   return (
@@ -26,7 +34,9 @@ const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, label, testID}) =>
       accessibilityRole="checkbox"
       accessibilityState={{disabled, checked}}>
       <IndicatorWrapper disabled={disabled} checked={checked}>
-        <Indicator testID={`${testID}`} style={{transform: [{translateX: translation}]}} />
+        <Animated.View testID={testID} style={animatedStyle}>
+          <Indicator />
+        </Animated.View>
       </IndicatorWrapper>
       {label && <Label disabled={disabled}>{label}</Label>}
     </Wrapper>
