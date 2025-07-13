@@ -126,7 +126,7 @@ const UserScreen: FC<Props> = ({route}) => {
           ))}
         </BoxesContainer>
 
-        {userInfoFields.length > 0 && (
+        {userInfoFields.length && (
           <DataListContainer mv={2}>
             {userInfoFields.map(({icon, value}) => (
               <DataListItem key={icon}>
