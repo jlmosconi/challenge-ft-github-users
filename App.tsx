@@ -12,9 +12,13 @@ import ApplicationNavigator from '@navigators/ApplicationNavigator';
 function App() {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      {/* Redux store provider for global state management. scalability and predictable state handling. */}
       <Provider store={store}>
+        {/* Prevents UI flicker by waiting for persisted Redux state. better UX on app startup. */}
         <PersistGate loading={null} persistor={persistor}>
+          {/* ThemeProvider for consistent theming across the app. */}
           <ThemeProvider>
+            {/* LanguageProvider for managing language settings and translations. */}
             <LanguageProvider>
               <BottomSheetModalProvider>
                 <ApplicationNavigator />

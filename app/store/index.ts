@@ -20,7 +20,7 @@ const languageConfig = {
 const usersConfig = {
   key: 'users',
   storage: AsyncStorage,
-  blacklist: ['isFetching'], // Avoid persisting the fetching state
+  blacklist: ['isFetching', 'hasError'], // Avoid persisting transient state.
 };
 
 const favoritesConfig = {
@@ -49,7 +49,6 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-  devTools: __DEV__,
 });
 
 const persistor = persistStore(store);
