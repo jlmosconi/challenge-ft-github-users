@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyChlrqIYBHCnnH0p1ABAyfYWnyHr-mKDFA</string>
+	<string>AIzaSyDp8SDWFlE8awdKL0gF2-iZLBvrFsyGazg</string>
 	<key>GCM_SENDER_ID</key>
-	<string>951674689497</string>
+	<string>414163866777</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.githubusers.dev</string>
+	<string>com.githubusers</string>
 	<key>PROJECT_ID</key>
-	<string>challenge-ft-github-users-dev</string>
+	<string>challenge-ft-github-users</string>
 	<key>STORAGE_BUCKET</key>
-	<string>challenge-ft-github-users-dev.firebasestorage.app</string>
+	<string>challenge-ft-github-users.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:951674689497:ios:cf354fe81cb9cb4c302bc8</string>
+	<string>1:414163866777:ios:7f5a666c292d0d917e5408</string>
 </dict>
 </plist>
