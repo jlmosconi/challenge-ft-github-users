@@ -22,5 +22,8 @@
     "followers": "Seguidores",
     "following": "Siguiendo",
     "error": "Ocurrió un error al cargar el usuario"
+  },
+  "config": {
+    "title": "Configuración"
   }
 }

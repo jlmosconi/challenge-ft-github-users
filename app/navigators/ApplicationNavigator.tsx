@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import {useMemo, type FC} from 'react';
 import {t} from '@config/i18n';
 import {NavigationContainer} from '@react-navigation/native';
@@ -14,6 +15,8 @@ import HomeScreen from '@screens/Home';
 import FavoritesScreen from '@screens/Favorites';
 import UserScreen from '@screens/User';
 import {FillView} from './styled';
+import ConfigurationScreen from '@screens/Configuration';
+import ConfigurationButton from '@components/ScreenOptions/ConfigurationButton';
 
 const Stack = createStackNavigator<MainStack>();
 
@@ -21,7 +24,12 @@ const ApplicationNavigator: FC = () => {
   const theme = useTheme();
 
   const headerLeft = () => <BackButton onPress={navigateBack} />;
-  const starButton = () => <StarButton onPress={() => navigate(MainScreen.Favorites)} />;
+  const homeHeaderRight = () => (
+    <>
+      <StarButton onPress={() => navigate(MainScreen.Favorites)} />
+      <ConfigurationButton onPress={() => navigate(MainScreen.Configuration)} />
+    </>
+  );
 
   const defaultScreenOptions = useMemo(() => {
     return {...DEFAULT_HEADER_OPTIONS, ...getFlatHeaderOptions(theme.mode), headerLeft};
@@ -43,7 +51,7 @@ const ApplicationNavigator: FC = () => {
             component={HomeScreen}
             options={{
               headerLeft: () => null,
-              headerRight: starButton,
+              headerRight: homeHeaderRight,
             }}
           />
           <Stack.Screen
@@ -54,7 +62,13 @@ const ApplicationNavigator: FC = () => {
             }}
           />
           <Stack.Screen name={MainScreen.User} component={UserScreen} />
-          {/*<Stack.Screen name={MainScreen.Configuration} component={ConfigurationScreen} /> */}
+          <Stack.Screen
+            name={MainScreen.Configuration}
+            component={ConfigurationScreen}
+            options={{
+              headerTitle: () => <HeaderTitle title={t('config.title')} />,
+            }}
+          />
         </Stack.Navigator>
       </FillView>
     </NavigationContainer>
