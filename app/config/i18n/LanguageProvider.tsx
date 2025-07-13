@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren, createContext} from 'react';
-import {Language} from '@config/i18n';
+import {defaultLanguage, Language} from '@config/i18n';
 import {useLanguage} from '@hooks/useLanguage';
 import {t as i18nT} from '@config/i18n';
 
@@ -10,7 +10,7 @@ interface LanguageContextProps {
 }
 
 export const LanguageContext = createContext<LanguageContextProps>({
-  language: Language.es,
+  language: defaultLanguage,
   setLanguage: () => {},
   t: i18nT,
 });
