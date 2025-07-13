@@ -20,7 +20,7 @@ describe('SearchBar', () => {
 
   it('renders the search icon', () => {
     const {getByTestId} = renderWithTheme(<SearchBar onChangeText={() => {}} value={''} />);
-
+    // Check that SpecificSizeIcon is rendered with the correct icon name.
     expect(getByTestId('mockSpecificSizeIcon').props.name).toBe(IconName.Search);
   });
 
@@ -31,7 +31,7 @@ describe('SearchBar', () => {
     const {getByPlaceholderText} = renderWithTheme(
       <SearchBar placeholder={placeholder} value={value} onChangeText={() => {}} />,
     );
-
+    // Ensure the input field renders with the given placeholder and value.
     expect(getByPlaceholderText(placeholder).props.value).toBe(value);
   });
 
@@ -43,8 +43,10 @@ describe('SearchBar', () => {
       <SearchBar placeholder={placeholder} onChangeText={mockChange} value="" />,
     );
 
+    // Simulate user typing new text.
     fireEvent.changeText(getByPlaceholderText(placeholder), 'new value');
 
+    // Ensure onChangeText is called with the new value.
     expect(mockChange).toHaveBeenCalledWith('new value');
   });
 
@@ -53,7 +55,7 @@ describe('SearchBar', () => {
       <SearchBar isSearching testID="search-bar" onChangeText={() => {}} value="" />,
     );
 
-    // There should be an ActivityIndicator inside the wrapper
+    // Find the wrapper and check for ActivityIndicator inside it.
     const wrapper = getByTestId('search-bar');
     const activityIndicator = wrapper.findByType(require('react-native').ActivityIndicator);
     expect(activityIndicator).toBeTruthy();
