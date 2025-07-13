@@ -20,6 +20,7 @@
   "user": {
     "respos": "Repositorios",
     "followers": "Seguidores",
-    "following": "Siguiendo"
+    "following": "Siguiendo",
+    "error": "Ocurrió un error al cargar el usuario"
   }
 }

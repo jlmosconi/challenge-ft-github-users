@@ -1,15 +1,15 @@
 import {useEffect, type FC} from 'react';
-import {Text, View} from 'react-native';
 import {type RouteProp} from '@react-navigation/native';
+import {useTheme} from 'styled-components/native';
+import {t} from '@config/i18n';
 import {MainScreen, MainStack} from '@navigators/screenRoutes';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
-import {fetchUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
+import {fetchUser, selectHasErrorUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
 import SpacingBox from '@components/SpacingBox';
 import UserAvatar from '@components/Users/UserAvatar';
 import SafeArea from '@components/SafeArea';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconName} from '@components/Icon/icons';
-import {useTheme} from 'styled-components/native';
 import {
   Bio,
   BoxesContainer,
@@ -24,7 +24,7 @@ import {
   NameContainer,
   UserName,
 } from './styled';
-import {t} from '@config/i18n';
+import EmptyState from '@components/EmptyState';
 
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
@@ -33,22 +33,31 @@ const UserScreen: FC<Props> = ({route}) => {
 
   const user = useAppSelector(selectUser);
   const isFetching = useAppSelector(selectIsFetchingUser);
+  const hasError = useAppSelector(selectHasErrorUser);
 
   const dispatch = useAppDispatch();
   const theme = useTheme();
 
-  // Fetch user only if not already loaded or different user
   useEffect(() => {
     if (!username || user?.login === username) return;
+    // Fetch user only if not already loaded or different user
     dispatch(fetchUser(username));
-  }, [dispatch, username, user]);
+  }, [dispatch, username, user?.login]);
 
   if (!user || isFetching) {
     return (
       <SafeArea>
-        <View style={{padding: 16}}>
+        {/* <View style={{padding: 16}}>
           <Text>Loading...</Text>
-        </View>
+        </View> */}
+      </SafeArea>
+    );
+  }
+
+  if (hasError) {
+    return (
+      <SafeArea>
+        <EmptyState iconName={IconName.Error} text={t('user.error')} iconTestID="errorImage" textTestID="errorTitle" />
       </SafeArea>
     );
   }

@@ -1,6 +1,6 @@
+import styled from 'styled-components/native';
 import SpacingBox from '@components/SpacingBox';
 import {Weight} from '@components/Text/TypographyText';
-import styled from 'styled-components/native';
 
 export const InfoContainer = styled.View`
   text-align: center;
@@ -74,7 +74,6 @@ export const DataListItem = styled.View`
 
 export const InfoListText = styled.Text`
   ${({theme}) => theme.typography.caption({weight: Weight.REGULAR})};
-
   flex: 1;
   opacity: 0.8;
 `;
