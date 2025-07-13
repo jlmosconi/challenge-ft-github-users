@@ -73,7 +73,7 @@ export const InfoBoxValue = styled.Text`
 export const DataListContainer = styled(SpacingBox)`
   background-color: ${({theme}) => theme.colors.grey.light};
   padding: ${({theme}) => theme.size(theme.spacing(1))}px;
-  gap: ${({theme}) => theme.size(theme.spacing(1.5))}px;
+  gap: ${({theme}) => theme.size(theme.spacing(2))}px;
   border-radius: ${({theme}) => theme.size(theme.spacing(1))}px;
 `;
 
