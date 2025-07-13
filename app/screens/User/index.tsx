@@ -81,6 +81,7 @@ const UserScreen: FC<Props> = ({route}) => {
     {icon: IconName.X, value: user.twitter_username},
   ].filter(item => !!item.value);
 
+  console.log('UserScreen userInfoFields:', userInfoFields);
   return (
     <SafeArea>
       <InfoContainer>
@@ -127,7 +128,7 @@ const UserScreen: FC<Props> = ({route}) => {
           ))}
         </BoxesContainer>
 
-        {userInfoFields.length && (
+        {userInfoFields.length > 0 && (
           <DataListContainer mv={2}>
             {userInfoFields.map(({icon, value}) => (
               <DataListItem key={icon}>
