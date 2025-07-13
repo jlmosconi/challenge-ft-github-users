@@ -13,6 +13,7 @@ import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconName} from '@components/Icon/icons';
 import EmptyState from '@components/EmptyState';
 import FavoriteButton from '@components/Favorite/FavoriteButton';
+import UserSkeleton from '@components/Users/UserSkeleton';
 import {
   Bio,
   BoxesContainer,
@@ -29,7 +30,6 @@ import {
   AvatarContainer,
   FavoriteContainer,
 } from './styled';
-import UserSkeleton from '@components/Users/UserSkeleton';
 
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
@@ -37,8 +37,7 @@ const UserScreen: FC<Props> = ({route}) => {
   const {username} = route.params;
 
   const user = useAppSelector(selectUser);
-  //   const isFetching = useAppSelector(selectIsFetchingUser);
-  const isFetching = true;
+  const isFetching = useAppSelector(selectIsFetchingUser);
   const hasError = useAppSelector(selectHasErrorUser);
 
   const dispatch = useAppDispatch();
@@ -54,9 +53,6 @@ const UserScreen: FC<Props> = ({route}) => {
   if (!user || isFetching) {
     return (
       <SafeArea>
-        {/* <View style={{padding: 16}}>
-          <Text>Loading...</Text>
-        </View> */}
         <UserSkeleton />
       </SafeArea>
     );

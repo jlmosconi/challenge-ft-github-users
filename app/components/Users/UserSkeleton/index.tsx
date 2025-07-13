@@ -28,7 +28,7 @@ const UserSkeleton: FC = () => {
       <SpacingBox mb={0.5}>
         {/* NAME */}
         <ContentLoader
-          width={theme.size(theme.spacing(20))}
+          width={theme.size(theme.spacing(18))}
           height={theme.size(theme.spacing(3))}
           backgroundColor={theme.colors.grey.light}
           foregroundColor={theme.colors.grey.medium}>
