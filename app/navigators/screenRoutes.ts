@@ -7,4 +7,11 @@ export enum MainScreen {
   Configuration = 'Configuration',
 }
 
-export type MainStack = CreateScreenStack<MainScreen>;
+export type MainStack = CreateScreenStack<
+  MainScreen,
+  {
+    [MainScreen.User]: {
+      userId: number;
+    };
+  }
+>;
