@@ -66,6 +66,12 @@ const UserScreen: FC<Props> = ({route}) => {
     );
   }
 
+  const userBoxes = [
+    {title: t('user.respos'), value: user.public_repos},
+    {title: t('user.followers'), value: user.followers},
+    {title: t('user.following'), value: user.following},
+  ];
+
   const userInfoFields = [
     {icon: IconName.Company, value: user.company},
     {icon: IconName.Email, value: user.email},
@@ -112,18 +118,12 @@ const UserScreen: FC<Props> = ({route}) => {
         )}
 
         <BoxesContainer>
-          <InfoBox>
-            <InfoBoxValue>{user.public_repos}</InfoBoxValue>
-            <InfoBoxTitle>{t('user.respos')}</InfoBoxTitle>
-          </InfoBox>
-          <InfoBox>
-            <InfoBoxValue>{user.followers}</InfoBoxValue>
-            <InfoBoxTitle>{t('user.followers')}</InfoBoxTitle>
-          </InfoBox>
-          <InfoBox>
-            <InfoBoxValue>{user.following}</InfoBoxValue>
-            <InfoBoxTitle>{t('user.following')}</InfoBoxTitle>
-          </InfoBox>
+          {userBoxes.map(box => (
+            <InfoBox key={box.title}>
+              <InfoBoxValue>{box.value}</InfoBoxValue>
+              <InfoBoxTitle>{box.title}</InfoBoxTitle>
+            </InfoBox>
+          ))}
         </BoxesContainer>
 
         {userInfoFields.length > 0 && (
