@@ -1,9 +1,9 @@
 import {type FC} from 'react';
 import SpacingBox from '@components/SpacingBox';
-import type {ListEmptyProps} from './types';
+import type {EmptyStateProps} from './types';
 import {Container, EmptyIcon, Text} from './styled';
 
-const ListEmpty: FC<ListEmptyProps> = ({text, spacing = 10, iconName, iconSize = 100, iconTestID, textTestID}) => {
+const EmptyState: FC<EmptyStateProps> = ({text, spacing = 10, iconName, iconSize = 100, iconTestID, textTestID}) => {
   return (
     <Container mt={spacing}>
       <SpacingBox testID={iconTestID} mb={1}>
@@ -13,4 +13,4 @@ const ListEmpty: FC<ListEmptyProps> = ({text, spacing = 10, iconName, iconSize =
     </Container>
   );
 };
-export default ListEmpty;
+export default EmptyState;

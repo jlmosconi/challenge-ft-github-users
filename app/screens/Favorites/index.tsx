@@ -7,7 +7,7 @@ import {sortUsers} from '@utils/users/sortUsers';
 import {t} from '@config/i18n';
 import ScrollList from '@components/ScrollList';
 import SafeArea from '@components/SafeArea';
-import ListEmpty from '@components/ListEmpty';
+import ListEmpty from '@components/EmptyState';
 import {IconName} from '@components/Icon/icons';
 import RenderItem from '@components/Users/RenderItem';
 import ListFilter from '@components/ListFilter';

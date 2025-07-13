@@ -1,5 +1,5 @@
 import {memo, type FC} from 'react';
-import Animated, {FadeOut, FadeIn, LinearTransition} from 'react-native-reanimated';
+import Animated, {FadeIn, LinearTransition} from 'react-native-reanimated';
 import UserItem from '@components/Users/Item';
 import {FavoriteUser} from '@store/slices/favorites/types';
 

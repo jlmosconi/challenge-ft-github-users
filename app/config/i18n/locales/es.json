@@ -2,7 +2,8 @@
   "home": {
     "title": "Usuarios de GitHub",
     "search_placeholder": "Buscar por nombre",
-    "empty": "No se encontraron usuarios"
+    "empty": "No se encontraron usuarios",
+    "error": "Ocurrió un error al cargar los usuarios"
   },
   "favorites": {
     "title": "Favoritos",

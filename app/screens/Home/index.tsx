@@ -21,6 +21,8 @@ import SpacingBox from '@components/SpacingBox';
 import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
 import UserRenderItem from '@components/Users/RenderItem';
+import EmptyState from '@components/EmptyState';
+import {IconName} from '@components/Icon/icons';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
@@ -69,7 +71,7 @@ const HomeScreen: FC = () => {
   return (
     <SafeArea>
       <SpacingBox mb={1}>
-        <TypographyText type={Body2} weight={Weight.BOLD}>
+        <TypographyText type={Body2} weight={Weight.BOLD} testID="homeTitle">
           {t('home.title')}
         </TypographyText>
       </SpacingBox>
@@ -81,16 +83,20 @@ const HomeScreen: FC = () => {
         />
       </SpacingBox>
 
-      <ScrollList
-        data={userList}
-        keyExtractor={item => item.id.toString()}
-        renderItem={renderItem}
-        fetchNextData={handleFetchNextUsers}
-        refreshData={handleOnRefresh}
-        isLoading={loading}
-        ListEmptyComponent={<ListEmpty loading={!!loading} text={t('home.empty')} />}
-        ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!userList?.length ? 5 : 1} />}
-      />
+      {hasError ? (
+        <EmptyState iconName={IconName.Error} text={t('home.error')} iconTestID="errorImage" textTestID="errorTitle" />
+      ) : (
+        <ScrollList
+          data={userList}
+          keyExtractor={item => item.id.toString()}
+          renderItem={renderItem}
+          fetchNextData={handleFetchNextUsers}
+          refreshData={handleOnRefresh}
+          isLoading={loading}
+          ListEmptyComponent={<ListEmpty loading={!!loading} text={t('home.empty')} />}
+          ListFooterComponent={<ListFooter loading={!!loading} elementsToDisplay={!userList?.length ? 5 : 1} />}
+        />
+      )}
     </SafeArea>
   );
 };

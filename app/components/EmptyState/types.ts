@@ -1,6 +1,6 @@
 import {IconName} from '@components/Icon/icons';
 
-export interface ListEmptyProps {
+export interface EmptyStateProps {
   iconName: IconName;
   iconSize?: number;
   text: string;
