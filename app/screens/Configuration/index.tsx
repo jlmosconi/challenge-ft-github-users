@@ -2,17 +2,17 @@ import {type FC, useCallback} from 'react';
 import Toggle from '@components/Toggle';
 import {ThemeMode, ThemePreference} from '@config/theme';
 import {selectThemeMode, setThemePreference} from '@store/slices/theme';
-import {useLanguage} from '@config/i18n/LanguageProvider';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {Language} from '@config/i18n';
 import SafeArea from '@components/SafeArea';
 import {ItemTitle, ListContainer, ListItem} from './styled';
+import {useLanguageState} from '@hooks/useLanguageState';
 
 const ConfigurationScreen: FC = () => {
   const currentMode = useAppSelector(selectThemeMode);
 
   const dispatch = useAppDispatch();
-  const {language, setLanguage, t} = useLanguage();
+  const {language, setLanguage, t} = useLanguageState();
 
   const onChangeAppearance = useCallback(() => {
     const preference = currentMode === ThemeMode.Dark ? ThemePreference.Light : ThemePreference.Dark;
