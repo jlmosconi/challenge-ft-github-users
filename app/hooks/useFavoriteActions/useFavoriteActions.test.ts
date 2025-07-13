@@ -10,7 +10,6 @@ jest.mock('@store/slices/favorites', () => ({
   })),
 }));
 
-const mockedUseAppDispatch = require('@store/hooks').useAppDispatch;
 const mockedUseAppSelector = require('@store/hooks').useAppSelector;
 
 // Fake list of favorite users for mock store
@@ -36,7 +35,6 @@ describe('useFavoriteActions', () => {
         },
       }),
     );
-    mockedUseAppDispatch.mockReturnValue(jest.fn());
 
     const {result} = renderHook(() => useFavoriteActions());
 
@@ -52,7 +50,6 @@ describe('useFavoriteActions', () => {
         },
       }),
     );
-    mockedUseAppDispatch.mockReturnValue(jest.fn());
 
     const {result} = renderHook(() => useFavoriteActions());
 

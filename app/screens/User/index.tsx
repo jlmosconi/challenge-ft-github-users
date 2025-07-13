@@ -12,7 +12,7 @@ import SafeArea from '@components/SafeArea';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconName} from '@components/Icon/icons';
 import EmptyState from '@components/EmptyState';
-import FavoriteButton from '@components/Favorite/FavoriteButton';
+import FavoriteButton from '@components/FavoriteButton';
 import UserSkeleton from '@components/Users/UserSkeleton';
 import {
   Bio,

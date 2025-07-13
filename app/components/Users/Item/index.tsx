@@ -1,7 +1,7 @@
 import {type FC} from 'react';
 import type {IUserBase} from '@services/usersService/types';
 import {TypographyText} from '@components/Text/TypographyText';
-import FavoriteButton from '@components/Favorite/FavoriteButton';
+import FavoriteButton from '@components/FavoriteButton';
 import UserAvatar from '@components/Users/UserAvatar';
 import {Block, ColumnCenter, ColumnLeft, ColumnRight} from './styled';
 
