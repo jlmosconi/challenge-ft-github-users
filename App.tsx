@@ -6,8 +6,8 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from '@store/index';
 import {ThemeProvider} from '@config/theme/ThemeContext';
-import ApplicationNavigator from '@navigators/ApplicationNavigator';
 import {LanguageProvider} from '@config/i18n/LanguageProvider';
+import ApplicationNavigator from '@navigators/ApplicationNavigator';
 
 function App() {
   return (
