@@ -2,7 +2,7 @@ import type {CreateScreenStack} from '@utils/screens';
 
 export enum MainScreen {
   Home = 'Home',
-  UserProfile = 'UserProfile',
+  User = 'User',
   Favorites = 'Favorites',
   Configuration = 'Configuration',
 }

@@ -12,7 +12,7 @@ import {
   selectIsSearching,
   selectUsersList,
 } from '@store/slices/users';
-import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
+import {selectFavorites} from '@store/slices/favorites';
 import type {FavoriteUser} from '@store/slices/favorites/types';
 import ScrollList from '@components/ScrollList';
 import ListFooter from '@components/Users/ListFooter';
@@ -23,6 +23,9 @@ import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
 import UserRenderItem from '@components/Users/RenderItem';
 import EmptyState from '@components/EmptyState';
 import {IconName} from '@components/Icon/icons';
+import {MainScreen} from '@navigators/screenRoutes';
+import {navigate} from '@utils/navigation';
+import {useFavoriteActions} from '@hooks/useFavoriteActions';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
@@ -30,18 +33,13 @@ const HomeScreen: FC = () => {
   const favorites = useAppSelector(selectFavorites);
   const isSearching = useAppSelector(selectIsSearching);
   const hasError = useAppSelector(selectHasError);
+
   const dispatch = useAppDispatch();
+  const {handleOnFavoritePress} = useFavoriteActions();
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
-
-  const handleOnFavoritePress = useCallback(
-    (user: FavoriteUser) => {
-      dispatch(toggleFavorite(user));
-    },
-    [dispatch],
-  );
 
   const handleOnSearch = useCallback(
     (name: string) => {
@@ -61,11 +59,18 @@ const HomeScreen: FC = () => {
     dispatch(fetchNextUsers());
   }, [dispatch]);
 
+  const navigateToUserScreen = useCallback((id: number) => navigate(MainScreen.User, {userId: id}), []);
+
   const renderItem = useCallback(
     ({item}: {item: FavoriteUser}) => (
-      <UserRenderItem user={item} isFavorite={!!favorites[item.id]} onFavoritePress={handleOnFavoritePress} />
+      <UserRenderItem
+        user={item}
+        isFavorite={!!favorites[item.id]}
+        onPress={() => navigateToUserScreen(item.id)}
+        onFavoritePress={handleOnFavoritePress}
+      />
     ),
-    [handleOnFavoritePress, favorites],
+    [favorites, handleOnFavoritePress, navigateToUserScreen],
   );
 
   return (

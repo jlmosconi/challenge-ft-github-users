@@ -9,12 +9,13 @@ interface UserItem extends Pick<IUserBase, 'login' | 'avatar_url'> {
   avatarSize?: number;
   isFavorite?: boolean;
   showFavoriteButton?: boolean;
+  handleOnPress?: () => void;
   handleOnFavorite?: () => void;
 }
 
-const UserItem: FC<UserItem> = ({login, avatar_url, avatarSize = 4, isFavorite, handleOnFavorite}) => {
+const UserItem: FC<UserItem> = ({login, avatar_url, avatarSize = 4, isFavorite, handleOnPress, handleOnFavorite}) => {
   return (
-    <Block>
+    <Block onPress={handleOnPress}>
       <ColumnLeft>
         <UserAvatar avatar_url={avatar_url} size={avatarSize} />
       </ColumnLeft>

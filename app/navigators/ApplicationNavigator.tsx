@@ -12,6 +12,7 @@ import StarButton from '@components/ScreenOptions/StarButton';
 import HeaderTitle from '@components/ScreenOptions/HeaderTitle';
 import HomeScreen from '@screens/Home';
 import FavoritesScreen from '@screens/Favorites';
+import UserScreen from '@screens/User';
 import {FillView} from './styled';
 
 const Stack = createStackNavigator<MainStack>();
@@ -51,9 +52,8 @@ const ApplicationNavigator: FC = () => {
               headerTitle: () => <HeaderTitle title={t('favorites.title')} />,
             }}
           />
-          {/* <Stack.Screen name={MainScreen.UserProfile} component={UserProfileScreen} />
-                <Stack.Screen name={MainScreen.Favorites} component={FavoritesScreen} />
-                <Stack.Screen name={MainScreen.Configuration} component={ConfigurationScreen} /> */}
+          <Stack.Screen name={MainScreen.User} component={UserScreen} />
+          {/*<Stack.Screen name={MainScreen.Configuration} component={ConfigurationScreen} /> */}
         </Stack.Navigator>
       </FillView>
     </NavigationContainer>
