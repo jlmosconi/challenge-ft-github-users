@@ -59,14 +59,14 @@ const HomeScreen: FC = () => {
     dispatch(fetchNextUsers());
   }, [dispatch]);
 
-  const navigateToUserScreen = useCallback((id: number) => navigate(MainScreen.User, {userId: id}), []);
+  const navigateToUserScreen = useCallback((username: string) => navigate(MainScreen.User, {username}), []);
 
   const renderItem = useCallback(
     ({item}: {item: FavoriteUser}) => (
       <UserRenderItem
         user={item}
         isFavorite={!!favorites[item.id]}
-        onPress={() => navigateToUserScreen(item.id)}
+        onPress={() => navigateToUserScreen(item.login)}
         onFavoritePress={handleOnFavoritePress}
       />
     ),

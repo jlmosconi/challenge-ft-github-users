@@ -1,28 +1,12 @@
 import type {PropsWithChildren, FC} from 'react';
-import {useHeaderHeight} from '@react-navigation/elements';
 import {useTheme} from 'styled-components/native';
-import {Edge} from '@config/constants/edges';
+import {useEdges} from '@hooks/useEdges';
 import type {SafeAreaProps} from './types';
 import {Container, Wrapper} from './styled';
-
-const useEdges = (
-  disableVertical?: boolean,
-  disableHorizontal?: boolean,
-  disableBottom?: boolean,
-  disableTop?: boolean,
-) => {
-  try {
-    const height = useHeaderHeight();
-    if (disableVertical) return [Edge.Left, Edge.Right];
-    if (disableHorizontal) return [Edge.Top, Edge.Bottom];
-    if (disableBottom) return [Edge.Top, Edge.Left, Edge.Right];
-    if (disableTop) return [Edge.Bottom, Edge.Left, Edge.Right];
-    return height === 0 ? [Edge.Top, Edge.Left, Edge.Right, Edge.Bottom] : [Edge.Left, Edge.Right, Edge.Bottom];
-  } catch (e) {
-    return [Edge.Top, Edge.Left, Edge.Right, Edge.Bottom];
-  }
-};
-
+/**
+ * SafeArea component that provides a safe area with customizable padding and background color.
+ * It uses the edges to determine which sides to apply padding based on the provided props.
+ */
 const SafeArea: FC<PropsWithChildren<SafeAreaProps>> = ({
   color,
   children,

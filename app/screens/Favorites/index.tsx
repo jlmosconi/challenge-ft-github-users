@@ -43,7 +43,7 @@ const FavoritesScreen: FC = () => {
     return sortUsers(usersArray, filter);
   }, [favorites, filter]);
 
-  const navigateToUserScreen = useCallback((id: number) => navigate(MainScreen.User, {userId: id}), []);
+  const navigateToUserScreen = useCallback((username: string) => navigate(MainScreen.User, {username}), []);
 
   const renderItem = useCallback(
     ({item}: {item: FavoriteUser}) => (
@@ -52,7 +52,7 @@ const FavoritesScreen: FC = () => {
         isFavorite={!!favorites[item.id]}
         animate
         onFavoritePress={handleOnFavoritePress}
-        onPress={() => navigateToUserScreen(item.id)}
+        onPress={() => navigateToUserScreen(item.login)}
       />
     ),
     [favorites, handleOnFavoritePress, navigateToUserScreen],

@@ -1,12 +1,13 @@
 import {type PayloadAction, createSlice} from '@reduxjs/toolkit';
 import type {AppDispatch, RootState} from 'store';
 import type {UsersState} from './types';
-import type {IUserListResponse} from '@services/usersService/types';
+import type {IUserListResponse, IUserResponse} from '@services/usersService/types';
 import usersService from '@services/usersService';
 import searchService from '@services/searchService';
 
 const initialState: UsersState = {
   list: [],
+  user: undefined,
   isFetching: false,
   isSearching: false,
   hasError: false,
@@ -42,6 +43,18 @@ const UsersSlice = createSlice({
       state.isFetching = false;
       state.hasError = true;
     },
+    getUserStart: state => {
+      state.isFetching = true;
+    },
+    getUserSuccess: (state, {payload}: PayloadAction<IUserResponse>) => {
+      state.user = payload;
+      state.isFetching = false;
+      state.hasError = false;
+    },
+    getUserFailed: state => {
+      state.isFetching = false;
+      state.hasError = true;
+    },
     clearUserList: state => {
       state.list = [];
       state.isFetching = false;
@@ -56,6 +69,9 @@ export const {
   searchUserStart,
   searchUserSuccess,
   searchUserFailed,
+  getUserStart,
+  getUserSuccess,
+  getUserFailed,
   clearUserList,
 } = UsersSlice.actions;
 
@@ -118,10 +134,27 @@ export const fetchSearchUsers =
     return {success: false};
   };
 
+export const fetchUser = (username: string) => async (dispatch: AppDispatch, getState: () => RootState) => {
+  const alreadyLoading = selectIsFetching(getState());
+  if (alreadyLoading) return;
+
+  dispatch(getUserStart());
+  const response = await usersService.getUserByName(username);
+  console.log('fetchUser', response);
+
+  if (response.ok) {
+    dispatch(getUserSuccess(response.data!));
+    return {success: true, data: response.data};
+  }
+  dispatch(getUserFailed());
+  return {success: false};
+};
+
 /**
  * Selectors
  */
 export const selectUsersList = (state: RootState) => state.users.list;
+export const selectUser = (state: RootState) => state.users.user;
 export const selectIsFetching = (state: RootState) => state.users.isFetching;
 export const selectIsSearching = (state: RootState) => state.users.isSearching;
 export const selectHasError = (state: RootState) => state.users.hasError;

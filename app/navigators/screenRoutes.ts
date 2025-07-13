@@ -11,7 +11,7 @@ export type MainStack = CreateScreenStack<
   MainScreen,
   {
     [MainScreen.User]: {
-      userId: number;
+      username: string;
     };
   }
 >;
