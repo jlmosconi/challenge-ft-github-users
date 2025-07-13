@@ -4,7 +4,7 @@ import {t} from '@config/i18n';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useTheme} from 'styled-components/native';
-import {DEFAULT_HEADER_OPTIONS, getFlatHeaderOptions, getNavTheme} from '@config/navigation';
+import {getFlatHeaderOptions, getNavTheme} from '@config/navigation';
 import {navigate, navigateBack, navigationReadyRef, navigationRef} from '@utils/navigation';
 import {MainScreen, MainStack} from './screenRoutes';
 import AppStatusBar from '@components/AppStatusBar';
@@ -31,10 +31,6 @@ const ApplicationNavigator: FC = () => {
     </>
   );
 
-  const defaultScreenOptions = useMemo(() => {
-    return {...DEFAULT_HEADER_OPTIONS, ...getFlatHeaderOptions(theme.mode), headerLeft};
-  }, [theme.mode]);
-
   return (
     <NavigationContainer
       ref={navigationRef}
@@ -45,7 +41,9 @@ const ApplicationNavigator: FC = () => {
       }}>
       <FillView>
         <AppStatusBar />
-        <Stack.Navigator initialRouteName={MainScreen.Home} screenOptions={defaultScreenOptions}>
+        <Stack.Navigator
+          initialRouteName={MainScreen.Home}
+          screenOptions={{...getFlatHeaderOptions(theme.mode), headerLeft}}>
           <Stack.Screen
             name={MainScreen.Home}
             component={HomeScreen}

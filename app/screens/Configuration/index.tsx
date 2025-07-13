@@ -1,10 +1,29 @@
-import {FC} from 'react';
-import {View, Text} from 'react-native';
+import {ThemeMode, ThemePreference} from '@config/theme';
+import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {selectThemeMode, setThemePreference} from '@store/slices/theme';
+import {FC, useCallback} from 'react';
+import {View, Text, Pressable} from 'react-native';
 
 const ConfigurationScreen: FC = () => {
+  const dispatch = useAppDispatch();
+  const currentMode = useAppSelector(selectThemeMode);
+  const onChangeAppearance = useCallback(() => {
+    const preference = currentMode === ThemeMode.Dark ? ThemePreference.Light : ThemePreference.Dark;
+    const mode = currentMode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark;
+
+    dispatch(
+      setThemePreference({
+        preference,
+        mode,
+      }),
+    );
+  }, [dispatch, currentMode]);
+
   return (
     <View>
-      <Text>ConfigurationScreen</Text>
+      <Pressable onPress={onChangeAppearance}>
+        <Text style={{color: currentMode === ThemeMode.Dark ? 'white' : 'black'}}>ConfigurationScreen</Text>
+      </Pressable>
     </View>
   );
 };

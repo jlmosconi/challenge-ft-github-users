@@ -8,6 +8,6 @@ export const HeaderTitleContainer = styled.View`
 `;
 
 export const Title = styled.Text<{color?: string}>`
-  ${({theme}) => theme.typography.body1({weight: Weight.REGULAR})}
+  ${({theme}) => theme.typography.body1({weight: Weight.SEMI_BOLD})}
   color: ${({theme, color}) => color || theme.colors.textPrimary};
 `;
