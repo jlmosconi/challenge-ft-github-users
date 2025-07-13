@@ -15,7 +15,9 @@ export const enum ThemeMode {
 }
 
 const calculatedRem = calculateREMForDevice(Dimensions.get('window'));
+// This is a factor to adjust the scaling based on platform differences
 const platformFactor = Platform.OS === 'ios' ? 1.09 : 1;
+// This function scales the size based on the calculated REM and platform factor
 const scaled = (size: number) => +(size * calculatedRem * platformFactor).toFixed(2);
 const spacingTransform = (size: number) => size * 8;
 
