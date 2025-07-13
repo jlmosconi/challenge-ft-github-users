@@ -28,7 +28,7 @@ describe('useFavoriteActions', () => {
   });
 
   it('should return false from isFavorite if user is not in favorites', () => {
-    // Mock useAppSelector to return our favoritesList
+    // Mock useAppSelector to return favoritesList
     mockedUseAppSelector.mockImplementation((selectorFn: any) =>
       selectorFn({
         favorites: {
@@ -44,7 +44,7 @@ describe('useFavoriteActions', () => {
   });
 
   it('should return true from isFavorite if user is in favorites', () => {
-    // Mock useAppSelector to return our favoritesList
+    // Mock useAppSelector to return favoritesList
     mockedUseAppSelector.mockImplementation((selectorFn: any) =>
       selectorFn({
         favorites: {
