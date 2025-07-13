@@ -7,8 +7,8 @@ import {
   fetchSearchUsers,
   fetchUsers,
   reloadUsers,
-  selectHasError,
-  selectIsFetching,
+  selectHasErrorList,
+  selectIsFetchingList,
   selectIsSearching,
   selectUsersList,
 } from '@store/slices/users';
@@ -29,10 +29,10 @@ import {useFavoriteActions} from '@hooks/useFavoriteActions';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
-  const loading = useAppSelector(selectIsFetching);
+  const loading = useAppSelector(selectIsFetchingList);
   const favorites = useAppSelector(selectFavorites);
   const isSearching = useAppSelector(selectIsSearching);
-  const hasError = useAppSelector(selectHasError);
+  const hasError = useAppSelector(selectHasErrorList);
 
   const dispatch = useAppDispatch();
   const {handleOnFavoritePress} = useFavoriteActions();

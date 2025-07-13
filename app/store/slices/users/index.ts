@@ -8,9 +8,15 @@ import searchService from '@services/searchService';
 const initialState: UsersState = {
   list: [],
   user: undefined,
-  isFetching: false,
+  isFetching: {
+    list: false,
+    user: false,
+  },
   isSearching: false,
-  hasError: false,
+  hasError: {
+    list: false,
+    user: false,
+  },
 };
 
 const UsersSlice = createSlice({
@@ -19,45 +25,46 @@ const UsersSlice = createSlice({
   reducers: {
     getUsersStart: state => {
       state.isSearching = false;
-      state.isFetching = true;
+      state.isFetching.list = true;
     },
     getUsersSuccess: (state, {payload}: PayloadAction<IUserListResponse[]>) => {
       state.list = payload || [];
-      state.isFetching = false;
-      state.hasError = false;
+      state.isFetching.list = false;
+      state.hasError.list = false;
     },
     getUsersFailed: state => {
-      state.isFetching = false;
-      state.hasError = true;
+      state.isFetching.list = false;
+      state.hasError.list = true;
     },
     searchUserStart: state => {
-      state.isFetching = true;
+      state.isFetching.list = true;
       state.isSearching = true;
     },
     searchUserSuccess: (state, {payload}: PayloadAction<IUserListResponse[]>) => {
       state.list = payload || [];
-      state.isFetching = false;
-      state.hasError = false;
+      state.isFetching.list = false;
+      state.hasError.list = false;
     },
     searchUserFailed: state => {
-      state.isFetching = false;
-      state.hasError = true;
+      state.isFetching.list = false;
+      state.hasError.list = true;
     },
     getUserStart: state => {
-      state.isFetching = true;
+      state.isFetching.user = true;
     },
     getUserSuccess: (state, {payload}: PayloadAction<IUserResponse>) => {
       state.user = payload;
-      state.isFetching = false;
-      state.hasError = false;
+      state.isFetching.user = false;
+      state.hasError.user = false;
     },
     getUserFailed: state => {
-      state.isFetching = false;
-      state.hasError = true;
+      state.isFetching.user = false;
+      state.hasError.user = true;
     },
     clearUserList: state => {
       state.list = [];
-      state.isFetching = false;
+      state.isFetching.list = false;
+      state.hasError.list = false;
     },
   },
 });
@@ -84,7 +91,7 @@ export default UsersSlice.reducer;
 export const fetchUsers =
   ({since = 0, limit = 15} = {}) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
-    const alreadyLoading = selectIsFetching(getState());
+    const alreadyLoading = selectIsFetchingList(getState());
     if (alreadyLoading) return;
 
     dispatch(getUsersStart());
@@ -104,7 +111,7 @@ export const fetchUsers =
 
 export const fetchNextUsers = () => async (dispatch: AppDispatch, getState: () => RootState) => {
   const searching = selectIsSearching(getState());
-  const hasError = selectHasError(getState());
+  const hasError = selectHasErrorList(getState());
   if (searching || hasError) return;
 
   const list = selectUsersList(getState()) || [];
@@ -120,7 +127,7 @@ export const reloadUsers = () => async (dispatch: AppDispatch) => {
 export const fetchSearchUsers =
   ({query = '', limit = 15} = {}) =>
   async (dispatch: AppDispatch, getState: () => RootState) => {
-    const alreadyLoading = selectIsFetching(getState());
+    const alreadyLoading = selectIsFetchingList(getState());
     if (alreadyLoading) return;
     dispatch(searchUserStart());
 
@@ -135,7 +142,7 @@ export const fetchSearchUsers =
   };
 
 export const fetchUser = (username: string) => async (dispatch: AppDispatch, getState: () => RootState) => {
-  const alreadyLoading = selectIsFetching(getState());
+  const alreadyLoading = selectIsFetchingUser(getState());
   if (alreadyLoading) return;
 
   dispatch(getUserStart());
@@ -155,6 +162,8 @@ export const fetchUser = (username: string) => async (dispatch: AppDispatch, get
  */
 export const selectUsersList = (state: RootState) => state.users.list;
 export const selectUser = (state: RootState) => state.users.user;
-export const selectIsFetching = (state: RootState) => state.users.isFetching;
+export const selectIsFetchingList = (state: RootState) => state.users.isFetching.list;
+export const selectIsFetchingUser = (state: RootState) => state.users.isFetching.user;
 export const selectIsSearching = (state: RootState) => state.users.isSearching;
-export const selectHasError = (state: RootState) => state.users.hasError;
+export const selectHasErrorList = (state: RootState) => state.users.hasError.list;
+export const selectHasErrorUser = (state: RootState) => state.users.hasError.user;
