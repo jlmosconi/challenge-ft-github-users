@@ -24,6 +24,7 @@ import {
   NameContainer,
   UserName,
 } from './styled';
+import {t} from '@config/i18n';
 
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
@@ -85,15 +86,15 @@ const UserScreen: FC<Props> = ({route}) => {
         <BoxesContainer>
           <InfoBox>
             <InfoBoxValue>{user.public_repos}</InfoBoxValue>
-            <InfoBoxTitle>Repositorios</InfoBoxTitle>
+            <InfoBoxTitle>{t('user.respos')}</InfoBoxTitle>
           </InfoBox>
           <InfoBox>
             <InfoBoxValue>{user.followers}</InfoBoxValue>
-            <InfoBoxTitle>Seguidores</InfoBoxTitle>
+            <InfoBoxTitle>{t('user.followers')}</InfoBoxTitle>
           </InfoBox>
           <InfoBox>
             <InfoBoxValue>{user.following}</InfoBoxValue>
-            <InfoBoxTitle>Siguiendo</InfoBoxTitle>
+            <InfoBoxTitle>{t('user.following')}</InfoBoxTitle>
           </InfoBox>
         </BoxesContainer>
 

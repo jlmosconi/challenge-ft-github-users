@@ -16,5 +16,10 @@
         "name-desc": "ordenar por nombre (Z-A)"
       }
     }
+  },
+  "user": {
+    "respos": "Repositorios",
+    "followers": "Seguidores",
+    "following": "Siguiendo"
   }
 }
