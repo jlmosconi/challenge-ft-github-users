@@ -37,7 +37,8 @@ const UserScreen: FC<Props> = ({route}) => {
   const {username} = route.params;
 
   const user = useAppSelector(selectUser);
-  const isFetching = useAppSelector(selectIsFetchingUser);
+  //   const isFetching = useAppSelector(selectIsFetchingUser);
+  const isFetching = true;
   const hasError = useAppSelector(selectHasErrorUser);
 
   const dispatch = useAppDispatch();

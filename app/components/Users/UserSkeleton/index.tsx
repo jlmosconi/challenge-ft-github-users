@@ -64,33 +64,28 @@ const UserSkeleton: FC = () => {
         </ContentLoader>
       </SpacingBox>
 
-      <SpacingBox mb={2}>
+      <SpacingBox mb={3}>
         <BoxesContainer>
-          <ContentLoader
-            width={theme.size(theme.spacing(12))}
-            height={theme.size(theme.spacing(7))}
-            backgroundColor={theme.colors.grey.light}
-            foregroundColor={theme.colors.grey.medium}>
-            <Rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
-          </ContentLoader>
-
-          <ContentLoader
-            width={theme.size(theme.spacing(12))}
-            height={theme.size(theme.spacing(7))}
-            backgroundColor={theme.colors.grey.light}
-            foregroundColor={theme.colors.grey.medium}>
-            <Rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
-          </ContentLoader>
-
-          <ContentLoader
-            width={theme.size(theme.spacing(12))}
-            height={theme.size(theme.spacing(7))}
-            backgroundColor={theme.colors.grey.light}
-            foregroundColor={theme.colors.grey.medium}>
-            <Rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
-          </ContentLoader>
+          {new Array(3).fill(null).map((_, index) => (
+            <ContentLoader
+              key={index}
+              width={theme.size(theme.spacing(12))}
+              height={theme.size(theme.spacing(7))}
+              backgroundColor={theme.colors.grey.light}
+              foregroundColor={theme.colors.grey.medium}>
+              <Rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
+            </ContentLoader>
+          ))}
         </BoxesContainer>
       </SpacingBox>
+
+      <ContentLoader
+        width={'100%'}
+        height={theme.size(theme.spacing(15))}
+        backgroundColor={theme.colors.grey.light}
+        foregroundColor={theme.colors.grey.medium}>
+        <Rect x="0" y="0" rx="4" ry="4" width="100%" height="100%" />
+      </ContentLoader>
     </CenterContent>
   );
 };
