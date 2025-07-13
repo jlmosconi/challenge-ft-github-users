@@ -38,6 +38,8 @@ const FavoritesScreen: FC = () => {
     [dispatch],
   );
 
+  // Convert favorites object to array and sort based on current filter
+  // This ensures the list is always in the correct order when rendered
   const favoritesList = useMemo(() => {
     const usersArray = Object.values(favorites);
     return sortUsers(usersArray, filter);
@@ -50,9 +52,9 @@ const FavoritesScreen: FC = () => {
       <RenderItem
         user={item}
         isFavorite={isFavorite(item.id)}
-        animate
         onFavoritePress={handleOnFavoritePress}
         onPress={() => navigateToUserScreen(item.login)}
+        animate
       />
     ),
     [handleOnFavoritePress, isFavorite, navigateToUserScreen],

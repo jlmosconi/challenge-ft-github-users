@@ -29,6 +29,7 @@ import {
   AvatarContainer,
   FavoriteContainer,
 } from './styled';
+import UserSkeleton from '@components/Users/UserSkeleton';
 
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
@@ -55,6 +56,7 @@ const UserScreen: FC<Props> = ({route}) => {
         {/* <View style={{padding: 16}}>
           <Text>Loading...</Text>
         </View> */}
+        <UserSkeleton />
       </SafeArea>
     );
   }
