@@ -1,6 +1,6 @@
 import reducer, {setLanguage, selectLanguage} from '.';
-import {Language} from '@config/i18n';
 import type {LanguageState} from './types';
+import {Language} from '@config/i18n';
 
 describe('language slice', () => {
   const initialState: LanguageState = {

@@ -1,7 +1,6 @@
-import reducer, {setThemePreference, selectThemePreference, selectThemeMode} from '../theme';
-
-import {ThemeMode, ThemePreference} from '@config/theme';
+import reducer, {setThemePreference, selectThemePreference, selectThemeMode} from '.';
 import type {ThemeState} from './types';
+import {ThemeMode, ThemePreference} from '@config/theme';
 
 describe('theme slice', () => {
   const initialState: ThemeState = {
