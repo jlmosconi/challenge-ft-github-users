@@ -1,6 +1,6 @@
 import {type FC} from 'react';
 import {useTheme} from 'styled-components/native';
-import {t} from '@config/i18n';
+import {useLanguageState} from '@hooks/useLanguageState';
 import {Overline, TypographyText, Weight} from '@components/Text/TypographyText';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconName} from '@components/Icon/icons';
@@ -12,6 +12,7 @@ interface ListFilterProps {
 
 const ListFilter: FC<ListFilterProps> = ({onFilterPress}) => {
   const theme = useTheme();
+  const {t} = useLanguageState();
   return (
     <FilterContainer onPress={onFilterPress}>
       <TypographyText type={Overline} weight={Weight.SEMI_BOLD}>

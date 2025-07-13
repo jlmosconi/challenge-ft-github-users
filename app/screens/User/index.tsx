@@ -1,10 +1,10 @@
 import {useEffect, type FC} from 'react';
 import {type RouteProp} from '@react-navigation/native';
 import {useTheme} from 'styled-components/native';
-import {t} from '@config/i18n';
 import {MainScreen, MainStack} from '@navigators/screenRoutes';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
+import {useLanguageState} from '@hooks/useLanguageState';
 import {fetchUser, selectHasErrorUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
 import SpacingBox from '@components/SpacingBox';
 import UserAvatar from '@components/Users/UserAvatar';
@@ -42,6 +42,7 @@ const UserScreen: FC<Props> = ({route}) => {
 
   const dispatch = useAppDispatch();
   const theme = useTheme();
+  const {t} = useLanguageState();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   useEffect(() => {
