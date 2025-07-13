@@ -13,6 +13,7 @@ jest.mock('@store/slices/favorites', () => ({
 const mockedUseAppDispatch = require('@store/hooks').useAppDispatch;
 const mockedUseAppSelector = require('@store/hooks').useAppSelector;
 
+// Fake list of favorite users for mock store
 const favoritesList = {
   136: {
     id: 136,
@@ -27,6 +28,7 @@ describe('useFavoriteActions', () => {
   });
 
   it('should return false from isFavorite if user is not in favorites', () => {
+    // Mock useAppSelector to return our favoritesList
     mockedUseAppSelector.mockImplementation((selectorFn: any) =>
       selectorFn({
         favorites: {
@@ -42,6 +44,7 @@ describe('useFavoriteActions', () => {
   });
 
   it('should return true from isFavorite if user is in favorites', () => {
+    // Mock useAppSelector to return our favoritesList
     mockedUseAppSelector.mockImplementation((selectorFn: any) =>
       selectorFn({
         favorites: {
