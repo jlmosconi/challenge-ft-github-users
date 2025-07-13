@@ -22,7 +22,7 @@ const FavoritesScreen: FC = () => {
   const filter = useAppSelector(selectFavoritesFilter);
 
   const dispatch = useAppDispatch();
-  const {handleOnFavoritePress} = useFavoriteActions();
+  const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -49,13 +49,13 @@ const FavoritesScreen: FC = () => {
     ({item}: {item: FavoriteUser}) => (
       <RenderItem
         user={item}
-        isFavorite={!!favorites[item.id]}
+        isFavorite={isFavorite(item.id)}
         animate
         onFavoritePress={handleOnFavoritePress}
         onPress={() => navigateToUserScreen(item.login)}
       />
     ),
-    [favorites, handleOnFavoritePress, navigateToUserScreen],
+    [handleOnFavoritePress, isFavorite, navigateToUserScreen],
   );
 
   return (

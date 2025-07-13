@@ -12,7 +12,6 @@ import {
   selectIsSearching,
   selectUsersList,
 } from '@store/slices/users';
-import {selectFavorites} from '@store/slices/favorites';
 import type {FavoriteUser} from '@store/slices/favorites/types';
 import ScrollList from '@components/ScrollList';
 import ListFooter from '@components/Users/ListFooter';
@@ -30,12 +29,11 @@ import {useFavoriteActions} from '@hooks/useFavoriteActions';
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
   const loading = useAppSelector(selectIsFetchingList);
-  const favorites = useAppSelector(selectFavorites);
   const isSearching = useAppSelector(selectIsSearching);
   const hasError = useAppSelector(selectHasErrorList);
 
   const dispatch = useAppDispatch();
-  const {handleOnFavoritePress} = useFavoriteActions();
+  const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -65,12 +63,12 @@ const HomeScreen: FC = () => {
     ({item}: {item: FavoriteUser}) => (
       <UserRenderItem
         user={item}
-        isFavorite={!!favorites[item.id]}
+        isFavorite={isFavorite(item.id)}
         onPress={() => navigateToUserScreen(item.login)}
         onFavoritePress={handleOnFavoritePress}
       />
     ),
-    [favorites, handleOnFavoritePress, navigateToUserScreen],
+    [handleOnFavoritePress, isFavorite, navigateToUserScreen],
   );
 
   return (

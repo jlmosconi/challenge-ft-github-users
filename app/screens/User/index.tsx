@@ -4,12 +4,15 @@ import {useTheme} from 'styled-components/native';
 import {t} from '@config/i18n';
 import {MainScreen, MainStack} from '@navigators/screenRoutes';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {useFavoriteActions} from '@hooks/useFavoriteActions';
 import {fetchUser, selectHasErrorUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
 import SpacingBox from '@components/SpacingBox';
 import UserAvatar from '@components/Users/UserAvatar';
 import SafeArea from '@components/SafeArea';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconName} from '@components/Icon/icons';
+import EmptyState from '@components/EmptyState';
+import FavoriteButton from '@components/Favorite/FavoriteButton';
 import {
   Bio,
   BoxesContainer,
@@ -23,8 +26,9 @@ import {
   Login,
   NameContainer,
   UserName,
+  AvatarContainer,
+  FavoriteContainer,
 } from './styled';
-import EmptyState from '@components/EmptyState';
 
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
@@ -37,6 +41,7 @@ const UserScreen: FC<Props> = ({route}) => {
 
   const dispatch = useAppDispatch();
   const theme = useTheme();
+  const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   useEffect(() => {
     if (!username || user?.login === username) return;
@@ -73,7 +78,22 @@ const UserScreen: FC<Props> = ({route}) => {
   return (
     <SafeArea>
       <InfoContainer>
-        <UserAvatar size={8} avatar_url={user.avatar_url} />
+        <AvatarContainer>
+          <UserAvatar size={8} avatar_url={user.avatar_url} />
+          <FavoriteContainer>
+            <FavoriteButton
+              iconSize={20}
+              isFavorite={isFavorite(user.id)}
+              onPress={() =>
+                handleOnFavoritePress({
+                  id: user.id,
+                  login: user.login,
+                  avatar_url: user.avatar_url,
+                })
+              }
+            />
+          </FavoriteContainer>
+        </AvatarContainer>
 
         <SpacingBox mb={1}>
           {user.name ? (

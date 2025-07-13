@@ -9,6 +9,19 @@ export const InfoContainer = styled.View`
   gap: ${({theme}) => theme.size(theme.spacing(1))}px;
 `;
 
+export const AvatarContainer = styled.View`
+  position: relative;
+`;
+
+export const FavoriteContainer = styled.View`
+  position: absolute;
+  bottom: ${({theme}) => theme.size(-5)}px;
+  right: ${({theme}) => theme.size(-5)}px;
+  z-index: 1;
+  background-color: ${({theme}) => theme.colors.surface};
+  border-radius: ${({theme}) => theme.size(theme.spacing(2))}px;
+`;
+
 export const NameContainer = styled.View`
   text-align: center;
   gap: ${({theme}) => theme.size(2)}px;

@@ -7,11 +7,12 @@ import {IconButton} from './styled';
 
 interface FavoriteButtonProps {
   isFavorite?: boolean;
+  iconSize?: number;
   pressDelay?: number; // delay in milliseconds to prevent rapid toggling
   onPress?: () => void;
 }
 
-const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, pressDelay = 350, onPress}) => {
+const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, iconSize = 24, pressDelay = 350, onPress}) => {
   const theme = useTheme();
 
   const scale = useSharedValue(1);
@@ -45,7 +46,7 @@ const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, pressDelay = 350, 
   return (
     <IconButton onPress={handlePress} testID="favoriteButton">
       <Animated.View style={animatedStyle}>
-        <SpecificSizeIcon size={24} name={iconName} color={iconColor} />
+        <SpecificSizeIcon size={iconSize} name={iconName} color={iconColor} />
       </Animated.View>
     </IconButton>
   );
