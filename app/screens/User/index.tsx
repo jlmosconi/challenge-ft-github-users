@@ -1,11 +1,15 @@
 import {useEffect, type FC} from 'react';
+import {Text, View} from 'react-native';
 import {type RouteProp} from '@react-navigation/native';
 import {MainScreen, MainStack} from '@navigators/screenRoutes';
-import {Text} from 'react-native';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {fetchUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
 import SpacingBox from '@components/SpacingBox';
 import UserAvatar from '@components/Users/UserAvatar';
+import SafeArea from '@components/SafeArea';
+import SpecificSizeIcon from '@components/Icon/SpecificSize';
+import {IconName} from '@components/Icon/icons';
+import {useTheme} from 'styled-components/native';
 import {
   Bio,
   BoxesContainer,
@@ -20,22 +24,19 @@ import {
   NameContainer,
   UserName,
 } from './styled';
-import SafeArea from '@components/SafeArea';
-import SpecificSizeIcon from '@components/Icon/SpecificSize';
-import {IconName} from '@components/Icon/icons';
-import {useTheme} from 'styled-components/native';
 
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
 const UserScreen: FC<Props> = ({route}) => {
   const {username} = route.params;
-  console.log('UserScreen route params:', route.params);
+
   const user = useAppSelector(selectUser);
   const isFetching = useAppSelector(selectIsFetchingUser);
 
   const dispatch = useAppDispatch();
   const theme = useTheme();
 
+  // Fetch user only if not already loaded or different user
   useEffect(() => {
     if (!username || user?.login === username) return;
     dispatch(fetchUser(username));
@@ -43,11 +44,21 @@ const UserScreen: FC<Props> = ({route}) => {
 
   if (!user || isFetching) {
     return (
-      <>
-        <Text>Loading...</Text>
-      </>
+      <SafeArea>
+        <View style={{padding: 16}}>
+          <Text>Loading...</Text>
+        </View>
+      </SafeArea>
     );
   }
+
+  const userInfoFields = [
+    {icon: IconName.Company, value: user.company},
+    {icon: IconName.Email, value: user.email},
+    {icon: IconName.Place, value: user.location},
+    {icon: IconName.Link, value: user.blog},
+    {icon: IconName.X, value: user.twitter_username},
+  ].filter(item => !!item.value);
 
   return (
     <SafeArea>
@@ -86,40 +97,19 @@ const UserScreen: FC<Props> = ({route}) => {
           </InfoBox>
         </BoxesContainer>
 
-        <DataListContainer mv={2}>
-          {user.company && (
-            <DataListItem>
-              <SpecificSizeIcon name={IconName.Company} size={18} color={theme.colors.grey.dark} />
-              <InfoListText numberOfLines={1}>{user.company}</InfoListText>
-            </DataListItem>
-          )}
-          {user.email && (
-            <DataListItem>
-              <SpecificSizeIcon name={IconName.Email} size={18} color={theme.colors.grey.dark} />
-              <InfoListText numberOfLines={1}>{user.email}</InfoListText>
-            </DataListItem>
-          )}
-          {user.location && (
-            <DataListItem>
-              <SpecificSizeIcon name={IconName.Place} size={18} color={theme.colors.grey.dark} />
-              <InfoListText numberOfLines={1}>{user.location}</InfoListText>
-            </DataListItem>
-          )}
-          {user.blog && (
-            <DataListItem>
-              <SpecificSizeIcon name={IconName.Link} size={18} color={theme.colors.grey.dark} />
-              <InfoListText numberOfLines={1}>{user.blog}</InfoListText>
-            </DataListItem>
-          )}
-          {user.twitter_username && (
-            <DataListItem>
-              <SpecificSizeIcon name={IconName.X} size={18} color={theme.colors.grey.dark} />
-              <InfoListText numberOfLines={1}>{user.twitter_username}</InfoListText>
-            </DataListItem>
-          )}
-        </DataListContainer>
+        {userInfoFields.length > 0 && (
+          <DataListContainer mv={2}>
+            {userInfoFields.map(({icon, value}) => (
+              <DataListItem key={icon}>
+                <SpecificSizeIcon name={icon} size={18} color={theme.colors.grey.dark} />
+                <InfoListText numberOfLines={1}>{value}</InfoListText>
+              </DataListItem>
+            ))}
+          </DataListContainer>
+        )}
       </InfoContainer>
     </SafeArea>
   );
 };
+
 export default UserScreen;
