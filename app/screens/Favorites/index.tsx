@@ -6,7 +6,7 @@ import {FavoriteUser, type SortOption} from '@store/slices/favorites/types';
 import {sortUsers} from '@utils/users/sortUsers';
 import {MainScreen} from '@navigators/screenRoutes';
 import {navigate} from '@utils/navigation';
-import {useLanguageState} from '@hooks/useLanguageState';
+import {useLanguage} from '@hooks/useLanguage';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
 import ScrollList from '@components/ScrollList';
 import SafeArea from '@components/SafeArea';
@@ -22,7 +22,7 @@ const FavoritesScreen: FC = () => {
   const filter = useAppSelector(selectFavoritesFilter);
 
   const dispatch = useAppDispatch();
-  const {t} = useLanguageState();
+  const {t} = useLanguage();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);

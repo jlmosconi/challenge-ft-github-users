@@ -1,6 +1,6 @@
-import {type FC, type PropsWithChildren, createContext, useContext} from 'react';
+import {type FC, type PropsWithChildren, createContext} from 'react';
 import {Language} from '@config/i18n';
-import {useLanguageState} from '@hooks/useLanguageState';
+import {useLanguage} from '@hooks/useLanguage';
 
 interface LanguageContextProps {
   language: Language;
@@ -15,9 +15,7 @@ export const LanguageContext = createContext<LanguageContextProps>({
 });
 
 export const LanguageProvider: FC<PropsWithChildren> = ({children}) => {
-  const languageState = useLanguageState();
+  const languageState = useLanguage();
 
   return <LanguageContext.Provider value={languageState}>{children}</LanguageContext.Provider>;
 };
-
-export const useLanguage = () => useContext(LanguageContext);

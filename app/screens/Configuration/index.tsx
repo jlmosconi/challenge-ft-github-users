@@ -6,13 +6,13 @@ import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {Language} from '@config/i18n';
 import SafeArea from '@components/SafeArea';
 import {ItemTitle, ListContainer, ListItem} from './styled';
-import {useLanguageState} from '@hooks/useLanguageState';
+import {useLanguage} from '@hooks/useLanguage';
 
 const ConfigurationScreen: FC = () => {
   const currentMode = useAppSelector(selectThemeMode);
 
   const dispatch = useAppDispatch();
-  const {language, setLanguage, t} = useLanguageState();
+  const {language, setLanguage, t} = useLanguage();
 
   const onChangeAppearance = useCallback(() => {
     const preference = currentMode === ThemeMode.Dark ? ThemePreference.Light : ThemePreference.Dark;

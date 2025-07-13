@@ -5,7 +5,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useTheme} from 'styled-components/native';
 import {getFlatHeaderOptions, getNavTheme} from '@config/navigation';
 import {navigate, navigateBack, navigationReadyRef, navigationRef} from '@utils/navigation';
-import {useLanguageState} from '@hooks/useLanguageState';
 import {MainScreen, MainStack} from './screenRoutes';
 import AppStatusBar from '@components/AppStatusBar';
 import BackButton from '@components/ScreenOptions/BackButton';
@@ -17,12 +16,13 @@ import ConfigurationButton from '@components/ScreenOptions/ConfigurationButton';
 import UserScreen from '@screens/User';
 import ConfigurationScreen from '@screens/Configuration';
 import {FillView} from './styled';
+import {useLanguage} from '@hooks/useLanguage';
 
 const Stack = createStackNavigator<MainStack>();
 
 const ApplicationNavigator: FC = () => {
   const theme = useTheme();
-  const {t} = useLanguageState();
+  const {t} = useLanguage();
 
   const headerLeft = () => <BackButton onPress={navigateBack} />;
   const homeHeaderRight = () => (

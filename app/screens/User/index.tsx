@@ -4,7 +4,7 @@ import {useTheme} from 'styled-components/native';
 import {MainScreen, MainStack} from '@navigators/screenRoutes';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
-import {useLanguageState} from '@hooks/useLanguageState';
+import {useLanguage} from '@hooks/useLanguage';
 import {fetchUser, selectHasErrorUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
 import SpacingBox from '@components/SpacingBox';
 import UserAvatar from '@components/Users/UserAvatar';
@@ -42,7 +42,7 @@ const UserScreen: FC<Props> = ({route}) => {
 
   const dispatch = useAppDispatch();
   const theme = useTheme();
-  const {t} = useLanguageState();
+  const {t} = useLanguage();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   useEffect(() => {

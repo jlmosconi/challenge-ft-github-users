@@ -24,7 +24,7 @@ import {IconName} from '@components/Icon/icons';
 import {MainScreen} from '@navigators/screenRoutes';
 import {navigate} from '@utils/navigation';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
-import {useLanguageState} from '@hooks/useLanguageState';
+import {useLanguage} from '@hooks/useLanguage';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
@@ -33,7 +33,7 @@ const HomeScreen: FC = () => {
   const hasError = useAppSelector(selectHasErrorList);
 
   const dispatch = useAppDispatch();
-  const {t} = useLanguageState();
+  const {t} = useLanguage();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   useEffect(() => {

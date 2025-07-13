@@ -1,5 +1,5 @@
 import {forwardRef, useMemo} from 'react';
-import {useLanguageState} from '@hooks/useLanguageState';
+import {useLanguage} from '@hooks/useLanguage';
 import {useTheme} from 'styled-components/native';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
 import type {SortOption} from '@store/slices/favorites/types';
@@ -16,7 +16,7 @@ interface BottomModalProps {
 
 const FilterModal = forwardRef<BottomSheetModal, BottomModalProps>(({filter, onSortSelection}, ref) => {
   const theme = useTheme();
-  const {t} = useLanguageState();
+  const {t} = useLanguage();
 
   const options: {label: string; value: SortOption}[] = useMemo(
     () => [
