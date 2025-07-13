@@ -1,11 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import {PropsWithChildren, forwardRef} from 'react';
+import {type PropsWithChildren, forwardRef} from 'react';
 import {useTheme} from 'styled-components/native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {BottomSheetModal} from '@gorhom/bottom-sheet';
+import {Edge} from '@config/constants/edges';
 import {RenderDefaultBackdrop} from './Backdrop';
 import {SheetView} from './styled';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Edge} from '@config/constants/edges';
 
 interface BottomModalProps {}
 

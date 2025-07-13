@@ -3,9 +3,9 @@ import {FlatList} from 'react-native';
 import type {ScrollListProp} from './types';
 import {Separator} from './styled';
 
-const SCROLL_EVENT_THROTTLE = 32;
-const SCROLL_END_THRESHOLD = 0.25;
-const DEFAULT_NUM_RENDER = 10;
+const SCROLL_EVENT_THROTTLE = 32; // Throttle for scroll events. 32ms
+const SCROLL_END_THRESHOLD = 0.25; // 25% of the list height
+const DEFAULT_NUM_RENDER = 10; // Default number of items to render initially
 
 const ScrollList = <T,>({
   fetchNextData,
@@ -40,10 +40,9 @@ const ScrollList = <T,>({
   return (
     <FlatList
       {...props}
-      scrollEnabled={(initialNumToRender || 0) >= DEFAULT_NUM_RENDER}
+      testID={testID}
       maxToRenderPerBatch={initialNumToRender}
       showsVerticalScrollIndicator={false}
-      testID={testID}
       scrollEventThrottle={SCROLL_EVENT_THROTTLE}
       onEndReachedThreshold={SCROLL_END_THRESHOLD}
       refreshing={refreshing}
@@ -52,10 +51,10 @@ const ScrollList = <T,>({
         if (!callOnScrollEnd.current && !isLoading && !refreshing) return;
         handleOnEndReached();
       }}
-      onMomentumScrollBegin={() => (callOnScrollEnd.current = true)}
+      onMomentumScrollBegin={() => (callOnScrollEnd.current = true)} // Set the flag to true when scrolling starts
       onMomentumScrollEnd={() => {
         callOnScrollEnd.current = false;
-      }}
+      }} // Reset the flag after scroll ends
       ItemSeparatorComponent={ItemSeparatorComponent}
     />
   );
