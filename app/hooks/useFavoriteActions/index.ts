@@ -19,7 +19,14 @@ export const useFavoriteActions = () => {
     [dispatch],
   );
 
-  const isFavorite = useCallback((id: FavoriteUser['id']) => !!favorites[id], [favorites]);
+  const isFavorite = useCallback(
+    (id: FavoriteUser['id']) => {
+      console.log('Checking if user is favorite:', id);
+      console.log('Current favorites:', favorites);
+      return !!favorites[id];
+    },
+    [favorites],
+  );
 
   return {
     handleOnFavoritePress,
