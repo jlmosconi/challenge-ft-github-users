@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {useAppSelector, useAppDispatch} from '@store/hooks';
 import {selectLanguage, setLanguage} from '@store/slices/language';
-import {changeLanguage, t, Language} from '@config/i18n';
+import {changeLanguage, t as i18nT, Language} from '@config/i18n';
 
 export const useLanguage = () => {
   const language = useAppSelector(selectLanguage);
@@ -19,6 +19,6 @@ export const useLanguage = () => {
   return {
     language,
     setLanguage: storeLanguage,
-    t,
+    t: i18nT,
   };
 };
