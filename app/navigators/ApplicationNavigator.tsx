@@ -32,6 +32,7 @@ const ApplicationNavigator: FC = () => {
       ref={navigationRef}
       theme={getNavTheme(theme.mode)}
       onReady={() => {
+        // Ensure navigation is ready before allowing any navigation actions
         navigationReadyRef.current = true;
       }}>
       <FillView>
