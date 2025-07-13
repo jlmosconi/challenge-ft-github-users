@@ -49,6 +49,7 @@ const ScrollList = <T,>({
       onRefresh={handleRefresh}
       onEndReached={() => {
         if (!callOnScrollEnd.current && !isLoading && !refreshing) return;
+        // Only call fetchNextData if not already loading and not refreshing
         handleOnEndReached();
       }}
       onMomentumScrollBegin={() => (callOnScrollEnd.current = true)} // Set the flag to true when scrolling starts
