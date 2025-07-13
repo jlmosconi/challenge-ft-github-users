@@ -3,10 +3,10 @@ import type {BottomSheetModal} from '@gorhom/bottom-sheet';
 import {selectFavorites, selectFavoritesFilter, setFilter} from '@store/slices/favorites';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {FavoriteUser, type SortOption} from '@store/slices/favorites/types';
-import {t} from '@config/i18n';
 import {sortUsers} from '@utils/users/sortUsers';
 import {MainScreen} from '@navigators/screenRoutes';
 import {navigate} from '@utils/navigation';
+import {useLanguageState} from '@hooks/useLanguageState';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
 import ScrollList from '@components/ScrollList';
 import SafeArea from '@components/SafeArea';
@@ -22,6 +22,7 @@ const FavoritesScreen: FC = () => {
   const filter = useAppSelector(selectFavoritesFilter);
 
   const dispatch = useAppDispatch();
+  const {t} = useLanguageState();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);

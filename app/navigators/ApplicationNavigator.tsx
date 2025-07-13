@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import {type FC} from 'react';
-import {t} from '@config/i18n';
+// import {t} from '@config/i18n';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {useTheme} from 'styled-components/native';
@@ -17,11 +17,13 @@ import UserScreen from '@screens/User';
 import {FillView} from './styled';
 import ConfigurationScreen from '@screens/Configuration';
 import ConfigurationButton from '@components/ScreenOptions/ConfigurationButton';
+import {useLanguage} from '@config/i18n/LanguageProvider';
 
 const Stack = createStackNavigator<MainStack>();
 
 const ApplicationNavigator: FC = () => {
   const theme = useTheme();
+  const {t} = useLanguage();
 
   const headerLeft = () => <BackButton onPress={navigateBack} />;
   const homeHeaderRight = () => (

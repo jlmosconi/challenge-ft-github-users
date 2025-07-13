@@ -1,7 +1,6 @@
 import {useCallback, useEffect, type FC} from 'react';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import SafeArea from '@components/SafeArea';
-import {t} from '@config/i18n';
 import {
   fetchNextUsers,
   fetchSearchUsers,
@@ -25,6 +24,7 @@ import {IconName} from '@components/Icon/icons';
 import {MainScreen} from '@navigators/screenRoutes';
 import {navigate} from '@utils/navigation';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
+import {useLanguageState} from '@hooks/useLanguageState';
 
 const HomeScreen: FC = () => {
   const userList = useAppSelector(selectUsersList);
@@ -33,6 +33,7 @@ const HomeScreen: FC = () => {
   const hasError = useAppSelector(selectHasErrorList);
 
   const dispatch = useAppDispatch();
+  const {t} = useLanguageState();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
 
   useEffect(() => {

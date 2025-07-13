@@ -1,13 +1,19 @@
+import {type FC, useCallback} from 'react';
 import Toggle from '@components/Toggle';
 import {ThemeMode, ThemePreference} from '@config/theme';
-import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {selectThemeMode, setThemePreference} from '@store/slices/theme';
-import {FC, useCallback} from 'react';
-import {View, Text, Pressable} from 'react-native';
+import {useLanguage} from '@config/i18n/LanguageProvider';
+import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {Language} from '@config/i18n';
+import SafeArea from '@components/SafeArea';
+import {ItemTitle, ListContainer, ListItem} from './styled';
 
 const ConfigurationScreen: FC = () => {
-  const dispatch = useAppDispatch();
   const currentMode = useAppSelector(selectThemeMode);
+
+  const dispatch = useAppDispatch();
+  const {language, setLanguage, t} = useLanguage();
+
   const onChangeAppearance = useCallback(() => {
     const preference = currentMode === ThemeMode.Dark ? ThemePreference.Light : ThemePreference.Dark;
     const mode = currentMode === ThemeMode.Dark ? ThemeMode.Light : ThemeMode.Dark;
@@ -21,12 +27,18 @@ const ConfigurationScreen: FC = () => {
   }, [dispatch, currentMode]);
 
   return (
-    <View>
-      <Pressable onPress={onChangeAppearance}>
-        <Text style={{color: currentMode === ThemeMode.Dark ? 'white' : 'black'}}>ConfigurationScreen</Text>
-        <Toggle testID="theme-toggle" checked={currentMode === ThemeMode.Dark} />
-      </Pressable>
-    </View>
+    <SafeArea>
+      <ListContainer mv={2}>
+        <ListItem onPress={onChangeAppearance}>
+          <ItemTitle>{t('config.dark_mode')}</ItemTitle>
+          <Toggle testID="theme-toggle" checked={currentMode === ThemeMode.Dark} />
+        </ListItem>
+        <ListItem onPress={() => setLanguage(language === Language.en ? Language.es : Language.en)}>
+          <ItemTitle>{t('config.spanish')}</ItemTitle>
+          <Toggle testID="language-toggle" checked={language === Language.es} />
+        </ListItem>
+      </ListContainer>
+    </SafeArea>
   );
 };
 export default ConfigurationScreen;

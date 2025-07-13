@@ -8,9 +8,8 @@ declare module 'styled-components/native' {
     colors: {
       background: string;
       surface: string;
-      primary: string;
+      yellow: string;
       textPrimary: string;
-      textSecondary: string;
       grey: {
         light: string;
         medium: string;

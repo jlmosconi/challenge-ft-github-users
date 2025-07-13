@@ -1,7 +1,7 @@
 import {type FC, useCallback, useEffect} from 'react';
 import Animated, {useSharedValue, useAnimatedStyle, withSpring} from 'react-native-reanimated';
 import type {ToggleProps} from './types';
-import {IndicatorWrapper, Label, Wrapper, Indicator} from './styled';
+import {IndicatorWrapper, Wrapper, Indicator} from './styled';
 
 const TOGGLE_TRANSLATION_X = 16;
 
@@ -38,7 +38,6 @@ const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, label, testID}) =>
           <Indicator />
         </Animated.View>
       </IndicatorWrapper>
-      {label && <Label disabled={disabled}>{label}</Label>}
     </Wrapper>
   );
 };

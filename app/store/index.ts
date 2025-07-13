@@ -3,11 +3,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER} from 'redux-persist';
 
 import themeReducer from '@store/slices/theme';
+import languageReducer from '@store/slices/language';
 import usersReducer from '@store/slices/users';
 import favoritesReducer from '@store/slices/favorites';
 
 const themeConfig = {
   key: 'theme',
+  storage: AsyncStorage,
+};
+
+const languageConfig = {
+  key: 'language',
   storage: AsyncStorage,
 };
 
@@ -25,6 +31,7 @@ const favoritesConfig = {
 // Combine all reducers into a single root reducer
 const combinedReducers = combineReducers({
   theme: persistReducer(themeConfig, themeReducer),
+  language: persistReducer(languageConfig, languageReducer),
   users: persistReducer(usersConfig, usersReducer),
   favorites: persistReducer(favoritesConfig, favoritesReducer),
 });

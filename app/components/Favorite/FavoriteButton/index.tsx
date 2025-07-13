@@ -34,7 +34,7 @@ const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, iconSize = 24, pre
   }));
 
   const iconName = isFavorite ? IconName.StarFilled : IconName.StarEmpty;
-  const iconColor = isFavorite ? theme.colors.primary : theme.colors.grey.dark;
+  const iconColor = isFavorite ? theme.colors.yellow : theme.colors.grey.dark;
 
   const handlePress = () => {
     const now = Date.now();

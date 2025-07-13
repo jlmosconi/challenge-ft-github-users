@@ -24,6 +24,8 @@
     "error": "Ocurrió un error al cargar el usuario"
   },
   "config": {
-    "title": "Configuración"
+    "title": "Configuración",
+    "dark_mode": "Usar tema oscuro",
+    "spanish": "Español"
   }
 }

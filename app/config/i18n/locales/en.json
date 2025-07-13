@@ -1,8 +1,31 @@
 {
   "home": {
     "title": "GitHub Users",
-    "search": "Search",
-    "search_placeholder": "Search by username",
-    "empty": "No users found"
+    "search_placeholder": "Search by name",
+    "empty": "No users found",
+    "error": "An error occurred while loading users"
+  },
+  "favorites": {
+    "title": "Favorites",
+    "empty": "You have no favorite users",
+    "filter": {
+      "title": "Sort by...",
+      "options": {
+        "id": "sort by ID",
+        "name-asc": "sort by name (A-Z)",
+        "name-desc": "sort by name (Z-A)"
+      }
+    }
+  },
+  "user": {
+    "respos": "Repositories",
+    "followers": "Followers",
+    "following": "Following",
+    "error": "An error occurred while loading the user"
+  },
+  "config": {
+    "title": "Settings",
+    "dark_mode": "Use dark theme",
+    "spanish": "Spanish"
   }
 }
