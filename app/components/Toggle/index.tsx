@@ -5,7 +5,7 @@ import {IndicatorWrapper, Wrapper, Indicator} from './styled';
 
 const TOGGLE_TRANSLATION_X = 16;
 
-const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, label, testID}) => {
+const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, accessibilityLabel, testID}) => {
   const translation = useSharedValue(checked ? TOGGLE_TRANSLATION_X : 0);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, label, testID}) =>
       onPress={onPress ? onPressWrapper : undefined}
       disabled={onPress ? disabled : true}
       accessible
-      accessibilityLabel={label}
+      accessibilityLabel={accessibilityLabel}
       accessibilityRole="checkbox"
       accessibilityState={{disabled, checked}}>
       <IndicatorWrapper disabled={disabled} checked={checked}>
