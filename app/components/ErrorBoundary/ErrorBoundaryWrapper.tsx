@@ -1,8 +1,8 @@
-import type {ReactNode, FC} from 'react';
+import type {FC, PropsWithChildren} from 'react';
 import ErrorBoundary from '.';
 import {useLanguage} from '@hooks/useLanguage';
 
-const ErrorBoundaryWrapper: FC<{children: ReactNode}> = ({children}) => {
+const ErrorBoundaryWrapper: FC<PropsWithChildren> = ({children}) => {
   const {t} = useLanguage();
 
   return (
