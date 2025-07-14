@@ -1,3 +1,23 @@
 {
-  "extends": "@react-native/typescript-config"
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "strictNullChecks": true,
+    "baseUrl": "./app",
+    "paths": {
+      "@assets/*": ["../assets/*"],
+      "@adapters/*": ["adapters/*"],
+      "@components/*": ["components/*"],
+      "@config/*": ["config/*"],
+      "@helpers/*": ["helpers/*"],
+      "@hooks/*": ["hooks/*"],
+      "@navigators/*": ["navigators/*"],
+      "@screens/*": ["screens/*"],
+      "@services/*": ["services/*"],
+      "@store/*": ["store/*"],
+      "types/*": ["types/*"],
+      "@utils/*": ["utils/*"]
+    }
+  },
+  "include": ["index.js", "app", "test", "__tests__", "__mocks__", "jest.config.js"]
 }

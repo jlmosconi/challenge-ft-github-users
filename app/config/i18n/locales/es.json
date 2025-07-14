@@ -1,0 +1,31 @@
+{
+  "home": {
+    "title": "Usuarios de GitHub",
+    "search_placeholder": "Buscar por nombre",
+    "empty": "No se encontraron usuarios",
+    "error": "Ocurrió un error al cargar los usuarios"
+  },
+  "favorites": {
+    "title": "Favoritos",
+    "empty": "No tienes usuarios favoritos",
+    "filter": {
+      "title": "Ordenar por...",
+      "options": {
+        "id": "ordenar por ID",
+        "name-asc": "ordenar por nombre (A-Z)",
+        "name-desc": "ordenar por nombre (Z-A)"
+      }
+    }
+  },
+  "user": {
+    "respos": "Repositorios",
+    "followers": "Seguidores",
+    "following": "Siguiendo",
+    "error": "Ocurrió un error al cargar el usuario"
+  },
+  "config": {
+    "title": "Configuración",
+    "dark_mode": "Usar tema oscuro",
+    "spanish": "Español"
+  }
+}

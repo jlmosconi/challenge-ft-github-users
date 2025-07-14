@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "414163866777",
+    "project_id": "challenge-ft-github-users",
+    "storage_bucket": "challenge-ft-github-users.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414163866777:android:1e912d9f6814abc47e5408",
+        "android_client_info": {
+          "package_name": "com.githubusers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdJ-59t-K9R-0XHXIW9EUL-xStrLU3pys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

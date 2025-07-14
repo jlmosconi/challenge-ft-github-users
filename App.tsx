@@ -1,25 +1,34 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import 'react-native-gesture-handler';
+import {SafeAreaProvider, initialWindowMetrics} from 'react-native-safe-area-context';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from '@store/index';
+import {ThemeProvider} from '@config/theme/ThemeContext';
+import {LanguageProvider} from '@config/i18n/LanguageProvider';
+import ApplicationNavigator from '@navigators/ApplicationNavigator';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-    </View>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+      {/* Redux store provider for global state management. scalability and predictable state handling. */}
+      <Provider store={store}>
+        {/* Prevents UI flicker by waiting for persisted Redux state. better UX on app startup. */}
+        <PersistGate loading={null} persistor={persistor}>
+          {/* ThemeProvider for consistent theming across the app. */}
+          <ThemeProvider>
+            {/* LanguageProvider for managing language settings and translations. */}
+            <LanguageProvider>
+              <BottomSheetModalProvider>
+                <ApplicationNavigator />
+              </BottomSheetModalProvider>
+            </LanguageProvider>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
