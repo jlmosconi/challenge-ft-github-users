@@ -1,16 +1,5 @@
-import {useCallback, useEffect, type FC} from 'react';
-import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {useCallback, type FC} from 'react';
 import SafeArea from '@components/SafeArea';
-import {
-  fetchNextUsers,
-  fetchSearchUsers,
-  fetchUsers,
-  reloadUsers,
-  selectHasErrorList,
-  selectIsFetchingList,
-  selectIsSearching,
-  selectUsersList,
-} from '@store/slices/users';
 import type {FavoriteUser} from '@store/slices/favorites/types';
 import ScrollList from '@components/ScrollList';
 import ListFooter from '@components/Users/ListFooter';
@@ -25,38 +14,19 @@ import {MainScreen} from '@navigators/screenRoutes';
 import {navigate} from '@utils/navigation';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
 import {useLanguage} from '@hooks/useLanguage';
+import {useUsersList} from '@hooks/useUsersList';
 
+/**
+ * SOLID - Keeps this screen focused on UI; logic sits in hooks for better separation.
+ * KISS  - Keeps things simple and easier to read by avoiding too much logic here.
+ * DRY   - Avoids repeating user logic everywhere by reusing hooks.
+ */
 const HomeScreen: FC = () => {
-  const userList = useAppSelector(selectUsersList);
-  const loading = useAppSelector(selectIsFetchingList);
-  const isSearching = useAppSelector(selectIsSearching);
-  const hasError = useAppSelector(selectHasErrorList);
+  const {userList, loading, isSearching, hasError, handleOnSearch, handleOnRefresh, handleFetchNextUsers} =
+    useUsersList();
 
-  const dispatch = useAppDispatch();
   const {t} = useLanguage();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
-
-  const handleOnSearch = useCallback(
-    (name: string) => {
-      if (!name.trim()) {
-        return dispatch(reloadUsers());
-      }
-      dispatch(fetchSearchUsers({query: name}));
-    },
-    [dispatch],
-  );
-
-  const handleOnRefresh = useCallback(() => {
-    dispatch(reloadUsers());
-  }, [dispatch]);
-
-  const handleFetchNextUsers = useCallback(() => {
-    dispatch(fetchNextUsers());
-  }, [dispatch]);
 
   const navigateToUserScreen = useCallback((username: string) => navigate(MainScreen.User, {username}), []);
 
