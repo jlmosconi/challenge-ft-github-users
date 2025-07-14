@@ -4,8 +4,8 @@ Aplicación móvil para visualizar los usuarios de Github, desarrollada con Reac
 
 <p align="center">
   <img src="./assets/images/home.png" alt="Home screen" width="200"/>
-  <img src="./assets/images/favorites.png" alt="Favorites screen" width="200"/>
   <img src="./assets/images/profile.png" alt="Profile screen" width="200"/>
+  <img src="./assets/images/favorites.png" alt="Favorites screen" width="200"/>
 </p>
 
 ---
