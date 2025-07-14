@@ -3,7 +3,14 @@
     "title": "GitHub Users",
     "search_placeholder": "Search by name",
     "empty": "No users found",
-    "error": "An error occurred while loading users"
+    "error": "An error occurred while loading users",
+    "accessibility": {
+      "search": {
+        "icon": "Search icon",
+        "label": "Search users",
+        "hint": "Type a name to search for GitHub users"
+      }
+    }
   },
   "favorites": {
     "title": "Favorites",

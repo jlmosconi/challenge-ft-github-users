@@ -49,6 +49,9 @@ const HomeScreen: FC = () => {
           onSearch={handleOnSearch}
           placeholder={t('home.search_placeholder')}
           isSearching={isSearching && loading}
+          iconAccessibilityLabel={t('home.accessibility.search.icon')}
+          accessibilityLabel={t('home.accessibility.search.label')}
+          accessibilityHint={t('home.accessibility.search.hint')}
         />
       </SpacingBox>
 

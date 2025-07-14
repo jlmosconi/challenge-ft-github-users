@@ -3,7 +3,14 @@
     "title": "Usuarios de GitHub",
     "search_placeholder": "Buscar por nombre",
     "empty": "No se encontraron usuarios",
-    "error": "Ocurrió un error al cargar los usuarios"
+    "error": "Ocurrió un error al cargar los usuarios",
+    "accessibility": {
+      "search": {
+        "icon": "Icono de búsqueda",
+        "label": "Buscar usuarios",
+        "hint": "Escribe un nombre para buscar usuarios de GitHub"
+      }
+    }
   },
   "favorites": {
     "title": "Favoritos",
