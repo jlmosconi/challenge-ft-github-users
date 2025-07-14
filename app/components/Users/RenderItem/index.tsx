@@ -34,4 +34,7 @@ const UserRenderItem: FC<RenderItemProps> = ({user, isFavorite, animate = false,
     </Animated.View>
   );
 };
-export default memo(UserRenderItem);
+export default memo(UserRenderItem, (prev, next) => {
+  // Only re-render if the user or favorite status changes
+  return prev.user.id === next.user.id && prev.isFavorite === next.isFavorite;
+});
