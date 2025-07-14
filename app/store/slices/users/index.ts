@@ -96,8 +96,9 @@ export const fetchUsers =
 
     dispatch(getUsersStart());
     const response = await usersService.getUserList(since, limit);
-
-    console.log('fetchUsers', response);
+    if (__DEV__) {
+      console.log('fetchUsers', response);
+    }
 
     if (response.ok) {
       const list = selectUsersList(getState());
@@ -147,7 +148,9 @@ export const fetchUser = (username: string) => async (dispatch: AppDispatch, get
 
   dispatch(getUserStart());
   const response = await usersService.getUserByName(username);
-  console.log('fetchUser', response);
+  if (__DEV__) {
+    console.log('fetchUser', response);
+  }
 
   if (response.ok) {
     dispatch(getUserSuccess(response.data!));
