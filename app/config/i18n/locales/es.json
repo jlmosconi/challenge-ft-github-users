@@ -15,6 +15,10 @@
         "name-asc": "ordenar por nombre (A-Z)",
         "name-desc": "ordenar por nombre (Z-A)"
       }
+    },
+    "accessibility": {
+      "add": "Agregar a favoritos",
+      "remove": "Quitar de favoritos"
     }
   },
   "user": {

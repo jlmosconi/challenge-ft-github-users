@@ -4,16 +4,25 @@ import Animated, {useSharedValue, useAnimatedStyle, withSpring} from 'react-nati
 import {IconName} from '@components/Icon/icons';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
 import {IconButton} from './styled';
+import {useLanguage} from '@hooks/useLanguage';
 
 interface FavoriteButtonProps {
   isFavorite?: boolean;
   iconSize?: number;
   pressDelay?: number; // delay in milliseconds to prevent rapid toggling
   onPress?: () => void;
+  accessibilityLabel?: string;
 }
 
-const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, iconSize = 24, pressDelay = 350, onPress}) => {
+const FavoriteButton: FC<FavoriteButtonProps> = ({
+  isFavorite,
+  iconSize = 24,
+  pressDelay = 350,
+  onPress,
+  accessibilityLabel,
+}) => {
   const theme = useTheme();
+  const {t} = useLanguage();
 
   const scale = useSharedValue(1);
   const prevIsFavorite = useRef(isFavorite);
@@ -44,7 +53,14 @@ const FavoriteButton: FC<FavoriteButtonProps> = ({isFavorite, iconSize = 24, pre
   };
 
   return (
-    <IconButton onPress={handlePress} testID="favoriteButton">
+    <IconButton
+      onPress={handlePress}
+      testID="favoriteButton"
+      accessibilityRole="button"
+      accessibilityLabel={
+        accessibilityLabel || (isFavorite ? t('favorites.accessibility.remove') : t('favorites.accessibility.add'))
+      }
+      accessibilityState={{selected: !!isFavorite}}>
       <Animated.View style={animatedStyle}>
         <SpecificSizeIcon size={iconSize} name={iconName} color={iconColor} />
       </Animated.View>
