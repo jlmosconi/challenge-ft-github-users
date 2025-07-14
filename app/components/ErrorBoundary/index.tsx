@@ -1,6 +1,6 @@
 import {Component, type ErrorInfo, type ReactNode} from 'react';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {navigateAndSimpleReset} from '@utils/navigation';
+import {navigate} from '@utils/navigation';
 import {MainScreen} from '@navigators/screenRoutes';
 import Button from '@components/Button';
 import SafeArea from '@components/SafeArea';
@@ -35,7 +35,7 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
 
   handleRetry = () => {
     this.setState({hasError: false});
-    navigateAndSimpleReset(MainScreen.Home);
+    navigate(MainScreen.Home);
   };
 
   render() {
