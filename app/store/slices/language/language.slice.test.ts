@@ -15,10 +15,10 @@ describe('language slice', () => {
   it('selectLanguage selector returns current language', () => {
     const fakeState = {
       language: {
-        language: Language.en,
+        language: Language.es,
       },
     };
 
-    expect(selectLanguage(fakeState as any)).toBe(Language.en);
+    expect(selectLanguage(fakeState as any)).toBe(Language.es);
   });
 });
