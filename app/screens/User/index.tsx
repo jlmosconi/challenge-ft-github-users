@@ -81,7 +81,6 @@ const UserScreen: FC<Props> = ({route}) => {
     {icon: IconName.X, value: user.twitter_username},
   ].filter(item => !!item.value);
 
-  console.log('UserScreen userInfoFields:', userInfoFields);
   return (
     <SafeArea>
       <InfoContainer>
