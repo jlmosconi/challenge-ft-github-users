@@ -1,5 +1,5 @@
 import {renderHook} from '@testing-library/react-hooks';
-import {useUserData} from '../useUserData';
+import {useUserData} from '.';
 import {fetchUser, selectUser, selectIsFetchingUser, selectHasErrorUser} from '@store/slices/users';
 import type {IUserResponse} from '@services/usersService/types';
 
