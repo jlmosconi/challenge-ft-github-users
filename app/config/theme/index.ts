@@ -21,8 +21,8 @@ const platformFactor = Platform.OS === 'ios' ? 1.09 : 1;
 const scaled = (size: number) => +(size * calculatedRem * platformFactor).toFixed(2);
 const spacingTransform = (size: number) => size * 8;
 
-const size = (s: number) => scaled(s);
-const spacing = (s: number) => spacingTransform(s);
+export const size = (s: number) => scaled(s);
+export const spacing = (s: number) => spacingTransform(s);
 
 const typography = {
   body1: Body1,
