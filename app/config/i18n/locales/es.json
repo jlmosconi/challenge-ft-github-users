@@ -34,6 +34,9 @@
         "id": "ordenar por ID",
         "name-asc": "ordenar por nombre (A-Z)",
         "name-desc": "ordenar por nombre (Z-A)"
+      },
+      "accessibility": {
+        "label": "Ordenar favoritos"
       }
     },
     "accessibility": {
