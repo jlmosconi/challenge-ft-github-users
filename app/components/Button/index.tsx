@@ -4,11 +4,17 @@ import {StyledButton, ButtonText} from './styled';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
+  accessibilityLabel?: string;
 }
 
-const Button: FC<ButtonProps> = ({title, ...props}) => {
+const Button: FC<ButtonProps> = ({title, accessibilityLabel, ...props}) => {
   return (
-    <StyledButton activeOpacity={0.7} {...props}>
+    <StyledButton
+      activeOpacity={0.7}
+      accessible
+      accessibilityRole="button"
+      accessibilityLabel={accessibilityLabel || title}
+      {...props}>
       <ButtonText>{title}</ButtonText>
     </StyledButton>
   );
