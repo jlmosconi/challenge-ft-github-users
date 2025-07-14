@@ -24,11 +24,19 @@ const ApplicationNavigator: FC = () => {
   const theme = useTheme();
   const {t} = useLanguage();
 
-  const headerLeft = () => <BackButton onPress={navigateBack} />;
+  const headerLeft = () => (
+    <BackButton onPress={navigateBack} accessibilityLabel={t('common.accessibility.back.label')} />
+  );
   const homeHeaderRight = () => (
     <>
-      <StarButton onPress={() => navigate(MainScreen.Favorites)} />
-      <ConfigurationButton onPress={() => navigate(MainScreen.Configuration)} />
+      <StarButton
+        onPress={() => navigate(MainScreen.Favorites)}
+        accessibilityLabel={t('common.accessibility.favorites.label')}
+      />
+      <ConfigurationButton
+        onPress={() => navigate(MainScreen.Configuration)}
+        accessibilityLabel={t('common.accessibility.configuration.label')}
+      />
     </>
   );
 

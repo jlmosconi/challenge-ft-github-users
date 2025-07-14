@@ -1,4 +1,17 @@
 {
+  "common": {
+    "accessibility": {
+      "back": {
+        "label": "Back to the previous screen"
+      },
+      "favorites": {
+        "label": "Go to favorites"
+      },
+      "configuration": {
+        "label": "Go to configuration"
+      }
+    }
+  },
   "home": {
     "title": "GitHub Users",
     "search_placeholder": "Search by name",
