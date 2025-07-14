@@ -133,6 +133,9 @@ export const fetchSearchUsers =
     dispatch(searchUserStart());
 
     const response = await searchService.searchUsers(query, limit);
+    if (__DEV__) {
+      console.log('fetchSearchUsers', response);
+    }
 
     if (response.ok) {
       dispatch(searchUserSuccess(response.data?.items || []));
