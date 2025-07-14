@@ -1,11 +1,10 @@
-import {useEffect, type FC} from 'react';
+import {type FC} from 'react';
 import {type RouteProp} from '@react-navigation/native';
 import {useTheme} from 'styled-components/native';
 import {MainScreen, MainStack} from '@navigators/screenRoutes';
-import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
+import {useUserData} from '@hooks/useUserData';
 import {useLanguage} from '@hooks/useLanguage';
-import {fetchUser, selectHasErrorUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
 import SpacingBox from '@components/SpacingBox';
 import UserAvatar from '@components/Users/UserAvatar';
 import SafeArea from '@components/SafeArea';
@@ -34,22 +33,10 @@ import {
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
 const UserScreen: FC<Props> = ({route}) => {
-  const {username} = route.params;
-
-  const user = useAppSelector(selectUser);
-  const isFetching = useAppSelector(selectIsFetchingUser);
-  const hasError = useAppSelector(selectHasErrorUser);
-
-  const dispatch = useAppDispatch();
+  const {user, isFetching, hasError} = useUserData(route.params?.username || '');
   const theme = useTheme();
   const {t} = useLanguage();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
-
-  useEffect(() => {
-    if (!username || user?.login === username) return;
-    // Fetch user only if not already loaded or different user
-    dispatch(fetchUser(username));
-  }, [dispatch, username, user?.login]);
 
   if (!user || isFetching) {
     return (

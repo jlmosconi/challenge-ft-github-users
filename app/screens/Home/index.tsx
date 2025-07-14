@@ -1,6 +1,13 @@
 import {useCallback, type FC} from 'react';
 import SafeArea from '@components/SafeArea';
 import type {FavoriteUser} from '@store/slices/favorites/types';
+import {MainScreen} from '@navigators/screenRoutes';
+import {navigate} from '@utils/navigation';
+import {useFavoriteActions} from '@hooks/useFavoriteActions';
+import {useLanguage} from '@hooks/useLanguage';
+import {useUsersList} from '@hooks/useUsersList';
+import {IconName} from '@components/Icon/icons';
+import EmptyState from '@components/EmptyState';
 import ScrollList from '@components/ScrollList';
 import ListFooter from '@components/Users/ListFooter';
 import ListEmpty from '@components/Users/ListEmpty';
@@ -8,19 +15,7 @@ import SpacingBox from '@components/SpacingBox';
 import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
 import UserRenderItem from '@components/Users/RenderItem';
-import EmptyState from '@components/EmptyState';
-import {IconName} from '@components/Icon/icons';
-import {MainScreen} from '@navigators/screenRoutes';
-import {navigate} from '@utils/navigation';
-import {useFavoriteActions} from '@hooks/useFavoriteActions';
-import {useLanguage} from '@hooks/useLanguage';
-import {useUsersList} from '@hooks/useUsersList';
 
-/**
- * SOLID - Keeps this screen focused on UI; logic sits in hooks for better separation.
- * KISS  - Keeps things simple and easier to read by avoiding too much logic here.
- * DRY   - Avoids repeating user logic everywhere by reusing hooks.
- */
 const HomeScreen: FC = () => {
   const {userList, loading, isSearching, hasError, handleOnSearch, handleOnRefresh, handleFetchNextUsers} =
     useUsersList();
