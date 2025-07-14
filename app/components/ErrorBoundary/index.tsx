@@ -12,14 +12,14 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-interface Props {
+interface ErrorBoundaryProps {
   children: ReactNode;
   errorTitle?: string;
   ctaLabel?: string;
 }
 
-class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
-  constructor(props: Props) {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = {hasError: false};
   }
@@ -39,7 +39,7 @@ class ErrorBoundary extends Component<Props, ErrorBoundaryState> {
   };
 
   render() {
-    if (this.state.hasError) {
+    if (!this.state.hasError) {
       return this.props.children;
     }
 
