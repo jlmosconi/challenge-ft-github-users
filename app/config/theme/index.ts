@@ -1,7 +1,7 @@
 import {DefaultTheme} from 'styled-components/native';
 import {calculateREMForDevice} from '@helpers/font';
 import {Dimensions, Platform} from 'react-native';
-import {Body1, Body2, Caption, Overline} from '@components/Text/TypographyText';
+import {Body1, Body2, Button, Caption, Overline} from '@components/Text/TypographyText';
 
 export const enum ThemePreference {
   System = 'system',
@@ -27,8 +27,9 @@ const spacing = (s: number) => spacingTransform(s);
 const typography = {
   body1: Body1,
   body2: Body2,
-  overline: Overline,
+  button: Button,
   caption: Caption,
+  overline: Overline,
 };
 
 const lightTheme: DefaultTheme = {

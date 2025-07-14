@@ -41,8 +41,9 @@ export const createTypography = (size: number, height: number, defaultWeight: We
 
 export const Body1 = createTypography(18, 24);
 export const Body2 = createTypography(20, 24);
-export const Overline = createTypography(12, 14);
+export const Button = createTypography(16, 20);
 export const Caption = createTypography(14, 16);
+export const Overline = createTypography(12, 14);
 
 export const TypographyText = styled.Text<ITypographyText>`
   ${({weight = Weight.REGULAR, type = Caption}) => type({weight})};

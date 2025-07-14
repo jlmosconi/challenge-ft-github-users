@@ -21,6 +21,7 @@ declare module 'styled-components/native' {
     typography: {
       body1: TypographyType;
       body2: TypographyType;
+      button: TypographyType;
       caption: TypographyType;
       overline: TypographyType;
     };

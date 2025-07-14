@@ -27,5 +27,10 @@
     "title": "Settings",
     "dark_mode": "Use dark theme",
     "spanish": "Spanish"
+  },
+  "error_boundary": {
+    "title": "Something went wrong",
+    "message": "Sorry, an unexpected error occurred.",
+    "cta": "Retry"
   }
 }

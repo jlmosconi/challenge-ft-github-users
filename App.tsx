@@ -8,9 +8,11 @@ import {persistor, store} from '@store/index';
 import {ThemeProvider} from '@config/theme/ThemeContext';
 import {LanguageProvider} from '@config/i18n/LanguageProvider';
 import ApplicationNavigator from '@navigators/ApplicationNavigator';
+import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundaryWrapper';
 
 function App() {
   return (
+    // ErrorBoundary to catch and handle errors in the app.
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       {/* Redux store provider for global state management. scalability and predictable state handling. */}
       <Provider store={store}>
@@ -18,12 +20,14 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
           {/* ThemeProvider for consistent theming across the app. */}
           <ThemeProvider>
-            {/* LanguageProvider for managing language settings and translations. */}
-            <LanguageProvider>
-              <BottomSheetModalProvider>
-                <ApplicationNavigator />
-              </BottomSheetModalProvider>
-            </LanguageProvider>
+            <ErrorBoundary>
+              {/* LanguageProvider for managing language settings and translations. */}
+              <LanguageProvider>
+                <BottomSheetModalProvider>
+                  <ApplicationNavigator />
+                </BottomSheetModalProvider>
+              </LanguageProvider>
+            </ErrorBoundary>
           </ThemeProvider>
         </PersistGate>
       </Provider>
