@@ -20,7 +20,7 @@ const languageConfig = {
 const usersConfig = {
   key: 'users',
   storage: AsyncStorage,
-  blacklist: ['isFetching', 'hasError'], // Avoid persisting transient state.
+  blacklist: ['list', 'isFetching', 'hasError'], // Exclude list, isFetching, and hasError from persistence
 };
 
 const favoritesConfig = {
@@ -46,7 +46,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], // Ignore these actions for serializability checks
       },
     }),
 });
