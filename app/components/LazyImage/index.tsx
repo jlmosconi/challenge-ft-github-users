@@ -1,9 +1,10 @@
 import {type FC, Fragment, useEffect, useState} from 'react';
 import {useSharedValue, useAnimatedStyle, withTiming} from 'react-native-reanimated';
+import FastImage from 'react-native-fast-image';
 import type {LazyImageProps} from './types';
-import {AnimatedImage, Loader, Wrapper} from './styled';
+import {ImageWrapper, Loader, StyledImage, Wrapper} from './styled';
 
-const LazyImage: FC<LazyImageProps> = ({source, containerStyle, resizeMode, fallback}) => {
+const LazyImage: FC<LazyImageProps> = ({source, containerStyle, resizeMode = FastImage.resizeMode.cover, fallback}) => {
   const opacity = useSharedValue(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -42,14 +43,18 @@ const LazyImage: FC<LazyImageProps> = ({source, containerStyle, resizeMode, fall
       {loading && <Loader />}
 
       {!error && source.uri && (
-        <AnimatedImage
-          source={source}
-          style={animatedStyle}
-          resizeMode={resizeMode}
-          onLoadStart={onLoadStart}
-          onLoadEnd={onImageLoad}
-          onError={onError}
-        />
+        <ImageWrapper style={animatedStyle}>
+          <StyledImage
+            source={{
+              uri: source.uri,
+              priority: FastImage.priority.normal,
+            }}
+            resizeMode={resizeMode}
+            onLoadStart={onLoadStart}
+            onLoadEnd={onImageLoad}
+            onError={onError}
+          />
+        </ImageWrapper>
       )}
 
       {(!source.uri || source.uri === '' || (!loading && error)) && <Fragment>{fallback}</Fragment>}
