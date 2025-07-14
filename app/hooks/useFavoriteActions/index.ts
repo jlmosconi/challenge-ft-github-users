@@ -1,5 +1,4 @@
 import {useCallback} from 'react';
-import {shallowEqual} from 'react-redux';
 import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {selectFavorites, toggleFavorite} from '@store/slices/favorites';
 import type {FavoriteUser} from '@store/slices/favorites/types';
@@ -11,11 +10,17 @@ import type {FavoriteUser} from '@store/slices/favorites/types';
  */
 export const useFavoriteActions = () => {
   const dispatch = useAppDispatch();
-  const favorites = useAppSelector(selectFavorites, shallowEqual); // Using shallowEqual to avoid unnecessary re-renders if the favorites reference doesn't change
+  const favorites = useAppSelector(selectFavorites);
 
   const handleOnFavoritePress = useCallback(
     (user: FavoriteUser) => {
-      dispatch(toggleFavorite(user));
+      dispatch(
+        toggleFavorite({
+          id: user.id,
+          login: user.login,
+          avatar_url: user.avatar_url,
+        }),
+      );
     },
     [dispatch],
   );
