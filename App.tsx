@@ -12,7 +12,6 @@ import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundaryWrapper';
 
 function App() {
   return (
-    // ErrorBoundary to catch and handle errors in the app.
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       {/* Redux store provider for global state management. scalability and predictable state handling. */}
       <Provider store={store}>
@@ -20,6 +19,7 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
           {/* ThemeProvider for consistent theming across the app. */}
           <ThemeProvider>
+            {/* Handles rendering errors and displays a fallback UI. */}
             <ErrorBoundary>
               {/* LanguageProvider for managing language settings and translations. */}
               <LanguageProvider>
