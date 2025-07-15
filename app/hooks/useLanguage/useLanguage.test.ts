@@ -17,7 +17,7 @@ describe('useLanguage', () => {
 
     const {result} = renderHook(() => useLanguage());
 
-    expect(result.current.language).toBe(Language.en);
+    expect(result.current.currentLanguage).toBe(Language.en);
   });
 
   it('should call changeLanguage on mount with initial language', () => {
