@@ -5,7 +5,14 @@ import {IndicatorWrapper, Wrapper, Indicator} from './styled';
 
 const TOGGLE_TRANSLATION_X = 16;
 
-const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, accessibilityLabel, testID}) => {
+const Toggle: FC<ToggleProps> = ({
+  disabled,
+  checked,
+  onPress,
+  accessibilityLabel,
+  accessibilityRole = 'switch',
+  testID,
+}) => {
   const translation = useSharedValue(checked ? TOGGLE_TRANSLATION_X : 0);
 
   useEffect(() => {
@@ -31,7 +38,7 @@ const Toggle: FC<ToggleProps> = ({disabled, checked, onPress, accessibilityLabel
       disabled={onPress ? disabled : true}
       accessible
       accessibilityLabel={accessibilityLabel}
-      accessibilityRole="checkbox"
+      accessibilityRole={disabled ? 'none' : accessibilityRole}
       accessibilityState={{disabled, checked}}>
       <IndicatorWrapper disabled={disabled} checked={checked}>
         <Animated.View testID={testID} style={animatedStyle}>

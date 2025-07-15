@@ -1,37 +1,39 @@
-import {type FC} from 'react';
-import Toggle from '@components/Toggle';
-import {ThemeMode} from '@config/theme';
+import {type FC, useCallback} from 'react';
 import {Language} from '@config/i18n';
-import SafeArea from '@components/SafeArea';
-import {ItemTitle, ListContainer, ListItem} from './styled';
 import {useLanguage} from '@hooks/useLanguage';
 import {useThemePreference} from '@hooks/useThemePreference';
+import SafeArea from '@components/SafeArea';
+import Toggle from '@components/Toggle';
+import {getConfigItems} from './data';
+import {ItemTitle, ListContainer, ListItem} from './styled';
 
 const ConfigurationScreen: FC = () => {
   const {currentMode, toggleTheme} = useThemePreference();
-  const {language, setLanguage, t} = useLanguage();
+  const {currentLanguage, setLanguage, t} = useLanguage();
+
+  const toggleLanguage = useCallback(() => {
+    setLanguage(currentLanguage === Language.en ? Language.es : Language.en);
+  }, [currentLanguage, setLanguage]);
+
+  const items = getConfigItems(currentMode, currentLanguage, toggleLanguage, toggleTheme, t);
 
   return (
     <SafeArea>
-      <ListContainer mv={2}>
-        <ListItem onPress={toggleTheme}>
-          <ItemTitle>{t('config.dark_mode')}</ItemTitle>
-          <Toggle
-            testID="theme-toggle"
-            accessibilityLabel={t('config.dark_mode')}
-            checked={currentMode === ThemeMode.Dark}
-          />
-        </ListItem>
-        <ListItem onPress={() => setLanguage(language === Language.en ? Language.es : Language.en)}>
-          <ItemTitle>{t('config.spanish')}</ItemTitle>
-          <Toggle
-            testID="language-toggle"
-            accessibilityLabel={t('config.spanish')}
-            checked={language === Language.es}
-          />
-        </ListItem>
+      <ListContainer mt={2}>
+        {items.map(item => (
+          <ListItem key={item.testID} onPress={item.onPress}>
+            <ItemTitle>{item.title}</ItemTitle>
+            <Toggle
+              testID={item.testID}
+              accessibilityLabel={item.title}
+              accessibilityRole="switch"
+              checked={item.value}
+            />
+          </ListItem>
+        ))}
       </ListContainer>
     </SafeArea>
   );
 };
+
 export default ConfigurationScreen;
