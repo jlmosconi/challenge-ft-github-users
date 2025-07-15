@@ -60,6 +60,7 @@ const FavoriteButton: FC<FavoriteButtonProps> = ({
       accessibilityLabel={
         accessibilityLabel || (isFavorite ? t('favorites.accessibility.remove') : t('favorites.accessibility.add'))
       }
+      accessibilityHint={isFavorite ? t('favorites.accessibility.hint.remove') : t('favorites.accessibility.hint.add')}
       accessibilityState={{selected: !!isFavorite}}>
       <Animated.View style={animatedStyle}>
         <SpecificSizeIcon size={iconSize} name={iconName} color={iconColor} />

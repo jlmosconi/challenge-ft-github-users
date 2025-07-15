@@ -41,7 +41,11 @@
     },
     "accessibility": {
       "add": "Agregar a favoritos",
-      "remove": "Quitar de favoritos"
+      "remove": "Quitar de favoritos",
+      "hint": {
+        "add": "Toca para agregar este usuario a tus favoritos",
+        "remove": "Toca para quitar este usuario de tus favoritos"
+      }
     }
   },
   "user": {
