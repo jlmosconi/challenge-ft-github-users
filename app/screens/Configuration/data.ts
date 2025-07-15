@@ -13,11 +13,13 @@ export const getConfigItems = (
     value: currentMode === ThemeMode.Dark,
     onPress: toggleTheme,
     testID: 'theme-toggle',
+    hint: t('config.dark_mode_hint'),
   },
   {
     title: t('config.spanish'),
     value: currentLanguage === Language.es,
     onPress: toggleLanguage,
     testID: 'language-toggle',
+    hint: t('config.spanish_hint'),
   },
 ];

@@ -61,7 +61,11 @@
   "config": {
     "title": "Settings",
     "dark_mode": "Use dark theme",
-    "spanish": "Spanish"
+    "spanish": "Spanish",
+    "accessibility": {
+      "dark_mode_hint": "Activate or deactivate the dark mode of the application",
+      "spanish_hint": "Tap to change the language of the application"
+    }
   },
   "error_boundary": {
     "title": "Something went wrong",

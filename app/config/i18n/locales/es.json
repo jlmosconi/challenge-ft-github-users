@@ -61,7 +61,11 @@
   "config": {
     "title": "Configuración",
     "dark_mode": "Usar tema oscuro",
-    "spanish": "Español"
+    "spanish": "Español",
+    "accessibility": {
+      "dark_mode_hint": "Activa o desactiva el modo oscuro de la aplicación",
+      "spanish_hint": "Toca para cambiar el idioma de la aplicación"
+    }
   },
   "error_boundary": {
     "title": "Lo sentimos, ocurrió un error inesperado.",
