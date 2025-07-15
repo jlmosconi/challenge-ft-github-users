@@ -1,9 +1,11 @@
-import {useAppSelector} from '@store/hooks';
-import {useMemo} from 'react';
-import {selectFavorites, selectFavoritesFilter} from '@store/slices/favorites';
+import {useMemo, useCallback} from 'react';
+import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {selectFavorites, selectFavoritesFilter, setFilter} from '@store/slices/favorites';
 import {sortUsers} from '@utils/users/sortUsers';
+import {SortOption} from '@store/slices/favorites/types';
 
 export const useFavoritesList = () => {
+  const dispatch = useAppDispatch();
   const favorites = useAppSelector(selectFavorites);
   const filter = useAppSelector(selectFavoritesFilter);
 
@@ -12,5 +14,16 @@ export const useFavoritesList = () => {
     return sortUsers(usersArray, filter);
   }, [favorites, filter]);
 
-  return {favoritesList, filter};
+  const setFavoritesFilter = useCallback(
+    (option: SortOption) => {
+      dispatch(setFilter(option));
+    },
+    [dispatch],
+  );
+
+  return {
+    favoritesList,
+    filter,
+    setFavoritesFilter,
+  };
 };

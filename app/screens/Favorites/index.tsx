@@ -1,7 +1,5 @@
 import {useCallback, useRef, type FC} from 'react';
 import type {BottomSheetModal} from '@gorhom/bottom-sheet';
-import {setFilter} from '@store/slices/favorites';
-import {useAppDispatch} from '@store/hooks';
 import {FavoriteUser, type SortOption} from '@store/slices/favorites/types';
 import {MainScreen} from '@navigators/screenRoutes';
 import {navigate} from '@utils/navigation';
@@ -18,11 +16,9 @@ import SpacingBox from '@components/SpacingBox';
 import FilterModal from '@components/Users/FilterModal';
 
 const FavoritesScreen: FC = () => {
-  const {favoritesList, filter} = useFavoritesList();
-  const {t} = useLanguage();
+  const {favoritesList, filter, setFavoritesFilter} = useFavoritesList();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
-
-  const dispatch = useAppDispatch();
+  const {t} = useLanguage();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -32,10 +28,10 @@ const FavoritesScreen: FC = () => {
 
   const handleSortSelection = useCallback(
     (option: SortOption) => {
-      dispatch(setFilter(option));
+      setFavoritesFilter(option);
       bottomSheetModalRef.current?.close();
     },
-    [dispatch],
+    [setFavoritesFilter],
   );
 
   const navigateToUserScreen = useCallback((username: string) => navigate(MainScreen.User, {username}), []);

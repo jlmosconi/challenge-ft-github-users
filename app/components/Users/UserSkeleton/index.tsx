@@ -1,11 +1,11 @@
-import React, {type FC} from 'react';
+import {type FC} from 'react';
 import ContentLoader, {Rect, Circle} from 'react-content-loader/native';
 import SpacingBox from '@components/SpacingBox';
 import {useTheme} from 'styled-components/native';
 import {BoxesContainer} from '@screens/User/styled';
 import {CenterContent} from './styled';
 
-const AVATAR_SIZE = 8;
+const AVATAR_SIZE = 10;
 
 const UserSkeleton: FC = () => {
   const theme = useTheme();

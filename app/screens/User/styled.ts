@@ -15,11 +15,11 @@ export const AvatarContainer = styled.View`
 
 export const FavoriteContainer = styled.View`
   position: absolute;
-  bottom: ${({theme}) => theme.size(-5)}px;
-  right: ${({theme}) => theme.size(-5)}px;
-  z-index: 1;
+  bottom: ${({theme}) => theme.size(-2)}px;
+  right: ${({theme}) => theme.size(-2)}px;
   background-color: ${({theme}) => theme.colors.surface};
   border-radius: ${({theme}) => theme.size(theme.spacing(2))}px;
+  z-index: 1;
 `;
 
 export const NameContainer = styled.View`
