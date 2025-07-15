@@ -4,13 +4,13 @@ import {useLanguage} from '@hooks/useLanguage';
 import {t as i18nT} from '@config/i18n';
 
 interface LanguageContextProps {
-  language: Language;
+  currentLanguage: Language;
   setLanguage: (lang: Language) => void;
   t: typeof i18nT;
 }
 
 export const LanguageContext = createContext<LanguageContextProps>({
-  language: defaultLanguage,
+  currentLanguage: defaultLanguage,
   setLanguage: () => {},
   t: i18nT,
 });
