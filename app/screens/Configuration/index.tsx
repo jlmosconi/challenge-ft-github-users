@@ -21,7 +21,7 @@ const ConfigurationScreen: FC = () => {
     <SafeArea>
       <ListContainer mt={2}>
         {items.map(item => (
-          <ListItem key={item.testID} onPress={item.onPress}>
+          <ListItem key={item.title} onPress={item.onPress}>
             <ItemTitle>{item.title}</ItemTitle>
             <Toggle
               testID={item.testID}
