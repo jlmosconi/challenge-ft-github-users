@@ -97,7 +97,7 @@ Las dimensiones de los componentes de UI escalan dinámicamente según:
 
 - El tamaño de pantalla del dispositivo
 - El sistema operativo (iOS / Android)
-- Tipo de dispositivo (smartphone / tablet)
+- El tipo de dispositivo (smartphone / tablet)
 
 Esto permite que el diseño sea responsivo y se adapte correctamente a pantallas grandes como tablets u otros formatos.
 
