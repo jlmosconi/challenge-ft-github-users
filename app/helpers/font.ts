@@ -15,12 +15,13 @@ const MTV = 0.7; // Multiplier Target Value: Value the multiplier will have when
  * @returns {number} - REM unit for this device
  */
 export const calculateREMForDevice = ({width}: ScaledSize) => {
-  let remValue = width / PhM;
+  let remValue = width / PhM; // Base REM value based on a good phone width
 
+  // If the device width is greater than the Multiplier Starting Width
   if (width > MSW) {
-    const multiplier = ((width - MSW) / (TaWidth - MSW)) * (MTV - MSV) + MSV; // Linear eq
-    remValue = remValue * multiplier;
+    const multiplier = ((width - MSW) / (TaWidth - MSW)) * (MTV - MSV) + MSV; // Linear eq to calculate the multiplier
+    remValue = remValue * multiplier; // Apply the multiplier to the base REM value
   }
 
-  return remValue;
+  return remValue; // Return the calculated REM value
 };
