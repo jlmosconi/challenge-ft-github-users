@@ -32,9 +32,11 @@ const HomeScreen: FC = () => {
         isFavorite={isFavorite(item.id)}
         onPress={() => navigateToUserScreen(item.login)}
         onFavoritePress={handleOnFavoritePress}
+        accessibilityLabel={t('user.accessibility.view_profile', {username: item.login})}
+        accessibilityHint={t('user.accessibility.view_profile_hint')}
       />
     ),
-    [handleOnFavoritePress, isFavorite, navigateToUserScreen],
+    [handleOnFavoritePress, t, isFavorite, navigateToUserScreen],
   );
 
   return (

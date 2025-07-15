@@ -7,11 +7,24 @@ interface RenderItemProps {
   user: FavoriteUser;
   isFavorite?: boolean;
   animate?: boolean;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
+  accessibilityRole?: 'button' | 'link';
+  testID?: string;
   onPress?: () => void;
   onFavoritePress: (user: FavoriteUser) => void;
 }
 
-const UserRenderItem: FC<RenderItemProps> = ({user, isFavorite, animate = false, onPress, onFavoritePress}) => {
+const UserRenderItem: FC<RenderItemProps> = ({
+  user,
+  isFavorite,
+  animate = false,
+  accessibilityLabel,
+  accessibilityHint,
+  accessibilityRole = 'button',
+  onPress,
+  onFavoritePress,
+}) => {
   const content = (
     <UserItem
       login={user.login}
@@ -19,6 +32,9 @@ const UserRenderItem: FC<RenderItemProps> = ({user, isFavorite, animate = false,
       handleOnPress={() => onPress?.()}
       handleOnFavorite={() => onFavoritePress(user)}
       isFavorite={isFavorite}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
+      accessibilityRole={accessibilityRole}
     />
   );
 

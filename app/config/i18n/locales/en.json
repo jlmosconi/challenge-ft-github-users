@@ -48,7 +48,11 @@
     "respos": "Repositories",
     "followers": "Followers",
     "following": "Following",
-    "error": "An error occurred while loading the user"
+    "error": "An error occurred while loading the user",
+    "accessibility": {
+      "view_profile": "View profile of {{username}}",
+      "view_profile_hint": "Tap to see more details about this user"
+    }
   },
   "config": {
     "title": "Settings",

@@ -47,10 +47,12 @@ const FavoritesScreen: FC = () => {
         isFavorite={isFavorite(item.id)}
         onFavoritePress={handleOnFavoritePress}
         onPress={() => navigateToUserScreen(item.login)}
+        accessibilityLabel={t('user.accessibility.view_profile', {username: item.login})}
+        accessibilityHint={t('user.accessibility.view_profile_hint')}
         animate
       />
     ),
-    [handleOnFavoritePress, isFavorite, navigateToUserScreen],
+    [t, handleOnFavoritePress, isFavorite, navigateToUserScreen],
   );
 
   return (

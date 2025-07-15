@@ -48,7 +48,11 @@
     "respos": "Repositorios",
     "followers": "Seguidores",
     "following": "Siguiendo",
-    "error": "Ocurrió un error al cargar el usuario"
+    "error": "Ocurrió un error al cargar el usuario",
+    "accessibility": {
+      "view_profile": "Ver perfil de {{username}}",
+      "view_profile_hint": "Toca para ver más detalles sobre este usuario"
+    }
   },
   "config": {
     "title": "Configuración",
