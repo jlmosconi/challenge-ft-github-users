@@ -91,6 +91,31 @@ yarn test <test>
 
 ---
 
+## 🌍 Entornos
+
+La app está preparada para funcionar en **múltiples entornos**, tanto en iOS como en Android, para poder trabajar en desarrollo y producción de forma aislada.
+
+### iOS (Schemes)
+
+- Se usan diferentes **schemes** (e.g. `Development`, `Production`) para compilar la app con configuraciones específicas (entitlements, endpoints, íconos, etc.).
+- Los comandos `yarn ios` y `yarn ios:prod` ejecutan cada uno su scheme correspondiente.
+
+### Android (Flavors)
+
+- Se utilizan **product flavors** (e.g. `dev`, `prod`) definidos en el archivo `build.gradle`.
+- Permite generar APKs o bundles distintos según el entorno.
+- Los comandos `yarn android` y `yarn android:prod` compilan la variante deseada.
+
+### Variables de entorno
+
+- Las variables de entorno se gestionan con [`react-native-config`](https://github.com/luggit/react-native-config).
+- Esto permite tener diferentes endpoints, claves API u otras configuraciones según el entorno.
+- Las variables se encuentran definidas en:
+  - [`.env.development`](.env.development)
+  - [`.env.production`](.env.production)
+
+---
+
 ## 🎨 Theme
 
 Las dimensiones de los componentes de UI escalan dinámicamente según:
