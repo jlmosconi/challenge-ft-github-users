@@ -76,22 +76,6 @@ yarn android:prod
 
 ---
 
-## 🧪 Testing
-
-### Correr todos los tests
-
-```bash
-yarn test
-```
-
-### Correr test en específico
-
-```bash
-yarn test <test>
-```
-
----
-
 ## 🌍 Entornos
 
 La app está preparada para funcionar en **múltiples entornos**, tanto en iOS como en Android, para poder trabajar en desarrollo y producción de forma aislada.
@@ -140,6 +124,34 @@ La app está preparada para multi-idioma utilizando i18n-js. Actualmente soporta
 
 La configuración de textos e idiomas se encuentra en:
 [`app/config/i18n`](./app/config/i18n)
+
+---
+
+## ♿️ Accesibilidad
+
+La app incluye soporte básico de accesibilidad:
+
+- Labels e hints para lectores de pantalla en botones e íconos.
+- Roles de accesibilidad definidos (botones, switches).
+- Estados accesibles en componentes dinámicos, como favoritos.
+
+Esto facilita que usuarios con lectores de pantalla puedan entender y navegar la app correctamente.
+
+---
+
+## 🧪 Testing
+
+### Correr todos los tests
+
+```bash
+yarn test
+```
+
+### Correr test en específico
+
+```bash
+yarn test <test>
+```
 
 ---
 
