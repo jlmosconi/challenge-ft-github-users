@@ -1,7 +1,7 @@
 import {DefaultTheme} from 'styled-components/native';
 import {calculateREMForDevice} from '@helpers/font';
 import {Dimensions, Platform} from 'react-native';
-import {Body1, Body2, Caption, Overline} from '@components/Text/TypographyText';
+import {Body1, Body2, Button, Caption, Overline} from '@components/Text/TypographyText';
 
 export const enum ThemePreference {
   System = 'system',
@@ -14,6 +14,7 @@ export const enum ThemeMode {
   Dark = 'dark',
 }
 
+//
 const calculatedRem = calculateREMForDevice(Dimensions.get('window'));
 // This is a factor to adjust the scaling based on platform differences
 const platformFactor = Platform.OS === 'ios' ? 1.09 : 1;
@@ -21,14 +22,16 @@ const platformFactor = Platform.OS === 'ios' ? 1.09 : 1;
 const scaled = (size: number) => +(size * calculatedRem * platformFactor).toFixed(2);
 const spacingTransform = (size: number) => size * 8;
 
-const size = (s: number) => scaled(s);
-const spacing = (s: number) => spacingTransform(s);
+// This function applies the scaling to the spacing
+export const size = (s: number) => scaled(s);
+export const spacing = (s: number) => spacingTransform(s);
 
 const typography = {
   body1: Body1,
   body2: Body2,
-  overline: Overline,
+  button: Button,
   caption: Caption,
+  overline: Overline,
 };
 
 const lightTheme: DefaultTheme = {
@@ -36,7 +39,7 @@ const lightTheme: DefaultTheme = {
   colors: {
     background: '#ffffff',
     surface: '#f5f5f5',
-    yellow: '#ffcc53',
+    yellow: '#ffb300',
     textPrimary: '#0f0d13',
     grey: {
       light: '#e0e0e0',
@@ -57,7 +60,7 @@ const darkTheme: DefaultTheme = {
     yellow: '#ffcc53',
     textPrimary: '#ffffff',
     grey: {
-      light: '#161616',
+      light: '#1a1a1a',
       medium: '#464548',
       dark: '#929292',
     },

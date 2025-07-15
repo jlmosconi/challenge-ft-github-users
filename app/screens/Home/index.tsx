@@ -1,17 +1,13 @@
-import {useCallback, useEffect, type FC} from 'react';
-import {useAppDispatch, useAppSelector} from '@store/hooks';
+import {useCallback, type FC} from 'react';
 import SafeArea from '@components/SafeArea';
-import {
-  fetchNextUsers,
-  fetchSearchUsers,
-  fetchUsers,
-  reloadUsers,
-  selectHasErrorList,
-  selectIsFetchingList,
-  selectIsSearching,
-  selectUsersList,
-} from '@store/slices/users';
 import type {FavoriteUser} from '@store/slices/favorites/types';
+import {MainScreen} from '@navigators/screenRoutes';
+import {navigate} from '@utils/navigation';
+import {useFavoriteActions} from '@hooks/useFavoriteActions';
+import {useLanguage} from '@hooks/useLanguage';
+import {useUsersList} from '@hooks/useUsersList';
+import {IconName} from '@components/Icon/icons';
+import EmptyState from '@components/EmptyState';
 import ScrollList from '@components/ScrollList';
 import ListFooter from '@components/Users/ListFooter';
 import ListEmpty from '@components/Users/ListEmpty';
@@ -19,44 +15,13 @@ import SpacingBox from '@components/SpacingBox';
 import SearchBox from '@components/Users/SearchBox';
 import {Body2, TypographyText, Weight} from '@components/Text/TypographyText';
 import UserRenderItem from '@components/Users/RenderItem';
-import EmptyState from '@components/EmptyState';
-import {IconName} from '@components/Icon/icons';
-import {MainScreen} from '@navigators/screenRoutes';
-import {navigate} from '@utils/navigation';
-import {useFavoriteActions} from '@hooks/useFavoriteActions';
-import {useLanguage} from '@hooks/useLanguage';
 
 const HomeScreen: FC = () => {
-  const userList = useAppSelector(selectUsersList);
-  const loading = useAppSelector(selectIsFetchingList);
-  const isSearching = useAppSelector(selectIsSearching);
-  const hasError = useAppSelector(selectHasErrorList);
+  const {userList, loading, isSearching, hasError, handleOnSearch, handleOnRefresh, handleFetchNextUsers} =
+    useUsersList();
 
-  const dispatch = useAppDispatch();
   const {t} = useLanguage();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, [dispatch]);
-
-  const handleOnSearch = useCallback(
-    (name: string) => {
-      if (!name.trim()) {
-        return dispatch(reloadUsers());
-      }
-      dispatch(fetchSearchUsers({query: name}));
-    },
-    [dispatch],
-  );
-
-  const handleOnRefresh = useCallback(() => {
-    dispatch(reloadUsers());
-  }, [dispatch]);
-
-  const handleFetchNextUsers = useCallback(() => {
-    dispatch(fetchNextUsers());
-  }, [dispatch]);
 
   const navigateToUserScreen = useCallback((username: string) => navigate(MainScreen.User, {username}), []);
 
@@ -67,9 +32,11 @@ const HomeScreen: FC = () => {
         isFavorite={isFavorite(item.id)}
         onPress={() => navigateToUserScreen(item.login)}
         onFavoritePress={handleOnFavoritePress}
+        accessibilityLabel={t('user.accessibility.view_profile', {username: item.login})}
+        accessibilityHint={t('user.accessibility.view_profile_hint')}
       />
     ),
-    [handleOnFavoritePress, isFavorite, navigateToUserScreen],
+    [handleOnFavoritePress, t, isFavorite, navigateToUserScreen],
   );
 
   return (
@@ -84,6 +51,9 @@ const HomeScreen: FC = () => {
           onSearch={handleOnSearch}
           placeholder={t('home.search_placeholder')}
           isSearching={isSearching && loading}
+          iconAccessibilityLabel={t('home.accessibility.search.icon')}
+          accessibilityLabel={t('home.accessibility.search.label')}
+          accessibilityHint={t('home.accessibility.search.hint')}
         />
       </SpacingBox>
 

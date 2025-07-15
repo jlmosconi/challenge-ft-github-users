@@ -1,6 +1,5 @@
 import {createRef} from 'react';
-
-import {NavigationContainerRef} from '@react-navigation/native';
+import {type NavigationContainerRef} from '@react-navigation/native';
 
 type Route = {
   name: string;

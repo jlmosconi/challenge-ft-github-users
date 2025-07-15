@@ -96,9 +96,6 @@ export const fetchUsers =
 
     dispatch(getUsersStart());
     const response = await usersService.getUserList(since, limit);
-    if (__DEV__) {
-      console.log('fetchUsers', response);
-    }
 
     if (response.ok) {
       const list = selectUsersList(getState());
@@ -133,9 +130,6 @@ export const fetchSearchUsers =
     dispatch(searchUserStart());
 
     const response = await searchService.searchUsers(query, limit);
-    if (__DEV__) {
-      console.log('fetchSearchUsers', response);
-    }
 
     if (response.ok) {
       dispatch(searchUserSuccess(response.data?.items || []));
@@ -151,9 +145,6 @@ export const fetchUser = (username: string) => async (dispatch: AppDispatch, get
 
   dispatch(getUserStart());
   const response = await usersService.getUserByName(username);
-  if (__DEV__) {
-    console.log('fetchUser', response);
-  }
 
   if (response.ok) {
     dispatch(getUserSuccess(response.data!));

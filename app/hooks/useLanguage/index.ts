@@ -4,7 +4,7 @@ import {selectLanguage, setLanguage} from '@store/slices/language';
 import {changeLanguage, t as i18nT, Language} from '@config/i18n';
 
 export const useLanguage = () => {
-  const language = useAppSelector(selectLanguage);
+  const currentLanguage = useAppSelector(selectLanguage);
   const dispatch = useAppDispatch();
 
   const storeLanguage = (lang: Language) => {
@@ -13,11 +13,11 @@ export const useLanguage = () => {
   };
 
   useEffect(() => {
-    changeLanguage(language);
-  }, [language]);
+    changeLanguage(currentLanguage);
+  }, [currentLanguage]);
 
   return {
-    language,
+    currentLanguage,
     setLanguage: storeLanguage,
     t: i18nT,
   };

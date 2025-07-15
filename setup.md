@@ -15,6 +15,7 @@
 - redux-toolkit
 - styled-components
 - react-native-reanimated
+- react-native-fast-image
 - typescript
 
 ---
@@ -109,6 +110,13 @@ Permite definir estilos en componentes mediante CSS-in-JS, con soporte para them
 Ofrece animaciones más fluidas y de alto rendimiento, fundamentales para lograr una experiencia de usuario moderna en aplicaciones móviles.
 
 - [Reanimated Docs](https://docs.swmansion.com/react-native-reanimated/)
+
+---
+
+#### react-native-fast-image
+Componente de imagen optimizado que mejora el rendimiento y permite controlar la caché para evitar descargas innecesarias.
+
+- [React Native Fast Image Docs](https://github.com/DylanVann/react-native-fast-image)
 
 ---
 

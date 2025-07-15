@@ -1,9 +1,29 @@
 {
+  "common": {
+    "accessibility": {
+      "back": {
+        "label": "Back to the previous screen"
+      },
+      "favorites": {
+        "label": "Go to favorites"
+      },
+      "configuration": {
+        "label": "Go to configuration"
+      }
+    }
+  },
   "home": {
     "title": "GitHub Users",
     "search_placeholder": "Search by name",
     "empty": "No users found",
-    "error": "An error occurred while loading users"
+    "error": "An error occurred while loading users",
+    "accessibility": {
+      "search": {
+        "icon": "Search icon",
+        "label": "Search users",
+        "hint": "Type a name to search for GitHub users"
+      }
+    }
   },
   "favorites": {
     "title": "Favorites",
@@ -14,6 +34,17 @@
         "id": "sort by ID",
         "name-asc": "sort by name (A-Z)",
         "name-desc": "sort by name (Z-A)"
+      },
+      "accessibility": {
+        "label": "Sort favorites"
+      }
+    },
+    "accessibility": {
+      "add": "Add to favorites",
+      "remove": "Remove from favorites",
+      "hint": {
+        "add": "Tap to add this user to your favorites",
+        "remove": "Tap to remove this user from favorites"
       }
     }
   },
@@ -21,11 +52,24 @@
     "respos": "Repositories",
     "followers": "Followers",
     "following": "Following",
-    "error": "An error occurred while loading the user"
+    "error": "An error occurred while loading the user",
+    "accessibility": {
+      "view_profile": "View profile of %{username}",
+      "view_profile_hint": "Tap to see more details about this user"
+    }
   },
   "config": {
     "title": "Settings",
     "dark_mode": "Use dark theme",
-    "spanish": "Spanish"
+    "spanish": "Spanish",
+    "accessibility": {
+      "dark_mode_hint": "Activate or deactivate the dark mode of the application",
+      "spanish_hint": "Tap to change the language of the application"
+    }
+  },
+  "error_boundary": {
+    "title": "Something went wrong",
+    "message": "Sorry, an unexpected error occurred.",
+    "cta": "Retry"
   }
 }

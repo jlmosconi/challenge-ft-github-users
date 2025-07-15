@@ -1,10 +1,10 @@
 import {type FC} from 'react';
+import {ActivityIndicator} from 'react-native';
+import {useTheme} from 'styled-components/native';
 import {IconName} from '@components/Icon/icons';
 import SpecificSizeIcon from '@components/Icon/SpecificSize';
-import {IconWrapper, StyledTextInput, Wrapper} from './styled';
 import type {SearchBarProps} from './types';
-import {useTheme} from 'styled-components/native';
-import {ActivityIndicator} from 'react-native';
+import {IconWrapper, StyledTextInput, Wrapper} from './styled';
 
 const SearchBar: FC<SearchBarProps> = ({
   placeholderTextColor,
@@ -14,13 +14,22 @@ const SearchBar: FC<SearchBarProps> = ({
   placeholder,
   isSearching,
   testID,
+  accessibilityLabel,
+  accessibilityHint,
+  iconAccessibilityLabel,
 }) => {
   const theme = useTheme();
 
   return (
     <Wrapper testID={testID}>
       <IconWrapper>
-        <SpecificSizeIcon size={24} name={IconName.Search} color={theme.colors.grey.dark} />
+        <SpecificSizeIcon
+          size={24}
+          name={IconName.Search}
+          color={theme.colors.grey.dark}
+          accessibilityLabel={iconAccessibilityLabel}
+          accessibilityRole="image"
+        />
       </IconWrapper>
       <StyledTextInput
         value={value}
@@ -33,6 +42,10 @@ const SearchBar: FC<SearchBarProps> = ({
         autoComplete="off"
         textContentType="none"
         spellCheck={false}
+        accessible
+        accessibilityLabel={accessibilityLabel}
+        accessibilityHint={accessibilityHint}
+        accessibilityRole="search"
       />
       {isSearching && <ActivityIndicator size="small" color={theme.colors.grey.dark} />}
     </Wrapper>

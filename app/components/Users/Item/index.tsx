@@ -1,11 +1,12 @@
 import {type FC} from 'react';
+import type {PressableProps} from 'react-native';
 import type {IUserBase} from '@services/usersService/types';
 import {TypographyText} from '@components/Text/TypographyText';
 import FavoriteButton from '@components/FavoriteButton';
 import UserAvatar from '@components/Users/UserAvatar';
 import {Block, ColumnCenter, ColumnLeft, ColumnRight} from './styled';
 
-interface UserItem extends Pick<IUserBase, 'login' | 'avatar_url'> {
+interface UserItemProps extends Pick<IUserBase, 'login' | 'avatar_url'>, PressableProps {
   avatarSize?: number;
   isFavorite?: boolean;
   showFavoriteButton?: boolean;
@@ -13,9 +14,17 @@ interface UserItem extends Pick<IUserBase, 'login' | 'avatar_url'> {
   handleOnFavorite?: () => void;
 }
 
-const UserItem: FC<UserItem> = ({login, avatar_url, avatarSize = 4, isFavorite, handleOnPress, handleOnFavorite}) => {
+const UserItem: FC<UserItemProps> = ({
+  login,
+  avatar_url,
+  avatarSize = 4,
+  isFavorite,
+  handleOnPress,
+  handleOnFavorite,
+  ...props
+}) => {
   return (
-    <Block onPress={handleOnPress}>
+    <Block onPress={handleOnPress} {...props}>
       <ColumnLeft>
         <UserAvatar avatar_url={avatar_url} size={avatarSize} />
       </ColumnLeft>

@@ -14,7 +14,13 @@ export const useFavoriteActions = () => {
 
   const handleOnFavoritePress = useCallback(
     (user: FavoriteUser) => {
-      dispatch(toggleFavorite(user));
+      dispatch(
+        toggleFavorite({
+          id: user.id,
+          login: user.login,
+          avatar_url: user.avatar_url,
+        }),
+      );
     },
     [dispatch],
   );

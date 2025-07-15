@@ -8,6 +8,7 @@ import {persistor, store} from '@store/index';
 import {ThemeProvider} from '@config/theme/ThemeContext';
 import {LanguageProvider} from '@config/i18n/LanguageProvider';
 import ApplicationNavigator from '@navigators/ApplicationNavigator';
+import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundaryWrapper';
 
 function App() {
   return (
@@ -18,12 +19,15 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
           {/* ThemeProvider for consistent theming across the app. */}
           <ThemeProvider>
-            {/* LanguageProvider for managing language settings and translations. */}
-            <LanguageProvider>
-              <BottomSheetModalProvider>
-                <ApplicationNavigator />
-              </BottomSheetModalProvider>
-            </LanguageProvider>
+            {/* Handles rendering errors and displays a fallback UI. */}
+            <ErrorBoundary>
+              {/* LanguageProvider for managing language settings and translations. */}
+              <LanguageProvider>
+                <BottomSheetModalProvider>
+                  <ApplicationNavigator />
+                </BottomSheetModalProvider>
+              </LanguageProvider>
+            </ErrorBoundary>
           </ThemeProvider>
         </PersistGate>
       </Provider>

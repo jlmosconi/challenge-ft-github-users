@@ -1,11 +1,10 @@
-import {useEffect, type FC} from 'react';
+import {type FC} from 'react';
 import {type RouteProp} from '@react-navigation/native';
 import {useTheme} from 'styled-components/native';
 import {MainScreen, MainStack} from '@navigators/screenRoutes';
-import {useAppDispatch, useAppSelector} from '@store/hooks';
 import {useFavoriteActions} from '@hooks/useFavoriteActions';
+import {useUserData} from '@hooks/useUserData';
 import {useLanguage} from '@hooks/useLanguage';
-import {fetchUser, selectHasErrorUser, selectIsFetchingUser, selectUser} from '@store/slices/users';
 import SpacingBox from '@components/SpacingBox';
 import UserAvatar from '@components/Users/UserAvatar';
 import SafeArea from '@components/SafeArea';
@@ -30,26 +29,15 @@ import {
   AvatarContainer,
   FavoriteContainer,
 } from './styled';
+import {ScrollView} from 'react-native';
 
 type Props = {route: RouteProp<MainStack, MainScreen.User>};
 
 const UserScreen: FC<Props> = ({route}) => {
-  const {username} = route.params;
-
-  const user = useAppSelector(selectUser);
-  const isFetching = useAppSelector(selectIsFetchingUser);
-  const hasError = useAppSelector(selectHasErrorUser);
-
-  const dispatch = useAppDispatch();
+  const {user, isFetching, hasError} = useUserData(route.params?.username || '');
   const theme = useTheme();
   const {t} = useLanguage();
   const {isFavorite, handleOnFavoritePress} = useFavoriteActions();
-
-  useEffect(() => {
-    if (!username || user?.login === username) return;
-    // Fetch user only if not already loaded or different user
-    dispatch(fetchUser(username));
-  }, [dispatch, username, user?.login]);
 
   if (!user || isFetching) {
     return (
@@ -83,61 +71,63 @@ const UserScreen: FC<Props> = ({route}) => {
 
   return (
     <SafeArea>
-      <InfoContainer>
-        <AvatarContainer>
-          <UserAvatar size={8} avatar_url={user.avatar_url} />
-          <FavoriteContainer>
-            <FavoriteButton
-              iconSize={20}
-              isFavorite={isFavorite(user.id)}
-              onPress={() =>
-                handleOnFavoritePress({
-                  id: user.id,
-                  login: user.login,
-                  avatar_url: user.avatar_url,
-                })
-              }
-            />
-          </FavoriteContainer>
-        </AvatarContainer>
+      <ScrollView>
+        <InfoContainer>
+          <AvatarContainer>
+            <UserAvatar size={8} avatar_url={user.avatar_url} />
+            <FavoriteContainer>
+              <FavoriteButton
+                iconSize={20}
+                isFavorite={isFavorite(user.id)}
+                onPress={() =>
+                  handleOnFavoritePress({
+                    id: user.id,
+                    login: user.login,
+                    avatar_url: user.avatar_url,
+                  })
+                }
+              />
+            </FavoriteContainer>
+          </AvatarContainer>
 
-        <SpacingBox mb={1}>
-          {user.name ? (
-            <NameContainer>
-              <UserName>{user.name}</UserName>
-              <Login>{user.login}</Login>
-            </NameContainer>
-          ) : (
-            <UserName>{user.login}</UserName>
-          )}
-        </SpacingBox>
-
-        {user.bio && (
-          <SpacingBox mb={0.5}>
-            <Bio>{user.bio}</Bio>
+          <SpacingBox mb={1}>
+            {user.name ? (
+              <NameContainer>
+                <UserName>{user.name}</UserName>
+                <Login>{user.login}</Login>
+              </NameContainer>
+            ) : (
+              <UserName>{user.login}</UserName>
+            )}
           </SpacingBox>
-        )}
 
-        <BoxesContainer>
-          {userBoxes.map(box => (
-            <InfoBox key={box.title}>
-              <InfoBoxValue>{box.value}</InfoBoxValue>
-              <InfoBoxTitle>{box.title}</InfoBoxTitle>
-            </InfoBox>
-          ))}
-        </BoxesContainer>
+          {user.bio && (
+            <SpacingBox mb={0.5}>
+              <Bio>{user.bio}</Bio>
+            </SpacingBox>
+          )}
 
-        {userInfoFields.length > 0 && (
-          <DataListContainer mv={2}>
-            {userInfoFields.map(({icon, value}) => (
-              <DataListItem key={icon}>
-                <SpecificSizeIcon name={icon} size={18} color={theme.colors.grey.dark} />
-                <InfoListText numberOfLines={1}>{value}</InfoListText>
-              </DataListItem>
+          <BoxesContainer>
+            {userBoxes.map(box => (
+              <InfoBox key={box.title}>
+                <InfoBoxValue>{box.value}</InfoBoxValue>
+                <InfoBoxTitle>{box.title}</InfoBoxTitle>
+              </InfoBox>
             ))}
-          </DataListContainer>
-        )}
-      </InfoContainer>
+          </BoxesContainer>
+
+          {userInfoFields.length > 0 && (
+            <DataListContainer mv={2}>
+              {userInfoFields.map(({icon, value}) => (
+                <DataListItem key={icon}>
+                  <SpecificSizeIcon name={icon} size={18} color={theme.colors.grey.dark} />
+                  <InfoListText numberOfLines={1}>{value}</InfoListText>
+                </DataListItem>
+              ))}
+            </DataListContainer>
+          )}
+        </InfoContainer>
+      </ScrollView>
     </SafeArea>
   );
 };

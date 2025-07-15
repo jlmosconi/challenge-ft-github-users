@@ -1,9 +1,29 @@
 {
+  "common": {
+    "accessibility": {
+      "back": {
+        "label": "Volver a la pantalla anterior"
+      },
+      "favorites": {
+        "label": "Ir a favoritos"
+      },
+      "configuration": {
+        "label": "Ir a configuración"
+      }
+    }
+  },
   "home": {
     "title": "Usuarios de GitHub",
     "search_placeholder": "Buscar por nombre",
     "empty": "No se encontraron usuarios",
-    "error": "Ocurrió un error al cargar los usuarios"
+    "error": "Ocurrió un error al cargar los usuarios",
+    "accessibility": {
+      "search": {
+        "icon": "Icono de búsqueda",
+        "label": "Buscar usuarios",
+        "hint": "Escribe un nombre para buscar usuarios de GitHub"
+      }
+    }
   },
   "favorites": {
     "title": "Favoritos",
@@ -14,6 +34,17 @@
         "id": "ordenar por ID",
         "name-asc": "ordenar por nombre (A-Z)",
         "name-desc": "ordenar por nombre (Z-A)"
+      },
+      "accessibility": {
+        "label": "Ordenar favoritos"
+      }
+    },
+    "accessibility": {
+      "add": "Agregar a favoritos",
+      "remove": "Quitar de favoritos",
+      "hint": {
+        "add": "Toca para agregar este usuario a tus favoritos",
+        "remove": "Toca para quitar este usuario de tus favoritos"
       }
     }
   },
@@ -21,11 +52,23 @@
     "respos": "Repositorios",
     "followers": "Seguidores",
     "following": "Siguiendo",
-    "error": "Ocurrió un error al cargar el usuario"
+    "error": "Ocurrió un error al cargar el usuario",
+    "accessibility": {
+      "view_profile": "Ver perfil de %{username}",
+      "view_profile_hint": "Toca para ver más detalles sobre este usuario"
+    }
   },
   "config": {
     "title": "Configuración",
     "dark_mode": "Usar tema oscuro",
-    "spanish": "Español"
+    "spanish": "Español",
+    "accessibility": {
+      "dark_mode_hint": "Activa o desactiva el modo oscuro de la aplicación",
+      "spanish_hint": "Toca para cambiar el idioma de la aplicación"
+    }
+  },
+  "error_boundary": {
+    "title": "Lo sentimos, ocurrió un error inesperado.",
+    "cta": "Reintentar"
   }
 }

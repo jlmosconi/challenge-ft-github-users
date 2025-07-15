@@ -8,4 +8,7 @@ export interface SearchBarProps {
   placeholder?: string;
   isSearching?: boolean;
   testID?: string;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
+  iconAccessibilityLabel?: string;
 }

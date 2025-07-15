@@ -4,8 +4,8 @@ Aplicación móvil para visualizar los usuarios de Github, desarrollada con Reac
 
 <p align="center">
   <img src="./assets/images/home.png" alt="Home screen" width="200"/>
-  <img src="./assets/images/favorites.png" alt="Favorites screen" width="200"/>
   <img src="./assets/images/profile.png" alt="Profile screen" width="200"/>
+  <img src="./assets/images/favorites.png" alt="Favorites screen" width="200"/>
 </p>
 
 ---
@@ -69,9 +69,73 @@ yarn android:prod
 ## ✅ Versiones Soportadas
 
 - **Android**
-  - Mínima: 6
+  - Mínima: 7 (API 24)
+  - Objetivo: 14 (API 35)
 - **iOS**
-  - Mínima: 14.7
+  - Mínima: 15.1
+
+---
+
+## 🌍 Entornos
+
+La app está preparada para funcionar en **múltiples entornos**, tanto en iOS como en Android, para poder trabajar en desarrollo y producción de forma aislada.
+
+### iOS (Schemes)
+
+- Se usan diferentes **schemes** (e.g. `Development`, `Production`) para compilar la app con configuraciones específicas.
+- Los comandos `yarn ios` y `yarn ios:prod` ejecutan cada uno su scheme correspondiente.
+
+### Android (Flavors)
+
+- Se utilizan **product flavors** (e.g. `dev`, `prod`) definidos en el archivo `build.gradle`.
+- Permite generar APKs o bundles distintos según el entorno.
+- Los comandos `yarn android` y `yarn android:prod` compilan la variante deseada.
+
+### Variables de entorno
+
+- Las variables de entorno se gestionan con [`react-native-config`](https://github.com/luggit/react-native-config).
+- Esto permite tener diferentes endpoints, claves API u otras configuraciones según el entorno.
+- Las variables se encuentran definidas en:
+  - [`.env.development`](.env.development)
+  - [`.env.production`](.env.production)
+
+---
+
+## 🎨 Theme
+
+Las dimensiones de los componentes de UI escalan dinámicamente según:
+
+- El tamaño de pantalla del dispositivo
+- El sistema operativo (iOS / Android)
+- El tipo de dispositivo (smartphone / tablet)
+
+Esto permite que el diseño sea responsivo y se adapte correctamente a pantallas grandes como tablets u otros formatos.
+
+Además, la app soporta tema claro y oscuro, permitiendo al usuario elegir su preferencia desde la configuración.
+
+Esta configuración se encuentra en:  
+[`app/config/theme/index.ts`](./app/config/theme/index.ts)
+
+---
+
+## 🌐 i18n
+
+La app está preparada para multi-idioma utilizando i18n-js. Actualmente soporta español e inglés, y permite cambiar el idioma dinámicamente desde la configuración.
+
+La configuración de textos e idiomas se encuentra en:
+[`app/config/i18n`](./app/config/i18n)
+
+---
+
+## ♿️ Accesibilidad
+
+La app incluye soporte básico de accesibilidad:
+
+- Labels e hints para lectores de pantalla en botones e íconos.
+- Roles de accesibilidad definidos (botones, switches).
+- Estados accesibles en componentes dinámicos, como favoritos.
+
+Esto facilita que usuarios con lectores de pantalla puedan entender y navegar la app correctamente.
 
 ---
 
@@ -88,18 +152,6 @@ yarn test
 ```bash
 yarn test <test>
 ```
-
----
-
-## 🎨 Theme
-
-Las dimensiones de los componentes de UI escalan dinámicamente según:
-
-- El tamaño de pantalla del dispositivo
-- El sistema operativo (iOS / Android)
-
-Esta configuración se encuentra en:  
-`app/config/theme/index.ts`
 
 ---
 

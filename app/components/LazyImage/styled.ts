@@ -1,4 +1,5 @@
 import Animated from 'react-native-reanimated';
+import FastImage from 'react-native-fast-image';
 import {ActivityIndicator} from 'react-native';
 import styled from 'styled-components/native';
 import type {ContainerStyle} from './types';
@@ -21,7 +22,12 @@ export const Loader = styled(ActivityIndicator).attrs(({theme}) => ({
   position: absolute;
 `;
 
-export const AnimatedImage = styled(Animated.Image)`
+export const ImageWrapper = styled(Animated.View)`
+  width: 100%;
+  height: 100%;
+`;
+
+export const StyledImage = styled(FastImage)`
   height: 100%;
   width: 100%;
 `;

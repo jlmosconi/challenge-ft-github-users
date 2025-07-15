@@ -7,9 +7,20 @@ interface SearchBoxProps {
   isSearching?: boolean;
   testID?: string;
   onSearch: (name: string) => void;
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
+  iconAccessibilityLabel?: string;
 }
 
-const SearchBox: FC<SearchBoxProps> = ({placeholder, isSearching, testID = 'userSearchBar', onSearch}) => {
+const SearchBox: FC<SearchBoxProps> = ({
+  placeholder,
+  isSearching,
+  testID = 'userSearchBar',
+  accessibilityLabel,
+  accessibilityHint,
+  iconAccessibilityLabel,
+  onSearch,
+}) => {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search, 300);
@@ -25,6 +36,9 @@ const SearchBox: FC<SearchBoxProps> = ({placeholder, isSearching, testID = 'user
       onChangeText={setSearch}
       isSearching={isSearching}
       testID={testID}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityHint={accessibilityHint}
+      iconAccessibilityLabel={iconAccessibilityLabel}
     />
   );
 };

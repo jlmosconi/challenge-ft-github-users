@@ -18,7 +18,14 @@ const ListFilter: FC<ListFilterProps> = ({onFilterPress}) => {
       <TypographyText type={Overline} weight={Weight.SEMI_BOLD}>
         {t('favorites.filter.title')}
       </TypographyText>
-      <SpecificSizeIcon name={IconName.ArrowRight} size={16} color={theme.colors.textPrimary} />
+      <SpecificSizeIcon
+        name={IconName.ArrowRight}
+        size={16}
+        color={theme.colors.textPrimary}
+        accessible
+        accessibilityLabel={t('favorites.filter.accessibility.label')}
+        accessibilityRole="button"
+      />
     </FilterContainer>
   );
 };
