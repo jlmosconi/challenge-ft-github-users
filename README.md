@@ -101,8 +101,20 @@ Las dimensiones de los componentes de UI escalan dinámicamente según:
 
 Esto permite que el diseño sea responsivo y se adapte correctamente a pantallas grandes como tablets u otros formatos.
 
+Además, la app soporta tema claro y oscuro, ajustándose a la preferencia del usuario o configuración del sistema operativo.
+➡️ Por defecto, la app inicia en tema oscuro.
+
 Esta configuración se encuentra en:  
 [`app/config/theme/index.ts`](./app/config/theme/index.ts)
+
+---
+
+## 🌐 i18n
+
+La app está preparada para multi-idioma utilizando i18n-js. Actualmente soporta español e inglés, y permite cambiar el idioma dinámicamente desde la configuración.
+
+La configuración de textos e idiomas se encuentra en:
+[`app/config/i18n`](./app/config/i18n)
 
 ---
 

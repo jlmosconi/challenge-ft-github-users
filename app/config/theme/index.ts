@@ -14,6 +14,7 @@ export const enum ThemeMode {
   Dark = 'dark',
 }
 
+//
 const calculatedRem = calculateREMForDevice(Dimensions.get('window'));
 // This is a factor to adjust the scaling based on platform differences
 const platformFactor = Platform.OS === 'ios' ? 1.09 : 1;
@@ -21,6 +22,7 @@ const platformFactor = Platform.OS === 'ios' ? 1.09 : 1;
 const scaled = (size: number) => +(size * calculatedRem * platformFactor).toFixed(2);
 const spacingTransform = (size: number) => size * 8;
 
+// This function applies the scaling to the spacing
 export const size = (s: number) => scaled(s);
 export const spacing = (s: number) => spacingTransform(s);
 
