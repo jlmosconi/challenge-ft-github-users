@@ -97,7 +97,7 @@ La app está preparada para funcionar en **múltiples entornos**, tanto en iOS c
 
 ### iOS (Schemes)
 
-- Se usan diferentes **schemes** (e.g. `Development`, `Production`) para compilar la app con configuraciones específicas (entitlements, endpoints, íconos, etc.).
+- Se usan diferentes **schemes** (e.g. `Development`, `Production`) para compilar la app con configuraciones específicas.
 - Los comandos `yarn ios` y `yarn ios:prod` ejecutan cada uno su scheme correspondiente.
 
 ### Android (Flavors)
