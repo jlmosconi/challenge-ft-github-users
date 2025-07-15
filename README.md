@@ -69,9 +69,10 @@ yarn android:prod
 ## ✅ Versiones Soportadas
 
 - **Android**
-  - Mínima: 6
+  - Mínima: 7 (API 24)
+  - Objetivo: 14 (API 35)
 - **iOS**
-  - Mínima: 14.7
+  - Mínima: 15.1
 
 ---
 
