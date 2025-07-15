@@ -101,8 +101,7 @@ Las dimensiones de los componentes de UI escalan dinámicamente según:
 
 Esto permite que el diseño sea responsivo y se adapte correctamente a pantallas grandes como tablets u otros formatos.
 
-Además, la app soporta tema claro y oscuro, ajustándose a la preferencia del usuario o configuración del sistema operativo.
-➡️ Por defecto, la app inicia en tema oscuro.
+Además, la app soporta tema claro y oscuro, permitiendo al usuario elegir su preferencia desde la configuración.
 
 Esta configuración se encuentra en:  
 [`app/config/theme/index.ts`](./app/config/theme/index.ts)
