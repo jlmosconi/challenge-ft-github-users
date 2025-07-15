@@ -39,7 +39,7 @@ const lightTheme: DefaultTheme = {
   colors: {
     background: '#ffffff',
     surface: '#f5f5f5',
-    yellow: '#ffcc53',
+    yellow: '#ffb300',
     textPrimary: '#0f0d13',
     grey: {
       light: '#e0e0e0',
@@ -60,7 +60,7 @@ const darkTheme: DefaultTheme = {
     yellow: '#ffcc53',
     textPrimary: '#ffffff',
     grey: {
-      light: '#161616',
+      light: '#1a1a1a',
       medium: '#464548',
       dark: '#929292',
     },
