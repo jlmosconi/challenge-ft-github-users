@@ -1,4 +1,3 @@
-import {DefaultTheme} from 'styled-components/native';
 import {calculateREMForDevice} from '@helpers/font';
 import {Dimensions, Platform} from 'react-native';
 import {Body1, Body2, Button, Caption, Overline} from '@components/Text/TypographyText';
@@ -34,7 +33,7 @@ const typography = {
   overline: Overline,
 };
 
-const lightTheme: DefaultTheme = {
+const lightTheme = {
   mode: ThemeMode.Light,
   colors: {
     background: '#ffffff',
@@ -52,7 +51,7 @@ const lightTheme: DefaultTheme = {
   typography,
 };
 
-const darkTheme: DefaultTheme = {
+const darkTheme = {
   mode: ThemeMode.Dark,
   colors: {
     background: '#0f0d13',

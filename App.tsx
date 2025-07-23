@@ -9,29 +9,32 @@ import {ThemeProvider} from '@config/theme/ThemeContext';
 import {LanguageProvider} from '@config/i18n/LanguageProvider';
 import ApplicationNavigator from '@navigators/ApplicationNavigator';
 import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundaryWrapper';
+import {ToggleStorybook} from './.rnstorybook/toggle-storybook';
 
 function App() {
   return (
-    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      {/* Redux store provider for global state management. scalability and predictable state handling. */}
-      <Provider store={store}>
-        {/* Prevents UI flicker by waiting for persisted Redux state. better UX on app startup. */}
-        <PersistGate loading={null} persistor={persistor}>
-          {/* ThemeProvider for consistent theming across the app. */}
-          <ThemeProvider>
-            {/* Handles rendering errors and displays a fallback UI. */}
-            <ErrorBoundary>
-              {/* LanguageProvider for managing language settings and translations. */}
-              <LanguageProvider>
-                <BottomSheetModalProvider>
-                  <ApplicationNavigator />
-                </BottomSheetModalProvider>
-              </LanguageProvider>
-            </ErrorBoundary>
-          </ThemeProvider>
-        </PersistGate>
-      </Provider>
-    </SafeAreaProvider>
+    <ToggleStorybook>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        {/* Redux store provider for global state management. scalability and predictable state handling. */}
+        <Provider store={store}>
+          {/* Prevents UI flicker by waiting for persisted Redux state. better UX on app startup. */}
+          <PersistGate loading={null} persistor={persistor}>
+            {/* ThemeProvider for consistent theming across the app. */}
+            <ThemeProvider>
+              {/* Handles rendering errors and displays a fallback UI. */}
+              <ErrorBoundary>
+                {/* LanguageProvider for managing language settings and translations. */}
+                <LanguageProvider>
+                  <BottomSheetModalProvider>
+                    <ApplicationNavigator />
+                  </BottomSheetModalProvider>
+                </LanguageProvider>
+              </ErrorBoundary>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      </SafeAreaProvider>
+    </ToggleStorybook>
   );
 }
 
