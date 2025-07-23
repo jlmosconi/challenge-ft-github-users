@@ -5,7 +5,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testPathIgnorePatterns: ['/node_modules/'],
   transformIgnorePatterns: [
-    'node_modules/(?!(jest-)?react-native|@react-native|@react-navigation|@react-native-community|@unimodules)',
+    'node_modules/(?!(jest-)?react-native|@react-native|@storybook|@react-navigation|@react-native-community|@unimodules)',
   ],
   moduleNameMapper: {
     '^.+\\.svg$': '<rootDir>/__mocks__/svgMocks.js',

@@ -19,5 +19,5 @@
       "@utils/*": ["utils/*"]
     }
   },
-  "include": ["index.js", "app", "test", "__tests__", "__mocks__", "jest.config.js"]
+  "include": ["index.js", "app", "test", ".rnstorybook", "__tests__", "__mocks__", "jest.config.js"]
 }

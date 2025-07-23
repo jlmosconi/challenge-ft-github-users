@@ -52,13 +52,13 @@ export const AllStates: Story = {
   render: () => (
     <Story>
       <UseCase text="Unchecked">
-        <Toggle checked={false} onPress={fn()} />
+        <Toggle checked={false} onPress={() => {}} />
       </UseCase>
       <UseCase text="Checked">
-        <Toggle checked onPress={fn()} />
+        <Toggle checked onPress={() => {}} />
       </UseCase>
       <UseCase text="Disabled">
-        <Toggle checked={false} disabled onPress={fn()} />
+        <Toggle checked={false} disabled onPress={() => {}} />
       </UseCase>
     </Story>
   ),
