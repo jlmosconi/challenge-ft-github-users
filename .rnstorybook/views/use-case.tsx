@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {type PropsWithChildren} from 'react';
 import {View, Text, TextStyle, ViewStyle} from 'react-native';
 
 const ROOT: ViewStyle = {backgroundColor: '#eee'};
@@ -34,8 +34,6 @@ export interface UseCaseProps {
   text: string;
   /** When should we be using this? */
   usage?: string;
-  /** The component use case. */
-  children: React.ReactNode;
   /** A style override. Rarely used. */
   style?: ViewStyle;
   /** Don't use any padding because it's important to see the spacing. */
@@ -44,7 +42,7 @@ export interface UseCaseProps {
   noBackground?: boolean;
 }
 
-export function UseCase(props: UseCaseProps) {
+export function UseCase(props: PropsWithChildren<UseCaseProps>) {
   const style: ViewStyle = {
     ...COMPONENT,
     ...{padding: props.noPad ? 0 : 10},
