@@ -1,33 +1,5 @@
-import {type PropsWithChildren} from 'react';
-import {View, Text, TextStyle, ViewStyle} from 'react-native';
-
-const ROOT: ViewStyle = {backgroundColor: '#eee'};
-const TITLE: TextStyle = {fontWeight: '600', color: '#3d3d3d'};
-const TITLE_WRAPPER: ViewStyle = {};
-const USE_CASE_WRAPPER: ViewStyle = {
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  right: 0,
-  borderTopColor: '#e6e6e6',
-  borderTopWidth: 1,
-  flexDirection: 'row',
-};
-const USE_CASE: TextStyle = {
-  fontSize: 10,
-  color: '#666',
-  paddingHorizontal: 4,
-  paddingBottom: 2,
-};
-const USAGE: TextStyle = {color: '#666', fontSize: 10, paddingTop: 0};
-const HEADER: ViewStyle = {
-  paddingTop: 20,
-  paddingBottom: 10,
-  paddingHorizontal: 10,
-  borderBottomColor: '#e6e6e6',
-  borderBottomWidth: 1,
-};
-const COMPONENT: ViewStyle = {backgroundColor: '#fff'};
+import type {FC, PropsWithChildren} from 'react';
+import {View, Text, StyleSheet, type ViewStyle} from 'react-native';
 
 export interface UseCaseProps {
   /** The title. */
@@ -42,28 +14,69 @@ export interface UseCaseProps {
   noBackground?: boolean;
 }
 
-export function UseCase(props: PropsWithChildren<UseCaseProps>) {
-  const style: ViewStyle = {
-    ...COMPONENT,
-    ...{padding: props.noPad ? 0 : 10},
-    ...{
-      backgroundColor: props.noBackground ? 'rgba(0,0,0,0)' : COMPONENT.backgroundColor,
-    },
-    ...props.style,
+export const UseCase: FC<PropsWithChildren<UseCaseProps>> = ({
+  text,
+  usage,
+  style,
+  noPad = false,
+  noBackground = false,
+  children,
+}) => {
+  const containerStyle: ViewStyle = {
+    ...styles.component,
+    padding: noPad ? 0 : 10,
+    backgroundColor: noBackground ? 'transparent' : styles.component.backgroundColor,
+    ...style,
   };
 
   return (
-    <View style={ROOT}>
-      <View style={HEADER}>
-        <View style={USE_CASE_WRAPPER}>
-          <Text style={USE_CASE}>Use Case</Text>
+    <View style={styles.root}>
+      <View style={styles.header}>
+        <View style={styles.useCaseWrapper}>
+          <Text style={styles.useCase}>USE CASE</Text>
         </View>
-        <View style={TITLE_WRAPPER}>
-          <Text style={TITLE}>{props.text}</Text>
-        </View>
-        {props.usage ? <Text style={USAGE}>{props.usage}</Text> : null}
+        <Text style={styles.title}>{text}</Text>
+        {usage && <Text style={styles.usage}>{usage}</Text>}
       </View>
-      <View style={style}>{props.children}</View>
+      <View style={containerStyle}>{children}</View>
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: '#F4F4F4',
+    borderRadius: 8,
+    marginBottom: 16,
+    overflow: 'hidden',
+  },
+  component: {
+    backgroundColor: '#FFFFFF',
+  },
+  header: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomColor: '#E0E0E0',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    backgroundColor: '#FAFAFA',
+  },
+  useCaseWrapper: {
+    marginBottom: 4,
+  },
+  useCase: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    color: '#999',
+    textTransform: 'uppercase',
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#333',
+  },
+  usage: {
+    fontSize: 12,
+    color: '#777',
+    marginTop: 4,
+  },
+});

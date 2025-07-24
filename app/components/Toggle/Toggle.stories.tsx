@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import type {Meta, StoryObj} from '@storybook/react';
 import {useArgs} from 'storybook/preview-api';
 import {fn} from 'storybook/test';
 
 import Toggle from '.';
-import {Story, UseCase, StoryScreen} from '../../../.rnstorybook/views';
+import {StoryBlock, UseCase, StoryScreen} from '../../../.rnstorybook/views';
 
 const meta = {
   title: 'Toggle',
@@ -39,18 +38,18 @@ export const Playground: Story = {
     };
 
     return (
-      <Story>
+      <StoryBlock>
         <UseCase text="Playground">
           <Toggle {...args} checked={checked} disabled={disabled} onPress={handleToggle} />
         </UseCase>
-      </Story>
+      </StoryBlock>
     );
   },
 };
 
 export const AllStates: Story = {
   render: () => (
-    <Story>
+    <StoryBlock>
       <UseCase text="Unchecked">
         <Toggle checked={false} onPress={() => {}} />
       </UseCase>
@@ -60,6 +59,6 @@ export const AllStates: Story = {
       <UseCase text="Disabled">
         <Toggle checked={false} disabled onPress={() => {}} />
       </UseCase>
-    </Story>
+    </StoryBlock>
   ),
 };

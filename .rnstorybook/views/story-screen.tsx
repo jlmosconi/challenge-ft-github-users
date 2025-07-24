@@ -1,19 +1,16 @@
-import * as React from "react";
-import { ViewStyle, KeyboardAvoidingView, Platform } from "react-native";
+import type {PropsWithChildren, FC} from 'react';
+import {KeyboardAvoidingView, Platform, StyleSheet} from 'react-native';
 
-const ROOT: ViewStyle = { backgroundColor: "#f0f0f0", flex: 1 };
-
-export interface StoryScreenProps {
-  children?: React.ReactNode;
-}
-
-const behavior = Platform.OS === "ios" ? "padding" : undefined;
-export const StoryScreen = (props: StoryScreenProps) => (
-  <KeyboardAvoidingView
-    style={ROOT}
-    behavior={behavior}
-    keyboardVerticalOffset={50}
-  >
-    {props.children}
+const behavior = Platform.OS === 'ios' ? 'padding' : undefined;
+export const StoryScreen: FC<PropsWithChildren> = ({children}) => (
+  <KeyboardAvoidingView style={styles.root} behavior={behavior} keyboardVerticalOffset={50}>
+    {children}
   </KeyboardAvoidingView>
 );
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: '#f0f0f0',
+    flex: 1,
+  },
+});
