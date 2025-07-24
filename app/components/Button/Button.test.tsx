@@ -11,7 +11,7 @@ describe('Button', () => {
 
   it('renders the button with the given title', () => {
     const {getByText} = renderWithTheme(<Button title="Click me" />);
-    expect(getByText('Click me23')).toBeTruthy();
+    expect(getByText('Click me233')).toBeTruthy();
   });
 
   it('calls onPress when pressed', () => {
