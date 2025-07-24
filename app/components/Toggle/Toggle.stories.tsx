@@ -1,9 +1,8 @@
 import type {Meta, StoryObj} from '@storybook/react';
 import {useArgs} from 'storybook/preview-api';
 import {fn} from 'storybook/test';
-
+import {StoryBlock, UseCase, StoryScreen} from '@rnstorybook/views';
 import Toggle from '.';
-import {StoryBlock, UseCase, StoryScreen} from '../../../.rnstorybook/views';
 
 const meta = {
   title: 'Toggle',

@@ -16,7 +16,8 @@
       "@services/*": ["services/*"],
       "@store/*": ["store/*"],
       "types/*": ["types/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@rnstorybook/*": ["../.rnstorybook/*"]
     }
   },
   "include": ["index.js", "app", "test", ".rnstorybook", "__tests__", "__mocks__", "jest.config.js"]
