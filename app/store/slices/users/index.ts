@@ -96,11 +96,8 @@ export const fetchUsers =
     if (alreadyLoading) return;
 
     dispatch(getUsersStart());
-
     try {
       const result = await dispatch(usersApi.endpoints.getUserList.initiate({since, limit})).unwrap();
-
-      console.log('result', result);
 
       const list = selectUsersList(getState());
       dispatch(getUsersSuccess([...list, ...result]));
@@ -137,8 +134,6 @@ export const fetchSearchUsers =
 
     try {
       const result = await dispatch(searchApi.endpoints.searchUsers.initiate({query, limit})).unwrap();
-
-      console.log('Search result:', result);
 
       dispatch(searchUserSuccess(result));
       return {success: true, data: result};
