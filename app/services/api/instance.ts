@@ -20,7 +20,6 @@ const getKey = (url: string, dataOrParams?: any): string => {
 
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const key = getKey(config.url || '', config.params || config.data);
-  console.log('Request key:', key);
   if (cancelTokenSources.has(key)) {
     cancelTokenSources.get(key)?.cancel('Duplicated request canceled');
   }
