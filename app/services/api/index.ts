@@ -1,37 +1,47 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import CONFIG from '@config/environment/current';
-import type {BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import {createApi} from '@reduxjs/toolkit/query/react';
+import type {BaseQueryFn} from '@reduxjs/toolkit/query/react';
+import type {AxiosRequestConfig, AxiosError} from 'axios';
+import {api} from './instance';
 
-const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
-  args,
-  api,
-  extraOptions,
-) => {
-  const rawBaseQuery = fetchBaseQuery({
-    baseUrl: CONFIG.API.BASE_URL,
-    credentials: 'include',
-    prepareHeaders: (headers, {getState}) => {
-      const token = (getState() as any)?.auth?.token;
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-      return headers;
+const customBaseQuery =
+  (): BaseQueryFn<
+    {
+      url: string;
+      method?: AxiosRequestConfig['method'];
+      data?: AxiosRequestConfig['data'];
+      params?: AxiosRequestConfig['params'];
+      headers?: AxiosRequestConfig['headers'];
     },
-  });
-
-  const result = await rawBaseQuery(args, api, extraOptions);
-
-  // Manejo global de errores
-  if (result?.error?.status === 401) {
-    // signOut(); // o dispatch(logout()), etc.
-  }
-
-  return result;
-};
+    unknown,
+    unknown
+  > =>
+  async ({url, method = 'GET', data, params, headers}) => {
+    try {
+      const result = await api.request({
+        url,
+        method,
+        data,
+        params,
+        headers,
+      });
+      return {data: result.data};
+    } catch (axiosError) {
+      const err = axiosError as AxiosError;
+      return {
+        error: {
+          status: err.response?.status,
+          data: err.response?.data || err.message,
+        },
+      };
+    }
+  };
 
 export const baseApi = createApi({
   reducerPath: 'api',
-  baseQuery: baseQueryWithAuth,
+  baseQuery: customBaseQuery(),
   tagTypes: ['UserList', 'UserSearch', 'UserDetail'],
+  keepUnusedDataFor: 300, // 5 minutes
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
   endpoints: () => ({}),
 });

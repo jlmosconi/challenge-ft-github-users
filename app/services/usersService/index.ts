@@ -13,7 +13,9 @@ export const usersApi = baseApi.injectEndpoints({
       providesTags: (_result, _error, {since}) => [{type: 'UserList', id: since}],
     }),
     getUserByName: builder.query<IUserResponse, string>({
-      query: username => `${baseUrl}/${username}`,
+      query: username => ({
+        url: `${baseUrl}/${username}`,
+      }),
       providesTags: (_result, _error, username) => [{type: 'UserDetail', id: username}],
     }),
   }),

@@ -98,6 +98,7 @@ export const fetchUsers =
     dispatch(getUsersStart());
     try {
       const result = await dispatch(usersApi.endpoints.getUserList.initiate({since, limit})).unwrap();
+      console.log('Fetched users:', result);
 
       const list = selectUsersList(getState());
       dispatch(getUsersSuccess([...list, ...result]));
