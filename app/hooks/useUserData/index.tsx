@@ -10,10 +10,8 @@ export const useUserData = (username: string) => {
   const hasError = useAppSelector(selectHasErrorUser);
 
   useEffect(() => {
-    if (!username || user?.login === username) return;
-
     dispatch(fetchUser(username));
-  }, [dispatch, username, user?.login]);
+  }, [dispatch, username]);
 
   return {user, isFetching, hasError};
 };

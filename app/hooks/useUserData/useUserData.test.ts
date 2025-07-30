@@ -78,22 +78,6 @@ describe('useUserData', () => {
     });
   };
 
-  it('should not dispatch fetchUser if username is empty', () => {
-    setupSelectors();
-
-    renderHook(() => useUserData(''));
-
-    expect(mockDispatch).not.toHaveBeenCalled();
-  });
-
-  it('should not dispatch fetchUser if user is already loaded', () => {
-    setupSelectors({user: {login: 'existingUser'}});
-
-    renderHook(() => useUserData('existingUser'));
-
-    expect(mockDispatch).not.toHaveBeenCalled();
-  });
-
   it('should dispatch fetchUser if username differs from loaded user', () => {
     setupSelectors({user: {login: 'oldUser'}});
 

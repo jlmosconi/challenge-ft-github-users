@@ -1,48 +1,37 @@
-import {create} from 'apisauce';
-import axios, {type CancelTokenSource} from 'axios';
+import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import CONFIG from '@config/environment/current';
+import type {BaseQueryFn, FetchArgs, FetchBaseQueryError} from '@reduxjs/toolkit/query';
 
-// Create the API instance
-const api = create({
-  baseURL: CONFIG.API.BASE_URL,
-});
+const baseQueryWithAuth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+  args,
+  api,
+  extraOptions,
+) => {
+  const rawBaseQuery = fetchBaseQuery({
+    baseUrl: CONFIG.API.BASE_URL,
+    credentials: 'include',
+    prepareHeaders: (headers, {getState}) => {
+      const token = (getState() as any)?.auth?.token;
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  });
 
-// Store CancelTokenSources to manage duplicate requests
-const cancelTokenSources: Map<string, CancelTokenSource> = new Map();
+  const result = await rawBaseQuery(args, api, extraOptions);
 
-// Generate a unique key for each request based on URL + params/data
-const getKey = (url: string, dataOrParams?: any): string => {
-  if (!dataOrParams) return url;
-  const paramsString = JSON.stringify(dataOrParams);
-  return `${url}/${paramsString}`;
+  // Manejo global de errores
+  if (result?.error?.status === 401) {
+    // signOut(); // o dispatch(logout()), etc.
+  }
+
+  return result;
 };
 
-// Add request transform to handle cancel tokens
-api.addRequestTransform(request => {
-  request.headers = request.headers || {};
-
-  const key = getKey(request.url || '', request.data || request.params);
-
-  // Cancel any existing identical request
-  if (cancelTokenSources.has(key)) {
-    const source = cancelTokenSources.get(key);
-    source?.cancel();
-  }
-
-  // Create a new CancelToken for this request
-  const cancelTokenSource = axios.CancelToken.source();
-  cancelTokenSources.set(key, cancelTokenSource);
-  request.cancelToken = cancelTokenSource.token;
+export const baseApi = createApi({
+  reducerPath: 'api',
+  baseQuery: baseQueryWithAuth,
+  tagTypes: ['UserList', 'UserSearch', 'UserDetail'],
+  endpoints: () => ({}),
 });
-
-// Remove token after response completes
-api.addResponseTransform(response => {
-  response.config = response.config || {};
-  const key = getKey(response.config.url || '', response.config.data);
-
-  if (cancelTokenSources.has(key)) {
-    cancelTokenSources.delete(key);
-  }
-});
-
-export {api};

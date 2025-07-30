@@ -6,6 +6,7 @@ import themeReducer from '@store/slices/theme';
 import languageReducer from '@store/slices/language';
 import usersReducer from '@store/slices/users';
 import favoritesReducer from '@store/slices/favorites';
+import {baseApi} from '@services/api';
 
 const themeConfig = {
   key: 'theme',
@@ -34,6 +35,7 @@ const combinedReducers = combineReducers({
   language: persistReducer(languageConfig, languageReducer),
   users: persistReducer(usersConfig, usersReducer),
   favorites: persistReducer(favoritesConfig, favoritesReducer),
+  [baseApi.reducerPath]: baseApi.reducer,
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
@@ -48,7 +50,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], // Ignore these actions for serializability checks
       },
-    }),
+    }).concat([baseApi.middleware]),
 });
 
 const persistor = persistStore(store);
