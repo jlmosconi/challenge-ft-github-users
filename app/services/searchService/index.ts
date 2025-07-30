@@ -1,12 +1,20 @@
-import {api} from '@services/api';
-import type {ErrorResponse} from '@services/api/types';
-import type {IUserSearchResponse} from './types';
+import {baseApi} from '@services/api';
+import type {IUserSearchItem, IUserSearchResponse} from './types';
 
 const baseUrl = `/search`;
 
-const searchUsers = (query: string, limit = 10) =>
-  api.get<IUserSearchResponse, ErrorResponse>(`${baseUrl}/users`, {q: query, per_page: limit});
+export const searchApi = baseApi.injectEndpoints({
+  endpoints: builder => ({
+    searchUsers: builder.query<IUserSearchItem[], {query: string; limit?: number}>({
+      query: ({query, limit = 10}) => ({
+        url: `${baseUrl}/users`,
+        params: {q: query, per_page: limit},
+      }),
+      transformResponse: (response: IUserSearchResponse) => response.items,
+      providesTags: (_result, _error, {query}) => [{type: 'UserSearch', id: query}],
+    }),
+  }),
+  overrideExisting: false,
+});
 
-export default {
-  searchUsers,
-};
+export const {useSearchUsersQuery, useLazySearchUsersQuery} = searchApi;
