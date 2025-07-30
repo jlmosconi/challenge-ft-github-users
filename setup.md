@@ -29,13 +29,6 @@ Permite gestionar variables de entorno y configuraciones específicas para cada 
 
 ---
 
-#### apisauce
-Facilita las llamadas HTTP, el manejo de respuestas y errores, ofreciendo una capa más sencilla sobre Axios.
-
-- [Apisauce Docs](https://github.com/infinitered/apisauce)
-
----
-
 #### async-storage
 Proporciona almacenamiento persistente simple en clave-valor, útil para tokens o configuraciones que deben mantenerse entre sesiones.
 
@@ -96,6 +89,13 @@ Permite persistir el estado global de Redux entre sesiones, evitando pérdida de
 Simplifica la gestión de estado global reduciendo boilerplate en comparación con Redux tradicional, y facilita el uso de thunks y slices.
 
 - [Redux Toolkit Docs](https://redux-toolkit.js.org/introduction/getting-started)
+
+---
+
+#### RTK Query
+Sistema de manejo de datos incluido en Redux Toolkit. Permite definir endpoints para realizar llamadas HTTP, gestionando automáticamente el caché, el estado de carga y errores.
+
+- [RTK Query Docs](https://redux-toolkit.js.org/rtk-query/overview)
 
 ---
 
