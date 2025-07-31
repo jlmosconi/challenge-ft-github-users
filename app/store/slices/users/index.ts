@@ -2,9 +2,9 @@ import {type PayloadAction, createSlice} from '@reduxjs/toolkit';
 import type {AppDispatch, RootState} from 'store';
 import type {UsersState} from './types';
 import type {IUserListResponse, IUserResponse} from '@services/usersService/types';
-import {usersApi} from '@services/usersService';
-import {searchApi} from '@services/searchService';
-// import searchService from '@services/searchService';
+import {usersService} from '@services/usersService';
+import {searchService} from '@services/searchService';
+// import {searchApi} from '@services/searchService';
 
 const initialState: UsersState = {
   list: [],
@@ -96,18 +96,16 @@ export const fetchUsers =
     if (alreadyLoading) return;
 
     dispatch(getUsersStart());
-    try {
-      const result = await dispatch(usersApi.endpoints.getUserList.initiate({since, limit})).unwrap();
-      console.log('Fetched users:', result);
 
+    const {success, data} = await usersService.getUserList(since, limit);
+    console.log('Fetched users:', data);
+
+    if (success && data) {
       const list = selectUsersList(getState());
-      dispatch(getUsersSuccess([...list, ...result]));
-      return {success: true, data: result};
-    } catch (e) {
-      console.error('Error fetching users:', e);
-      dispatch(getUsersFailed());
-      return {success: false};
+      return dispatch(getUsersSuccess([...list, ...data]));
     }
+
+    dispatch(getUsersFailed());
   };
 
 export const fetchNextUsers = () => async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -133,16 +131,13 @@ export const fetchSearchUsers =
 
     dispatch(searchUserStart());
 
-    try {
-      const result = await dispatch(searchApi.endpoints.searchUsers.initiate({query, limit})).unwrap();
+    const {success, data} = await searchService.getSearchUsers(query, limit);
 
-      dispatch(searchUserSuccess(result));
-      return {success: true, data: result};
-    } catch (e) {
-      console.log('Error searching users:', e);
-      dispatch(searchUserFailed());
-      return {success: false};
+    if (success) {
+      return dispatch(searchUserSuccess(data));
     }
+
+    dispatch(searchUserFailed());
   };
 
 export const fetchUser = (username: string) => async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -151,15 +146,12 @@ export const fetchUser = (username: string) => async (dispatch: AppDispatch, get
 
   dispatch(getUserStart());
 
-  try {
-    const result = await dispatch(usersApi.endpoints.getUserByName.initiate(username)).unwrap();
-
-    dispatch(getUserSuccess(result));
-    return {success: true, data: result};
-  } catch (e) {
-    dispatch(getUserFailed());
-    return {success: false};
+  const {success, data} = await usersService.getUserByName(username);
+  if (success && data) {
+    return dispatch(getUserSuccess(data));
   }
+
+  dispatch(getUserFailed());
 };
 
 /**

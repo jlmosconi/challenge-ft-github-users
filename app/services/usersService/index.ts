@@ -1,26 +1,19 @@
-import {baseApi} from '@services/api';
-import type {IUserListResponse, IUserResponse} from './types';
+import {executeQuery} from '@services/api/utils';
+import {usersApi} from './api';
 
-const baseUrl = `/users`;
+const getUserList = (since: number, limit: number) =>
+  executeQuery({
+    endpoint: usersApi.endpoints.getUserList,
+    args: {since, limit},
+  });
 
-export const usersApi = baseApi.injectEndpoints({
-  endpoints: builder => ({
-    getUserList: builder.query<IUserListResponse[], {since: number; limit: number}>({
-      query: ({since, limit}) => ({
-        url: `${baseUrl}`,
-        params: {since, per_page: limit},
-      }),
-      providesTags: (_result, _error, {since}) => [{type: 'UserList', id: since}],
-    }),
-    getUserByName: builder.query<IUserResponse, string>({
-      query: username => ({
-        url: `${baseUrl}/${username}`,
-      }),
-      providesTags: (_result, _error, username) => [{type: 'UserDetail', id: username}],
-    }),
-  }),
-  overrideExisting: false,
-});
+const getUserByName = (username: string) =>
+  executeQuery({
+    endpoint: usersApi.endpoints.getUserByName,
+    args: username,
+  });
 
-export const {useGetUserListQuery, useGetUserByNameQuery, useLazyGetUserListQuery, useLazyGetUserByNameQuery} =
-  usersApi;
+export const usersService = {
+  getUserList,
+  getUserByName,
+};
