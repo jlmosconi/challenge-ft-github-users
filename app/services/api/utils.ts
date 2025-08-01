@@ -17,9 +17,9 @@ type ExtractResult<T> = T extends QueryDefinition<any, any, any, infer R>
 
 interface ExecuteQueryOptions<E extends ValidEndpoint> {
   endpoint: {
-    initiate: (args: ExtractArgs<E>, options?: StartQueryActionCreatorOptions) => any;
+    initiate: (args?: ExtractArgs<E>, options?: StartQueryActionCreatorOptions) => any;
   };
-  args: ExtractArgs<E>;
+  args?: ExtractArgs<E>;
   options?: StartQueryActionCreatorOptions;
   onSuccess?: (result: ExtractResult<E>) => void;
   onError?: (error: unknown) => void;

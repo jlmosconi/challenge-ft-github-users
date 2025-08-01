@@ -39,7 +39,8 @@ export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: customBaseQuery(),
   tagTypes: ['UserList', 'UserSearch', 'UserDetail'],
-  keepUnusedDataFor: 300, // 5 minutes
+  keepUnusedDataFor: 300,
+  refetchOnMountOrArgChange: 300,
   refetchOnFocus: true,
   refetchOnReconnect: true,
   endpoints: () => ({}),
