@@ -1,55 +1,59 @@
-import type {QueryDefinition, MutationDefinition, StartQueryActionCreatorOptions} from '@reduxjs/toolkit/query';
-import {store} from '@store/index';
+import type {
+  ApiEndpointQuery,
+  ApiEndpointMutation,
+  QueryDefinition,
+  MutationDefinition,
+  StartQueryActionCreatorOptions,
+} from '@reduxjs/toolkit/query';
+import {store, type AppDispatch} from '@store/index';
 
-type ValidEndpoint = QueryDefinition<any, any, any, any> | MutationDefinition<any, any, any, any>;
+type DefOf<E> = E extends ApiEndpointQuery<infer D, any> ? D : E extends ApiEndpointMutation<infer D, any> ? D : never;
 
-type ExtractArgs<T> = T extends QueryDefinition<infer A, any, any, any>
+type ArgsOf<D> = D extends QueryDefinition<infer A, any, any, any>
   ? A
-  : T extends MutationDefinition<infer A, any, any, any>
+  : D extends MutationDefinition<infer A, any, any, any>
   ? A
   : never;
 
-type ExtractResult<T> = T extends QueryDefinition<any, any, any, infer R>
+type ResultOf<D> = D extends QueryDefinition<any, any, any, infer R>
   ? R
-  : T extends MutationDefinition<any, any, any, infer R>
+  : D extends MutationDefinition<any, any, any, infer R>
   ? R
   : never;
 
-interface ExecuteQueryOptions<E extends ValidEndpoint> {
-  endpoint: {
-    initiate: (args?: ExtractArgs<E>, options?: StartQueryActionCreatorOptions) => any;
-  };
-  args?: ExtractArgs<E>;
+type AnyEndpoint =
+  | ApiEndpointQuery<QueryDefinition<any, any, any, any>, any>
+  | ApiEndpointMutation<MutationDefinition<any, any, any, any>, any>;
+
+interface ExecuteQueryOptions<E extends AnyEndpoint> {
+  endpoint: E;
+  args?: ArgsOf<DefOf<E>>;
   options?: StartQueryActionCreatorOptions;
-  onSuccess?: (result: ExtractResult<E>) => void;
+  onSuccess?: (result: ResultOf<DefOf<E>>) => void;
   onError?: (error: unknown) => void;
   invalidateTags?: () => any;
+  dispatch?: AppDispatch; // optional, for testing or custom dispatching
 }
 
-export const executeQuery = async <E extends ValidEndpoint>({
+export async function executeQuery<E extends AnyEndpoint>({
   endpoint,
   args,
   options,
   onSuccess,
   onError,
   invalidateTags,
-}: ExecuteQueryOptions<E>): Promise<{
-  success: boolean;
-  data?: ExtractResult<E>;
-  error?: unknown;
-}> => {
+  dispatch = store.dispatch as AppDispatch,
+}: ExecuteQueryOptions<E>): Promise<{success: true; data: ResultOf<DefOf<E>>} | {success: false; error: unknown}> {
   try {
-    const result = await store.dispatch(endpoint.initiate(args, options)).unwrap();
+    const thunk = endpoint.initiate(args, options);
+    const result = await (dispatch as any)(thunk).unwrap();
 
     onSuccess?.(result);
-
-    if (invalidateTags) {
-      store.dispatch(invalidateTags());
-    }
+    if (invalidateTags) dispatch(invalidateTags());
 
     return {success: true, data: result};
   } catch (error) {
     onError?.(error);
     return {success: false, error};
   }
-};
+}
