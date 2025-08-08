@@ -97,12 +97,12 @@ export const fetchUsers =
 
     dispatch(getUsersStart());
 
-    const {success, data} = await usersService.getUserList(since, limit);
-    console.log('Fetched users:', data);
+    const result = await usersService.getUserList(since, limit);
 
-    if (success && data) {
+    if (result.success) {
+      console.log('Fetched users:', result.data);
       const list = selectUsersList(getState());
-      return dispatch(getUsersSuccess([...list, ...data]));
+      return dispatch(getUsersSuccess([...list, ...result.data]));
     }
 
     dispatch(getUsersFailed());
@@ -131,10 +131,10 @@ export const fetchSearchUsers =
 
     dispatch(searchUserStart());
 
-    const {success, data} = await searchService.getSearchUsers(query, limit);
+    const result = await searchService.getSearchUsers(query, limit);
 
-    if (success) {
-      return dispatch(searchUserSuccess(data));
+    if (result.success) {
+      return dispatch(searchUserSuccess(result.data));
     }
 
     dispatch(searchUserFailed());
@@ -146,9 +146,9 @@ export const fetchUser = (username: string) => async (dispatch: AppDispatch, get
 
   dispatch(getUserStart());
 
-  const {success, data} = await usersService.getUserByName(username);
-  if (success && data) {
-    return dispatch(getUserSuccess(data));
+  const result = await usersService.getUserByName(username);
+  if (result.success) {
+    return dispatch(getUserSuccess(result.data));
   }
 
   dispatch(getUserFailed());
