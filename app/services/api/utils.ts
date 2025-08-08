@@ -54,6 +54,6 @@ export async function executeQuery<E extends AnyEndpoint>({
     return {success: true, data: result};
   } catch (error) {
     onError?.(error);
-    return {success: false, data: null, error};
+    return {success: false, error};
   }
 }
